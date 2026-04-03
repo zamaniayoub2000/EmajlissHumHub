@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: Common API Components
+  version: 1.0.0
+paths: {}
+components:
+  parameters:
+    pageParam:
+      in: query
+      name: page
+      required: false
+      description: The number of page of the result set.
+      schema:
+        type: integer
+        minimum: 0
+    limitParam:
+      in: query
+      name: limit
+      required: false
+      description: The numbers of items to return per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 20
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: JWT Authorization header using the Bearer scheme.
+    BasicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    totalProperty:
+      type: integer
+      format: int64
+      example: 76
+    pageProperty:
+      type: integer
+      format: int64
+      example: 1
+    pagesProperty:
+      type: integer
+      format: int64
+      example: 8
+    linksProperty:
+      type: object
+      properties:
+        self:
+          type: string
+          example: "{endpoint_path}?page=1&per-page=10"
+        next:
+          type: string
+          example: "{endpoint_path}?page=2&per-page=10"
+        last:
+          type: string
+          example: "{endpoint_path}?page=8&per-page=10"
+    ContainerNotFound:
+      type: object
+      description: Not found
+      properties:
+        code:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: Content container not found!

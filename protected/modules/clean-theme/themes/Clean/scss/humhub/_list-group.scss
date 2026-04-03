@@ -1,0 +1,35 @@
+//
+// List-Group
+// --------------------------------------------------
+
+a.list-group-item {
+    padding: 10px 15px;
+    transition: .25s;
+    font-size: var(--hh-ct-menu-font-size);
+    color: var(--hh-ct-menu-text-color);
+
+    &:hover {
+        background-color: var(--hh-background-color-secondary);
+    }
+}
+
+body.hh-ct-menu-style-background {
+    a.list-group-item {
+        border-left: none !important;
+
+        &:not(.active) {
+            &:hover, &:focus {
+                background-color: var(--hh-background-color-secondary);
+                border-left: none !important;
+            }
+        }
+
+        &.active {
+            &, &:hover, &:focus {
+                background-color: var(--bs-primary);
+                color: var(--hh-primary-contrast);
+                border-left: none !important;
+            }
+        }
+    }
+}

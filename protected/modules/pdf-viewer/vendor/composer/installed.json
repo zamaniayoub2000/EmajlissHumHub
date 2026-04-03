@@ -1,0 +1,42 @@
+{
+    "packages": [
+        {
+            "name": "clean-composer-packages/pdf-js",
+            "version": "v4.10.38",
+            "version_normalized": "4.10.38.0",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/clean-composer-packages/pdf-js.git",
+                "reference": "ec6cf96f5b68d8945257f362d4a9106a1c890af7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/clean-composer-packages%2Fpdf-js/repository/archive.zip?sha=ec6cf96f5b68d8945257f362d4a9106a1c890af7",
+                "reference": "ec6cf96f5b68d8945257f362d4a9106a1c890af7",
+                "shasum": ""
+            },
+            "time": "2025-06-21T16:49:08+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Composer build of Mozilla's PDF.js library.",
+            "homepage": "http://mozilla.github.io/pdf.js/",
+            "keywords": [
+                "mozilla",
+                "pdf",
+                "pdf.js",
+                "pdfjs"
+            ],
+            "support": {
+                "issues": "https://github.com/mozilla/pdf.js/issues",
+                "source": "https://github.com/mozilla/pdf.js"
+            },
+            "install-path": "../clean-composer-packages/pdf-js"
+        }
+    ],
+    "dev": false,
+    "dev-package-names": []
+}

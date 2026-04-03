@@ -1,0 +1,35 @@
+<?php
+
+return [
+    ' Remove panel' => 'Supprimer le panneau',
+    '<strong>Account</strong> Menu' => '<strong>Modifier les paramètres de votre compte</strong>',
+    
+    '<strong>Getting</strong> Started' => '<strong>Guides d\'utilisation</strong>',
+    
+    '<strong>Guide:</strong> Administration (Modules)' => '<strong>Guide :</strong> Administration (Modules)',
+    '<strong>Guide:</strong> Overview' => '<strong>Guide :</strong> Vue d\'ensemble',
+    '<strong>Guide:</strong> Spaces' => '<strong>Guide :</strong> Espaces ',
+    '<strong>Guide:</strong> User profile' => '<strong>Guide :</strong> Profil utilisateur',
+    '<strong>Notifications</strong>' => '<strong>Notifications</strong>',
+    '<strong>Remove</strong> tour panel' => '<strong>Supprimer</strong> le panneau d\'introduction',
+    '<strong>Space</strong> Menu' => 'Menu <strong>Espace</strong>',
+    '<strong>Start</strong> space guide' => '<strong>Démarrer</strong> la visite guidée d\'un espace',
+    'Cancel' => 'Annuler',
+    'Don\'t lose track of things!<br /><br />This icon will keep you informed of activities and posts that concern you directly.' => 'Cette icône vous tiendra au courant des notifications et des messages qui vous concernent directement.',
+    'Drag a photo here or click to browse your files' => 'Faites glisser une photo ici ou cliquez pour parcourir vos fichiers',
+    'Get to know your way around the site\'s most important features with the following guides:' => 'Apprenez à utiliser les fonctionnalités les plus importantes de la plateforme à travers les guides suivants :',
+    'Hide my year of birth' => 'Cacher l\'année de naissance',
+    'Howdy <strong>%firstname%</strong>, thank you for using %community%.' => 'Bonjour <strong>%firstname%</strong>, merci d\'utiliser %community%.',
+    'Ok' => 'Ok',
+    'Save and close' => 'Enregistrer et fermer',
+    'The account menu gives you access to your private settings and allows you to manage your public profile.' => 'Cliquez ici puis sur réglage pour mettre à jour votre profil et vos paramètres de compte ( profil, login, mot de passe…).',
+    'This action will remove the tour panel from your dashboard. You can reactivate it at<br>Account settings <i class="fa fa-caret-right"></i> Settings.' => 'Cette opération va supprimer le panneau d\'introduction de votre tableau de bord. Vous pourrez le réactiver dans le menu<br />Paramètres du compte <i class="fa fa-caret-right"></i> Réglages.',
+    'This is the most important menu and will probably be the one you use most often!<br><br>Access all the spaces you have joined and create new spaces here.<br><br>The next guide will show you how:' => 'Ce menu regroupe l’ensemble des raccourcis vers les espaces dans lesquels vous êtes membre, vous permettant d’y accéder rapidement.',
+    'You are the first user here... Yehaaa! Be a shining example and complete your profile,<br>so that future users know who is the top dog here and to whom they can turn to if they have questions.' => 'Vous être le premier utilisateur ici... Youpie ! Soyez un exemple resplendissant et complétez votre profil,<br />pour que les prochains utilisateurs sachent qui est le patron ici et vers qui ils peuvent se tourner s\'ils ont des questions.',
+    'Your firstname' => 'Votre prénom',
+    'Your lastname' => 'Votre nom de famille',
+    'Your mobile phone number' => 'Votre téléphone portable',
+    'Your phone number at work' => 'Votre téléphone de bureau',
+    'Your skills, knowledge and experience' => 'Vos compétences, connaissances et expériences',
+    'Your title or position' => 'Votre titre ou poste',
+];

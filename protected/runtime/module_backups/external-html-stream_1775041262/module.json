@@ -1,0 +1,26 @@
+{
+    "id": "external-html-stream",
+    "version": "1.0.0",
+    "name": "Majliss Sync — External HTML Stream",
+    "description": "Synchronise les posts WordPress Majliss vers le stream HumHub. Récupère automatiquement les articles publiés avec images et les affiche dans le fil d'actualité d'un espace.",
+    "humhub": {
+        "minVersion": "1.15.0"
+    },
+    "homepage": "",
+    "authors": [
+        {
+            "name": "EMajlis",
+            "role": "Developer"
+        }
+    ],
+    "keywords": [
+        "majliss",
+        "wordpress",
+        "sync",
+        "stream",
+        "journal",
+        "conseil",
+        "external",
+        "html"
+    ]
+}

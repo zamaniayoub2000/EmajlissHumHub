@@ -1,0 +1,585 @@
+<?php
+
+namespace humhub\modules\external_calendar\models;
+
+use DateTime;
+use DateTimeZone;
+use humhub\helpers\Html;
+use humhub\modules\content\components\ContentActiveRecord;
+use humhub\modules\content\interfaces\Searchable;
+use humhub\modules\external_calendar\permissions\ManageEntry;
+use humhub\modules\external_calendar\widgets\WallEntry;
+use humhub\modules\external_calendar\helpers\CalendarUtils;
+use humhub\modules\external_calendar\models\forms\ConfigForm;
+use humhub\widgets\bootstrap\Badge;
+use humhub\widgets\bootstrap\Link;
+use Recurr\Rule;
+use Yii;
+use yii\db\StaleObjectException as StaleObjectExceptionAlias;
+
+/**
+ * This is the model class for table "external_calendar_entry".
+ *
+ * The followings are the available columns in table 'external_calendar_entry':
+ * @property int $id
+ * @property string $uid
+ * @property int $calendar_id
+ * @property string $title
+ * @property string $description
+ * @property string $location
+ * @property string $last_modified
+ * @property string $dtstamp
+ * @property string $start_datetime
+ * @property string $end_datetime It is the moment immediately after the event has ended. For example, if the last full day of an event is Thursday, the exclusive end of the event will be 00:00:00 on Friday!
+ * @property string $time_zone
+ * @property int $all_day
+ * @property string $rrule
+ * @property int $parent_event_id
+ * @property string $recurrence_id
+ * @property string $recurrence_until
+ * @property int $is_altered
+ * @property  string exdate
+ *
+ * @property-read  ExternalCalendarEntry $recurrences
+ * @property-read ExternalCalendarEntry $parent
+ * @property-read ExternalCalendar $calendar
+ *
+ *
+ * @author David Born ([staxDB](https://github.com/staxDB))
+ */
+class ExternalCalendarEntry extends ContentActiveRecord implements Searchable
+{
+    /**
+     * @inheritdoc
+     */
+    public $wallEntryClass = WallEntry::class;
+
+    /**
+     * @inheritdoc
+     */
+    public $managePermission = ManageEntry::class;
+
+    /**
+     * @inheritdoc
+     * set post to stream to false
+     */
+    public $streamChannel = null;
+
+    /**
+     * @inheritdoc
+     */
+    public $silentContentCreation = true;
+
+    /**
+     * @var CalendarDateFormatter
+     */
+    public $formatter;
+
+    public $canMove = false;
+
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'external_calendar_entry';
+    }
+
+    public function init()
+    {
+        parent::init();
+        $this->formatter = new CalendarDateFormatter(['calendarItem' => $this]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getContentName()
+    {
+        return Yii::t('ExternalCalendarModule.base', "External Event");
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getContentDescription()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getIcon()
+    {
+        return 'calendar';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['title', 'start_datetime', 'end_datetime'], 'required'],
+            [['start_datetime', 'end_datetime', 'dtstamp', 'last_modified'], 'validateDate'],
+            [['all_day'], 'integer'],
+            [['title'], 'string', 'max' => 200],
+            [['location'], 'string'],
+            [['end_datetime'], 'validateEndTime'],
+            [['description'], 'safe'],
+        ];
+    }
+
+    public function validateDate($attribute)
+    {
+        if (!empty($this->$attribute) && !CalendarUtils::isInDbFormat($this->$attribute)) {
+            $this->addError($attribute, "Invalid Date format used for $attribute: " . $this->$attribute);
+        }
+    }
+
+    /**
+     * Validator for the end_datetime field.
+     * Execute this after DbDateValidator
+     *
+     * @param string $attribute attribute name
+     * @param array $params parameters
+     * @throws \Exception
+     */
+    public function validateEndTime($attribute, $params)
+    {
+        if (new DateTime($this->start_datetime) > new DateTime($this->end_datetime)) {
+            $this->addError($attribute, Yii::t('ExternalCalendarModule.base', "End time must be after start time!"));
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('ExternalCalendarModule.view', 'ID'),
+            'uid' => Yii::t('ExternalCalendarModule.view', 'UID'),
+            'calendar_id' => Yii::t('ExternalCalendarModule.view', 'Calendar'),
+            'title' => Yii::t('ExternalCalendarModule.view', 'Title'),
+            'description' => Yii::t('ExternalCalendarModule.view', 'Description'),
+            'location' => Yii::t('ExternalCalendarModule.view', 'Location'),
+            'last_modified' => Yii::t('ExternalCalendarModule.view', 'Last Modified'),
+            'dtstamp' => Yii::t('ExternalCalendarModule.view', 'DT Stamp'),
+            'start_datetime' => Yii::t('ExternalCalendarModule.view', 'Start Datetime'),
+            'end_datetime' => Yii::t('ExternalCalendarModule.view', 'End Datetime'),
+            'all_day' => Yii::t('ExternalCalendarModule.view', 'All Day'),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSearchAttributes()
+    {
+        return [
+            'title' => $this->title,
+            'description' => $this->description,
+            'location' => $this->location,
+            'calendar' => $this->calendar->title,
+        ];
+    }
+
+    public function beforeSave($insert)
+    {
+        $this->process();
+        return parent::beforeSave($insert);
+    }
+
+    private function process()
+    {
+        $this->setSettings();
+
+
+        // We removed this since the sync logic is responsible for checking full day events
+        /*if (!$this->all_day && CalendarUtils::isFullDaySpan(new DateTime($this->start_datetime), new DateTime($this->end_datetime))) {
+            $this->all_day = 1;
+        }*/
+
+        $end = new DateTime($this->end_datetime, new DateTimeZone(Yii::$app->timeZone));
+
+        if ($this->all_day && ($this->end_datetime === $this->start_datetime)) {
+            $end->modify('+1 day');
+        }
+
+        if ($this->all_day && $end->format('H:i:s') === '00:00:00') {
+            $end->modify('-1 second');
+        }
+
+        $this->end_datetime = $end->format('Y-m-d H:i:s');
+    }
+
+    public function setSettings()
+    {
+        $settings = ConfigForm::instantiate();
+
+        if ($settings->autopost_entries && (!$this->isRecurringInstance() ||  $this->is_altered)) {
+            // set back to autopost true
+            $this->streamChannel = 'default';
+
+            // Only create activities etc for upcoming events
+            if ($this->getStartDateTime() >= new DateTime('now')) {
+                $this->silentContentCreation = false;
+            }
+        }
+    }
+
+    public function beforeDelete()
+    {
+        $this->deleteRecurringInstances();
+        return parent::beforeDelete(); // TODO: Change the autogenerated stub
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getFullCalendarArray()
+    {
+        $start = $this->getStartDateTime();
+        $end = $this->getEndDateTime();
+        $lastModified = $this->getLastModifiedDateTime();
+
+        if ($this->all_day) {
+            $end = $end->modify('+1 second');
+        }
+
+        if ($this->isRecurringInstance() && empty($this->id)) {
+            $viewUrl = $this->content->container->createUrl('/external_calendar/entry/view-recurrence', ['parent_id' => $this->parent_event_id, 'recurrence_id' => $this->recurrence_id, 'cal' => '1']);
+            $openUrl = $this->content->container->createUrl('/external_calendar/entry/view-recurrence', ['parent_id' => $this->parent_event_id, 'recurrence_id' => $this->recurrence_id]);
+        } else {
+            $viewUrl = $this->content->container->createUrl('/external_calendar/entry/view', ['id' => $this->id, 'cal' => '1']);
+            $openUrl = $this->content->container->createUrl('/external_calendar/entry/view', ['id' => $this->id]);
+        }
+
+        return [
+            'uid' => $this->uid,
+            'start' => $start,
+            'end' => $end,
+            'title' => Html::encode($this->getTitle()),
+            'editable' => false,
+            'allDay' => $this->isAllDay(),
+            'location' => $this->location,
+            'description' => $this->description,
+            'lastModified' => $lastModified,
+            'rrule' => $this->rrule,
+            'exdate' => $this->exdate,
+            'viewUrl' => $viewUrl,
+            'viewMode' => 'redirect',
+            'openUrl' => $openUrl,
+            'badge' =>  Badge::none($this->getContentName())
+                ->icon('calendar-o')
+                ->cssBgColor($this->calendar->color)
+                ->right(),
+        ];
+    }
+
+    public function getUrl()
+    {
+        return $this->content->container->createUrl('/external_calendar/entry/view', ['id' => $this->id]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTimezone()
+    {
+        return $this->time_zone;
+    }
+
+    public function getStartDateTime()
+    {
+        return new DateTime($this->start_datetime, CalendarUtils::getSystemTimeZone());
+    }
+
+    public function getEndDateTime()
+    {
+        return new DateTime($this->end_datetime, CalendarUtils::getSystemTimeZone());
+    }
+
+    public function getLastModifiedDateTime()
+    {
+        return new DateTime($this->last_modified, CalendarUtils::getSystemTimeZone());
+    }
+
+    public function getFormattedTime($format = 'long')
+    {
+        return $this->formatter->getFormattedTime($format);
+    }
+
+    /**
+     * @return bool weather or not this item spans exactly over a whole day
+     */
+    public function isAllDay()
+    {
+        if ($this->all_day === null) {
+            return true;
+        }
+
+        return (bool)$this->all_day;
+    }
+
+    public function isRecurringRoot()
+    {
+        return $this->isRecurring() && !$this->isRecurringInstance();
+    }
+
+    public function isRecurring()
+    {
+        return !empty($this->rrule);
+    }
+
+    public function isRecurringInstance()
+    {
+        return $this->parent_event_id !== null;
+    }
+
+    /**
+     *
+     * @return string the timezone this item was originally saved, note this is
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getParent()
+    {
+        return $this->hasOne(self::class, ['id' => 'parent_event_id']);
+    }
+
+    /**
+     * @param null|array|string $recurrenceIds Filters the result by either an array of recurrence ids or a single recurrence id
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRecurrences($recurrenceIds = null)
+    {
+        if (is_string($recurrenceIds)) {
+            $recurrenceIds = [$recurrenceIds];
+        } elseif (is_array($recurrenceIds) && empty($recurrenceIds)) {
+            return;
+        }
+
+        $query = $this->hasMany(self::class, ['parent_event_id' => 'id'])
+            ->andWhere(['calendar_id' => $this->calendar_id])
+            ->andWhere(['uid' => $this->uid]);
+
+        if (is_array($recurrenceIds)) {
+            array_walk($recurrenceIds, function (&$item): void {
+                $item = CalendarUtils::cleanRecurrentId($item);
+            });
+            $query->andWhere(['IN', 'recurrence_id', $recurrenceIds]);
+        }
+
+        return $query;
+    }
+
+    /**
+     * Deletes all recurrent instances of this recurrence root.
+     *
+     * The $filter parameter can be used to either filter the recurrence instances to delete
+     * by
+     *
+     * - DateTimeInterFace object in order to delete instances starting after the given date.
+     * - Array of recurrence ids in order to delete specific recurrences
+     * - String of a single recurrence id
+     *
+     * @param null|\DateTimeInterFace|array|string $filter
+     * @throws \Throwable
+     * @throws StaleObjectExceptionAlias
+     */
+    public function deleteRecurringInstances($filter = null)
+    {
+        if (!$this->isRecurringRoot()) {
+            return;
+        }
+
+        if (is_array($filter) || is_string($filter)) {
+            $instances = $this->getRecurrences($filter)->all();
+        } elseif ($filter instanceof \DateTimeInterface) {
+            $instances = $this->getRecurrences()->andFilterWhere(['>', 'start_datetime', $filter->format('Y-m-d H:i:s')])->all();
+        } else {
+            $instances = $this->recurrences;
+        }
+
+        foreach ($instances as $recurrence) {
+            $recurrence->hardDelete();
+        }
+    }
+
+    /**
+     * @param $recurrenceId
+     * @return ExternalCalendarEntry
+     */
+    public function getRecurrenceInstance($recurrenceId)
+    {
+        if ($this->recurrence_id === $recurrenceId) {
+            return $this;
+        }
+        return $this->getRecurrences()->andWhere(['recurrence_id' => CalendarUtils::cleanRecurrentId($recurrenceId)])->one();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAlteredRecurrences()
+    {
+        return $this->getRecurrences()->andWhere(['is_altered' => 1]);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCalendar()
+    {
+        return $this->hasOne(ExternalCalendar::class, ['id' => 'calendar_id']);
+    }
+
+    public function generateIcs()
+    {
+        $module = Yii::$app;
+        $timezone = $module->settings->get('defaultTimeZone');
+        $ics = new ICS($this->title, $this->description, $this->start_datetime, $this->end_datetime, $this->location, null, $timezone, $this->all_day);
+        return $ics;
+    }
+
+    public function getRecurrenceUntil()
+    {
+        if (empty($this->rrule)) {
+            return null;
+        }
+
+        return (new Rule($this->rrule))->getUntil();
+    }
+
+    /**
+     * @return ExternalCalendarEntry
+     */
+    public function syncWithICal(ICalEventIF $icalEvent, $timeZone = null, $save = true)
+    {
+        $this->uid = $icalEvent->getUid();
+        $this->title = $icalEvent->getTitle();
+        $this->description = $icalEvent->getDescription();
+
+        if (!empty($icalEvent->getRrule())) {
+            $this->setRRule(($icalEvent->getRrule()));
+
+            if (!$this->recurrence_id && !$icalEvent->getRecurrenceId()) {
+                $this->recurrence_id = CalendarUtils::cleanRecurrentId($icalEvent->getStart());
+            }
+        }
+
+        if ($icalEvent->getRecurrenceId()) {
+            $this->recurrence_id = $icalEvent->getRecurrenceId();
+        }
+
+        $this->location = $icalEvent->getLocation();
+        $this->last_modified = CalendarUtils::toDBDateFormat($icalEvent->getLastModified());
+        $this->dtstamp = $this->resolveDtstamp($icalEvent);
+        $this->start_datetime = CalendarUtils::toDBDateformat($icalEvent->getStartDateTime());
+        $this->end_datetime = CalendarUtils::toDBDateFormat($icalEvent->getEndDateTime());
+        $this->exdate = $icalEvent->getExdate();
+
+        if ($timeZone) {
+            $this->time_zone = $timeZone;
+        }
+
+        $this->all_day = (int) $icalEvent->isAllDay();
+
+        if ($save && !$this->save()) {
+            Yii::error('Could not save ical event ' . $icalEvent->getUid());
+            Yii::error($this->getErrors());
+        }
+
+        return $this;
+    }
+
+    private function resolveDtstamp(ICalEventIF $icalEvent): string
+    {
+        return CalendarUtils::toDBDateFormat($icalEvent->getTimeStamp())
+            ?? CalendarUtils::toDBDateFormat($icalEvent->getLastModified())
+            ?? CalendarUtils::toDBDateFormat($icalEvent->getCreated())
+            ?? CalendarUtils::toDBDateFormat($icalEvent->getStartDateTime());
+    }
+
+    public function createRecurrence($start, $end, $recurrenceId, $save = true)
+    {
+        $instance = new static($this->content->container, $this->content->visibility);
+        $instance->content->created_by = $this->content->created_by;
+        $instance->uid = $this->uid;
+        $instance->parent_event_id = $this->id;
+        $instance->start_datetime = CalendarUtils::toDBDateFormat($start);
+        $instance->end_datetime = CalendarUtils::toDBDateFormat($end);
+        $instance->title = $this->title;
+        $instance->rrule = $this->rrule;
+        $instance->calendar_id = $this->calendar_id;
+        $instance->description = $this->description;
+        $instance->location = $this->location;
+        $instance->last_modified = $this->last_modified;
+        $instance->dtstamp = $this->dtstamp;
+        $instance->all_day = $this->all_day;
+        $instance->time_zone = $this->time_zone;
+        $instance->recurrence_id = CalendarUtils::cleanRecurrentId($recurrenceId);
+
+        if ($save) {
+            $instance->save();
+        } else {
+            // We at least have to validate in order to trigger date validation/transformation
+            $instance->validate();
+            $this->process();
+        }
+        return $instance;
+    }
+
+    public function setRRule($rrule)
+    {
+        if (!empty($rrule)) {
+            $this->rrule = $rrule;
+            $until = $this->getRecurrenceUntil();
+            if ($until) {
+                $this->recurrence_until = $until->format('Y-m-d H:i:s');
+            } else {
+                $this->recurrence_until = null;
+            }
+        } else {
+            $this->rrule = null;
+            $this->recurrence_until = null;
+        }
+    }
+
+    public function wasModifiedSince(ICalEventIF $icalEvent)
+    {
+        if (!$icalEvent->getLastModified()) {
+            return false;
+        }
+
+        return !$this->last_modified || CalendarUtils::formatDateTimeToAppTime($icalEvent->getLastModified()) > $this->getLastModifiedDateTime();
+    }
+
+    /**
+    * Get location of this external calendar entry
+    *
+    * @return string
+    */
+    public function getLocation(bool $asHtml = false)
+    {
+        if (!$asHtml) {
+            return $this->location;
+        }
+        if (
+            filter_var($this->location, FILTER_VALIDATE_URL) !== false
+            && strpos($this->location, 'https://') === 0 // restrict to secure URLs (and not HTTP, SSF, FTP, etc.)
+        ) {
+            return Link::asLink($this->location, $this->location)->blank();
+        }
+        return Html::encode($this->location);
+    }
+}

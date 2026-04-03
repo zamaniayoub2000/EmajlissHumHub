@@ -1,0 +1,17 @@
+{
+    "name": "clean-composer-packages/pdf-js",
+    "description": "Composer build of Mozilla's PDF.js library.",
+    "keywords": [
+        "Mozilla",
+        "pdf",
+        "pdf.js",
+        "pdfjs"
+    ],
+    "type": "library",
+    "license": "Apache-2.0",
+    "homepage": "http://mozilla.github.io/pdf.js/",
+    "support": {
+        "issues": "https://github.com/mozilla/pdf.js/issues",
+        "source": "https://github.com/mozilla/pdf.js"
+    }
+}

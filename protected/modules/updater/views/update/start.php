@@ -1,0 +1,376 @@
+<?php
+
+use humhub\helpers\Html;
+use humhub\modules\ui\icon\widgets\Icon;
+use humhub\modules\updater\libs\AvailableUpdate;
+use humhub\widgets\bootstrap\Alert;
+use humhub\widgets\modal\Modal;
+use humhub\widgets\modal\ModalButton;
+use yii\helpers\Url;
+
+/* @var AvailableUpdate $availableUpdate */
+/* @var array $updateModules */
+
+$warningMessage = $availableUpdate->getWarningMessage();
+?>
+
+<?php Modal::beginDialog([
+    'title' => Yii::t('UpdaterModule.base', '<strong>Update</strong> to HumHub {version}', ['version' => $availableUpdate->versionTo]),
+    'footer' =>
+        ModalButton::success(Yii::t('UpdaterModule.base', 'Start'))
+            ->id('btnUpdaterStart')
+            ->cssClass('startButton')
+            ->pjax(false) .
+        ModalButton::danger(Yii::t('UpdaterModule.base', 'Abort'))
+            ->link(['/updater/update'])
+            ->cssClass('startButton')
+            ->pjax(false) .
+        ModalButton::light(Yii::t('UpdaterModule.base', 'Close'))
+            ->link(['/updater/update'])
+            ->id('btnUpdaterClose')
+            ->pjax(false),
+]) ?>
+
+    <div id="startDialog">
+
+        <?php if ($warningMessage): ?>
+            <?= Alert::warning('<strong>' . $warningMessage . '</strong>')->closeButton(false) ?>
+        <?php endif ?>
+
+        <div class="alert alert-danger">
+            <strong><?= Yii::t('UpdaterModule.base', 'Please note:') ?></strong><br>
+            <ul>
+                <li><?= Yii::t('UpdaterModule.base', 'Backup all your files & database before proceed') ?></li>
+                <li><?= Yii::t('UpdaterModule.base', 'Make sure all files are writable by application') ?></li>
+                <li><?= Yii::t('UpdaterModule.base', 'Please update installed marketplace modules before and after the update') ?></li>
+                <li><?= Yii::t('UpdaterModule.base', 'Make sure custom modules or themes are compatible with version %version%', ['%version%' => $availableUpdate->versionTo]) ?></li>
+                <li><?= Yii::t('UpdaterModule.base', 'Do not use this updater in combination with Git or Composer installations!') ?></li>
+                <li><?= Yii::t('UpdaterModule.base', 'Changes to HumHub core files may overwritten during update!') ?></li>
+            </ul>
+        </div>
+        <div class="checkbox"<?= $availableUpdate->hideSwitchDefaultThemeCheckbox() ? ' class="d-none"' : '' ?>>
+            <label>
+                <input type="checkbox" value="1" checked id="chkBoxResetTheme">
+                <?= Yii::t('UpdaterModule.base', 'Switch to default theme after update (strongly recommended)') ?>
+            </label>
+        </div>
+    </div>
+
+    <div class="steps">
+        <p id="step_download"><strong><i></i> <?= Yii::t('UpdaterModule.base', 'Downloading update package') ?></strong></p>
+        <p id="step_extract"><strong><i></i> <?= Yii::t('UpdaterModule.base', 'Extracting package files') ?></strong></p>
+        <p id="step_validate"><strong><i></i> <?= Yii::t('UpdaterModule.base', 'Validating package') ?></strong></p>
+        <p id="step_prepare"><strong><i></i> <?= Yii::t('UpdaterModule.base', 'Preparing system') ?></strong></p>
+        <p id="step_install"><strong><i></i> <?= Yii::t('UpdaterModule.base', 'Installing files') ?></strong></p>
+        <p id="step_migrate"><strong><i></i> <?= Yii::t('UpdaterModule.base', 'Migrating database') ?></strong></p>
+        <p id="step_modules"><strong><i></i> <?= Yii::t('UpdaterModule.base', 'Update module: {moduleName}') ?></strong></p>
+        <p id="step_cleanup"><strong><i></i> <?= Yii::t('UpdaterModule.base', 'Cleanup update files') ?></strong></p>
+    </div>
+    <br>
+    <div class="alert alert-danger" id="errorMessageBox">
+        <p><strong>Error!</strong></p>
+        <p id="errorMessage"><?= Yii::t('UpdaterModule.base', 'No error message available. Please check logfiles!') ?></p>
+    </div>
+    <div class="alert alert-success" id="successMessageBox">
+        <p><strong>
+            <?= Icon::get('thumbs-up') . ' ' . Yii::t('UpdaterModule.base', 'Update successful') ?>
+        </strong></p>
+        <p><?= Yii::t('UpdaterModule.base', 'The update was successfully installed!') ?></p>
+        <p><?= Yii::t('UpdaterModule.base', 'Please update installed modules when new version is available!') ?></p>
+    </div>
+    <div class="interruptWarning text-warning float-end d-none">
+        <?= Icon::get('warning') . ' ' . Yii::t('UpdaterModule.base', 'Do not interrupt!') ?>
+    </div>
+
+<?php Modal::endDialog() ?>
+
+<script <?= Html::nonce() ?>>
+    $('#errorMessageBox').hide();
+    $('#successMessageBox').hide();
+
+    $('#btnUpdaterClose').hide();
+    $('#btnUpdaterStart').click(function () {
+        $('#startDialog').hide();
+        $('.startButton').hide();
+
+        humhub.require('ui.modal').footerLoader();
+        $('.interruptWarning').show();
+        step_download();
+    });
+
+    $('.steps').find('p').hide();
+
+    function showStep(id) {
+        $('#step_' + id).show().find('i')
+            .addClass('text-warning fa fa-circle pulse animated infinite');
+    }
+
+    function finishStep(id) {
+        $('#step_' + id).find('i')
+            .removeClass('text-warning fa-circle infinite pulse')
+            .addClass('swing fa-check-circle text-success');
+    }
+
+    function showError(response) {
+        $('#btnUpdaterClose').show();
+        $('.loader-modal').hide();
+        $('#errorMessageBox').show();
+
+        var message = isJsonString(response) ? JSON.parse(response).message : response;
+
+        if (message !== '') {
+            $('#errorMessage').html(message);
+        }
+
+        stopFooterLoader();
+    }
+
+    function checkError(result) {
+        if (result.status === 'ok') {
+            return true;
+        }
+        showError(result.message);
+    }
+
+    function step_download() {
+        showStep('download');
+        $.ajax({
+            cache: false,
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                'fileName': '<?= $availableUpdate->fileName ?>',
+            },
+            url: '<?= Url::to(['download']) ?>',
+            success: function (json) {
+                if (checkError(json)) {
+                    finishStep('download');
+                    step_extract();
+                }
+            },
+            error: function (result) {
+                showError(result.responseText);
+            },
+        });
+    }
+
+    function step_extract() {
+        showStep('extract');
+        $.ajax({
+            cache: false,
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                'fileName': '<?= $availableUpdate->fileName ?>',
+            },
+            url: '<?= Url::to(['/package-installer/install/extract']) ?>',
+            success: function (json) {
+                if (checkError(json)) {
+                    finishStep('extract');
+                    step_validate();
+                }
+            },
+            error: function (result) {
+                showError(result.responseText);
+            },
+        });
+    }
+
+    function step_validate() {
+        showStep('validate');
+        $.ajax({
+            cache: false,
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                'fileName': '<?= $availableUpdate->fileName ?>',
+            },
+            url: '<?= Url::to(['/package-installer/install/validate']) ?>',
+            success: function (json) {
+                if (checkError(json)) {
+                    finishStep('validate');
+                    step_prepare();
+                }
+            },
+            error: function (result) {
+                showError(result.responseText);
+            },
+        });
+
+    }
+
+    function step_prepare() {
+        showStep('prepare');
+        resetTheme = $('#chkBoxResetTheme').prop('checked');
+
+        $.ajax({
+            cache: false,
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                'fileName': '<?= $availableUpdate->fileName ?>',
+                'theme': resetTheme,
+            },
+            url: '<?= Url::to(['/package-installer/install/prepare']) ?>',
+            success: function (json) {
+                if (checkError(json)) {
+                    finishStep('prepare');
+                    step_install();
+                }
+            },
+            error: function (result) {
+                showError(result.responseText);
+            },
+        });
+    }
+
+    function step_install() {
+        showStep('install');
+        $.ajax({
+            cache: false,
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                'fileName': '<?= $availableUpdate->fileName ?>',
+            },
+            url: '<?= Url::to(['/package-installer/install/install-files']) ?>',
+            success: function (json) {
+                if (checkError(json)) {
+                    finishStep('install');
+                    step_migrate();
+                }
+            },
+            error: function (result) {
+                showError(result.responseText);
+            },
+        });
+    }
+
+    function step_migrate() {
+        showStep('migrate');
+        $.ajax({
+            cache: false,
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                'fileName': '<?= $availableUpdate->fileName ?>',
+            },
+            url: '<?= Url::to(['/package-installer/install/migrate']) ?>',
+            success: function (json) {
+                if (checkError(json)) {
+                    finishStep('migrate');
+                    <?php if ($updateModules === []) : ?>
+                        step_cleanup();
+                    <?php else : ?>
+                        step_module(0);
+                    <?php endif ?>
+                }
+            },
+            error: function (result) {
+                showError(result.responseText);
+            },
+        });
+    }
+
+    <?php if ($updateModules !== []) : ?>
+    var modules = <?= json_encode($updateModules) ?>;
+
+    function step_module(index) {
+        if (typeof(modules[index]) === 'undefined') {
+            step_cleanup();
+            return;
+        }
+
+        const module = modules[index];
+        showModuleStep(module);
+
+        $.ajax({
+            cache: false,
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                moduleId: module.id,
+                fileName: '<?= $availableUpdate->fileName ?>',
+            },
+            url: '<?= Url::to(['/package-installer/install/module']) ?>',
+            success: function (json) {
+                if (json.status === 'ok') {
+                    finishModuleStep(module.id);
+                } else {
+                    showModuleError(module.id, json.message);
+                }
+                step_module(index + 1);
+            },
+            error: function (result) {
+                showModuleError(module.id, result.responseText);
+                step_module(index + 1);
+            },
+        });
+    }
+
+    function showModuleStep(module) {
+        const moduleHtml = $('#step_modules').clone();
+        $('#step_cleanup').before(moduleHtml);
+        moduleHtml.show()
+            .html(moduleHtml.html().replace('{moduleName}', module.name))
+            .removeAttr('id')
+            .attr('data-step-module-id', module.id)
+            .find('i').addClass('colorWarning fa fa-circle pulse animated infinite');
+
+        const modal = document.getElementById('globalModal');
+        if (modal) {
+            modal.scrollTop = modal.scrollHeight;
+        }
+    }
+
+    function finishModuleStep(moduleId) {
+        $('[data-step-module-id="' + moduleId + '"').find('i')
+            .removeClass('colorWarning fa-circle infinite pulse')
+            .addClass('swing fa-check-circle colorSuccess');
+    }
+
+    function showModuleError(moduleId, error) {
+        $('[data-step-module-id="' + moduleId + '"').after('<p class="alert alert-warning mb-1" style="margin-bottom:10px">' + error + '</p>');
+    }
+    <?php endif ?>
+
+    function step_cleanup() {
+        resetTheme = $('#chkBoxResetTheme').prop('checked');
+        showStep('cleanup');
+        $.ajax({
+            cache: false,
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                'fileName': '<?= $availableUpdate->fileName ?>',
+                'theme': resetTheme,
+            },
+            url: '<?= Url::to(['/package-installer/install/cleanup']) ?>',
+            success: function (json) {
+                if (checkError(json)) {
+                    finishStep('cleanup');
+                    stopFooterLoader();
+                    $('#successMessageBox').show();
+                }
+            },
+            error: function (result) {
+                showError(result.responseText);
+            },
+        });
+    }
+
+    function isJsonString(str) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }
+
+    function stopFooterLoader() {
+        humhub.require('ui.loader').reset(humhub.require('ui.modal').global.getFooter());
+        $('.interruptWarning').hide();
+        $('#btnUpdaterClose').show();
+    }
+</script>

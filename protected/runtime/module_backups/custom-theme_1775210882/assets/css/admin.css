@@ -1,0 +1,176 @@
+/* ============================================
+   Custom Theme Admin - Styles d'administration
+   ============================================ */
+
+/* Navigation latérale */
+.custom-theme-nav {
+    margin-bottom: 20px;
+}
+.custom-theme-nav li a {
+    border-radius: 4px;
+    padding: 10px 15px;
+    color: #555;
+    transition: all 0.2s ease;
+}
+.custom-theme-nav li a:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+.custom-theme-nav li.active a {
+    background: #6D1A36;
+    color: #fff;
+}
+.custom-theme-nav li a i {
+    margin-right: 8px;
+    width: 18px;
+    text-align: center;
+}
+
+/* Cartes de statut */
+.ct-status-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px 15px;
+    text-align: center;
+    margin-bottom: 15px;
+    transition: box-shadow 0.2s ease;
+}
+.ct-status-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.ct-status-icon {
+    color: #6D1A36;
+    margin-bottom: 10px;
+}
+.ct-status-card h5 {
+    font-weight: 600;
+    margin: 5px 0 12px;
+    color: #333;
+}
+
+/* Toggle switch CSS */
+.ct-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+.ct-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.ct-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: 0.3s;
+    border-radius: 24px;
+}
+.ct-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+input:checked + .ct-slider {
+    background-color: #27ae60;
+}
+input:checked + .ct-slider:before {
+    transform: translateX(20px);
+}
+
+.ct-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.ct-status-label {
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 50px;
+}
+
+/* Code editor textarea */
+.ct-code-editor {
+    font-family: 'Courier New', 'Fira Code', monospace !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    tab-size: 4;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 15px !important;
+    resize: vertical;
+}
+.ct-code-editor:focus {
+    border-color: #6D1A36;
+    box-shadow: 0 0 0 2px rgba(109, 26, 54, 0.15);
+    outline: none;
+}
+
+/* Preview zone */
+.ct-preview-zone {
+    background: #f9f9f9;
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+}
+.ct-preview-zone h5 {
+    color: #888;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+.ct-preview-frame {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 0;
+    min-height: 100px;
+    overflow: auto;
+}
+
+/* Options globales */
+.ct-options {
+    padding: 10px 0;
+}
+.ct-switch-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ct-status-card {
+        margin-bottom: 10px;
+    }
+    .ct-code-editor {
+        font-size: 11px !important;
+        rows: 15;
+    }
+}
+
+/* RTL support */
+[dir="rtl"] .custom-theme-nav li a i {
+    margin-right: 0;
+    margin-left: 8px;
+}
+[dir="rtl"] .ct-toggle-wrapper {
+    flex-direction: row-reverse;
+}

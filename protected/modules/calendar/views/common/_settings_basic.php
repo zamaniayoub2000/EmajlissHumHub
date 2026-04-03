@@ -1,0 +1,34 @@
+<?php
+/**
+ * @link https://www.humhub.org/
+ * @copyright Copyright (c) 2023 HumHub GmbH & Co. KG
+ * @license https://www.humhub.com/licences
+ */
+
+use humhub\modules\calendar\models\forms\BasicSettings;
+use humhub\widgets\bootstrap\Button;
+use humhub\widgets\form\ActiveForm;
+use humhub\widgets\form\ContentHiddenCheckbox;
+
+/* @var $basicSettings BasicSettings */
+/* @var $form ActiveForm */
+?>
+<div class="panel-body">
+    <h4>
+        <?= Yii::t('CalendarModule.config', 'Default basic settings'); ?>
+        <?php if ($basicSettings->showResetButton()) : ?>
+            <?= Button::light(Yii::t('CalendarModule.config', 'Reset'))
+                ->action('client.pjax.post', $basicSettings->getResetButtonUrl())->link()->right()->sm()?>
+        <?php endif; ?>
+    </h4>
+
+    <div class="form-text">
+        <?= $basicSettings->isGlobal()
+            ? Yii::t('CalendarModule.config', 'Here you can configure default settings for new calendar events. These settings can be overwritten on space/profile level.')
+            : Yii::t('CalendarModule.config', 'Here you can configure default settings for new calendar events.') ?>
+    </div>
+
+    <?= $form->field($basicSettings, 'contentHiddenDefault')->widget(ContentHiddenCheckbox::class, [
+        'type' => $basicSettings->isGlobal() ? ContentHiddenCheckbox::TYPE_GLOBAL : ContentHiddenCheckbox::TYPE_CONTENTCONTAINER,
+    ]) ?>
+</div>

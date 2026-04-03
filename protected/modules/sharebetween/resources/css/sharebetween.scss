@@ -1,0 +1,22 @@
+.panel.sharebetween-wall-entry {
+  > .panel-body {
+    padding: 10px;
+    > .wall-entry-header-info {
+      padding-bottom: 5px;
+      border-bottom: 2px solid var(--bs-border-color);
+      a {
+        color: var(--hh-text-color-main);
+      }
+    }
+    > .wall-entry {
+      margin-top: 10px;
+      > .panel {
+        margin: 0;
+        box-shadow: none;
+        > .panel-body {
+          padding: 0;
+        }
+      }
+    }
+  }
+}

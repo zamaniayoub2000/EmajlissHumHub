@@ -1,0 +1,163 @@
+<?php
+
+/**
+ * @link https://www.humhub.org/
+ * @copyright Copyright (c) HumHub GmbH & Co. KG
+ * @license https://www.humhub.com/licences
+ */
+
+namespace humhub\modules\calendar\extensions\custom_pages\elements;
+
+use DateTime;
+use humhub\helpers\Html;
+use humhub\modules\calendar\helpers\CalendarUtils;
+use humhub\modules\calendar\models\CalendarEntry;
+use humhub\modules\calendar\models\CalendarEntryParticipant;
+use humhub\modules\content\components\ActiveQueryContent;
+use humhub\modules\custom_pages\modules\template\elements\BaseContentRecordsElement;
+use humhub\modules\custom_pages\modules\template\elements\BaseElementVariable;
+use humhub\widgets\form\ActiveForm;
+use Yii;
+use yii\db\ActiveQuery;
+
+/**
+ * Class to manage content records of the elements with Calendar events list
+ *
+ * @property int $nextDays
+ */
+class CalendarEventsElement extends BaseContentRecordsElement
+{
+    public const FILTER_PARTICIPANT = 'participant';
+    public const FILTER_PAST = 'past_events';
+    public const RECORD_CLASS = CalendarEntry::class;
+    public const SORT_UPCOMING = 'upcoming';
+
+    /**
+     * @inheritdoc
+     */
+    protected function getDynamicAttributes(): array
+    {
+        return array_merge(parent::getDynamicAttributes(), [
+            'nextDays' => null,
+        ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getLabel(): string
+    {
+        return Yii::t('CalendarModule.base', 'Calendar events');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return array_merge(parent::attributeLabels(), [
+            'nextDays' => Yii::t('CalendarModule.base', 'Display events within the next X days'),
+        ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeHints()
+    {
+        return array_merge(parent::attributeHints(), [
+            'nextDays' => Yii::t('CalendarModule.base', 'Leave empty to list all events. Enter 0 to display only today\'s events.'),
+        ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getContentFilterOptions(): array
+    {
+        return array_merge([
+            self::FILTER_PAST => Yii::t('CalendarModule.base', 'Show past events'),
+            self::FILTER_PARTICIPANT => Yii::t('CalendarModule.base', 'I\'m attending'),
+        ], parent::getContentFilterOptions());
+    }
+
+    /**
+     * @inheritdoc
+     * @return ActiveQueryContent
+     */
+    protected function getQuery(): ActiveQuery
+    {
+        $query = parent::getQuery();
+
+        if (!Yii::$app->user->isGuest && $this->hasFilter(self::FILTER_PARTICIPANT)) {
+            $query->leftJoin('calendar_entry_participant', 'calendar_entry.id = calendar_entry_participant.calendar_entry_id AND calendar_entry_participant.user_id = :userId', [':userId' => Yii::$app->user->id])
+                ->andWhere(['calendar_entry_participant.participation_state' => CalendarEntryParticipant::PARTICIPATION_STATE_ACCEPTED]);
+        }
+
+        $isUpcomingSorting = in_array($this->sortOrder, [self::SORT_UPCOMING, 'date_new'/* support deprecated */]);
+
+        if (!$this->hasFilter(self::FILTER_PAST) || $isUpcomingSorting) {
+            $now = new DateTime('now', CalendarUtils::getUserTimeZone());
+            $query->andWhere(['>', 'calendar_entry.end_datetime', $now->format('Y-m-d H:i:s')]);
+        }
+
+        if ($this->nextDays !== null && $this->nextDays !== '') {
+            $maxDate = new DateTime('+' . ($this->nextDays + 1) . ' days', CalendarUtils::getUserTimeZone());
+            $query->andWhere(['<', 'calendar_entry.start_datetime', $maxDate->format('Y-m-d')]);
+        }
+
+        if ($isUpcomingSorting) {
+            $query->orderBy(['calendar_entry.start_datetime' => SORT_ASC]);
+        }
+
+        return $query;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTemplateVariable(): BaseElementVariable
+    {
+        return new CalendarEventsElementVariable($this);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function renderEditForm(ActiveForm $form): string
+    {
+        $sortUpcoming = self::SORT_UPCOMING;
+        $filterPast = self::FILTER_PAST;
+
+        return parent::renderEditForm($form)
+            . $form->field($this, 'nextDays')
+            // Disable filter "Show past events" on sorting "By upcoming events first":
+            . Html::script(<<<JS
+var calendarsSortOrderSelector = 'input[name="CalendarEventsElement[sortOrder]"]';
+if (typeof changeCalendarsElementFilter === 'undefined') {
+    function changeCalendarsElementFilter() {
+        const sortOrder = document.querySelector(calendarsSortOrderSelector + ':checked');
+        const pastEvents = document.querySelector('input[name="CalendarEventsElement[filter][]"][value="{$filterPast}"]');
+        if (sortOrder && pastEvents) {
+            pastEvents.disabled = sortOrder.value === '{$sortUpcoming}';
+        }
+    }
+}
+
+changeCalendarsElementFilter();
+document.querySelectorAll(calendarsSortOrderSelector).forEach(el => {
+    el.addEventListener('change', changeCalendarsElementFilter);
+});
+JS);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function getSortOptions(): array
+    {
+        return array_merge(parent::getSortOptions(), [
+            self::SORT_UPCOMING => Yii::t('CalendarModule.base', 'By upcoming events first'),
+        ]);
+    }
+}

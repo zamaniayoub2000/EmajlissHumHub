@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * This file lets you override the default HumHub/Yii configuration
+ * for both Web and Console applications.
+ */
+
+return [
+    'components' => [
+        'user' => [
+            // sync the profile language after login
+            'on afterLogin' => function ($event) {
+
+                $user = $event->identity;
+
+                // Language currently active
+                $currentLanguage = \Yii::$app->language;
+
+                if (!empty($currentLanguage) && $user && $user->language !== $currentLanguage) {
+                    // Update the user profile language
+                    $user->language = $currentLanguage;
+
+                    // Save attribute, no validation
+                    $user->save(false, ['language']);
+                }
+            },
+        ],
+    ],
+
+    'params' => [
+        // Your existing param
+        'hidePoweredBy' => true,
+    ],
+];

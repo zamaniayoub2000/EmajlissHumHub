@@ -1,0 +1,25 @@
+{
+  "id": "homepage",
+  "name": "Homepage",
+  "description": "Create custom homepages for registered users, guests, and for members of specific groups",
+  "keywords": ["homepage", "home"],
+  "version": "1.3.3",
+  "humhub": {
+    "minVersion": "1.18"
+  },
+  "homepage": "https://cuzy.app",
+  "authors": [
+    {
+      "name": "Marc FARRE",
+      "homepage": "https://marc.fun",
+      "role": "Developer"
+    }
+  ],
+  "screenshots": [
+    "resources/screen_1.png",
+    "resources/screen_2.png",
+    "resources/screen_3.png",
+    "resources/screen_4.png",
+    "resources/screen_5.png"
+  ]
+}

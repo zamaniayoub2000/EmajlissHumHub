@@ -1,0 +1,22 @@
+{
+    "id": "online-users",
+    "name": "Online Users",
+    "description": "The module displays online users directly on your dashboard in a snippet.",
+    "keywords": ["online", "users", "snippet"],
+    "version": "1.1.0",
+    "humhub": {
+        "minVersion": "1.18"
+    },
+    "homepage": "https://github.com/humhub/online-users",
+    "authors": [
+        {
+            "name": "HumHub Team"
+        },
+        {
+            "name": "001101"
+        }
+    ],
+    "screenshots": [
+        "resources/screenshot1.png"
+    ]
+}

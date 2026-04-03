@@ -1,0 +1,11 @@
+{
+    "id": "custom-theme",
+    "name": "Custom Theme Override",
+    "description": "Module de personnalisation complète du thème HumHub (header, footer, CSS, JS) avec interface d'administration.",
+    "version": "1.0.0",
+    "humhub": {
+        "minVersion": "1.15.0"
+    },
+    "keywords": ["theme", "footer", "header", "css", "customization"],
+    "author": "EMajlis Dev Team"
+}

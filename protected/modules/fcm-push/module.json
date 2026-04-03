@@ -1,0 +1,19 @@
+{
+    "id": "fcm-push",
+    "name": "Push Notifications (Firebase)",
+    "description": "Enables your users to receive push notifications from your network.",
+    "keywords": [
+        "push",
+        "notifications",
+        "firebase"
+    ],
+    "homepage": "https://github.com/humhub/fcm-push",
+    "humhub": {
+        "minVersion": "1.18"
+    },
+    "version": "2.2.2",
+    "screenshots": [
+        "resources/screenshot1.PNG",
+        "resources/screenshot2.PNG"
+    ]
+}

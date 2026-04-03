@@ -1,0 +1,808 @@
+a:2:{i:0;a:1336:{s:15:"oembedProviders";s:1431:"{"Facebook Video":{"pattern":"/facebook\\.com\\/(.*)(video)/","endpoint":"https://graph.facebook.com/v12.0/oembed_video?url=%url%&access_token="},"Facebook Post":{"pattern":"/facebook\\.com\\/(.*)(post|activity|photo|permalink|media|question|note)/","endpoint":"https://graph.facebook.com/v12.0/oembed_post?url=%url%&access_token="},"Facebook Page":{"pattern":"/^(https\\:\\/\\/)*(www\\.)*facebook\\.com\\/((?!video|post|activity|photo|permalink|media|question|note).)*$/","endpoint":"https://graph.facebook.com/v12.0/oembed_post?url=%url%&access_token="},"Instagram":{"pattern":"/instagram\\.com/","endpoint":"https://graph.facebook.com/v12.0/instagram_oembed?url=%url%&access_token="},"Twitter":{"pattern":"/twitter\\.com/","endpoint":"https://publish.twitter.com/oembed?url=%url%&maxwidth=450"},"YouTube":{"pattern":"/youtube\\.com|youtu.be/","endpoint":"https://www.youtube.com/oembed?scheme=https&url=%url%&format=json&maxwidth=450"},"Soundcloud":{"pattern":"/soundcloud\\.com/","endpoint":"https://soundcloud.com/oembed?url=%url%&format=json&maxwidth=450"},"Vimeo":{"pattern":"/vimeo\\.com/","endpoint":"https://vimeo.com/api/oembed.json?scheme=https&url=%url%&format=json&maxwidth=450"},"SlideShare":{"pattern":"/slideshare\\.net/","endpoint":"https://www.slideshare.net/api/oembed/2?url=%url%&format=json&maxwidth=450"},"Reddit":{"pattern":"/reddit\\.com/","endpoint":"https://www.reddit.com/oembed?format=json&url=%url%"}}";s:20:"displayNameSubFormat";s:5:"title";s:14:"serverTimeZone";s:17:"Africa/Casablanca";s:27:"useDefaultThemePrimaryColor";s:1:"0";s:26:"useDefaultThemeAccentColor";s:1:"0";s:27:"useDefaultThemeSuccessColor";s:1:"0";s:26:"useDefaultThemeDangerColor";s:1:"0";s:27:"useDefaultThemeWarningColor";s:1:"0";s:25:"useDefaultThemeLightColor";s:1:"0";s:5:"theme";s:59:"/var/www/emajlis/protected/modules/clean-theme/themes/Clean";s:17:"cronLastHourlyRun";s:10:"1775209441";s:16:"cronLastDailyRun";s:10:"1775149201";s:11:"cronLastRun";s:10:"1775211721";s:4:"name";s:55:"E-majlis : plateforme d'information et de collaboration";s:7:"baseUrl";s:29:"https://emajlis-dev.csefrs.ma";s:14:"paginationSize";s:2:"10";s:17:"displayNameFormat";s:38:"{profile.firstname} {profile.lastname}";s:19:"mailerTransportType";s:4:"smtp";s:24:"mailerSystemEmailAddress";s:17:"emajlis@csefrs.ma";s:21:"mailerSystemEmailName";s:19:"Plateforme E-Majlis";s:10:"cacheClass";s:21:"yii\caching\FileCache";s:15:"cacheExpireTime";s:4:"3600";s:15:"defaultLanguage";s:2:"fr";s:7:"useCase";s:5:"other";s:6:"secret";s:36:"13f590a0-a0d5-4e69-9942-0bc332d61431";s:15:"defaultTimeZone";s:17:"Africa/Casablanca";s:35:"humhub\components\InstallationState";s:1:"3";s:29:"useDefaultThemeSecondaryColor";s:1:"0";s:17:"themeSuccessColor";s:7:"#52a11c";s:16:"themeDangerColor";s:7:"#fc4a64";s:17:"themeWarningColor";s:7:"#ffc107";s:24:"useDefaultThemeInfoColor";s:1:"0";s:15:"themeLightColor";s:7:"#e7e7e7";s:24:"useDefaultThemeDarkColor";s:1:"0";s:15:"themeCustomScss";s:22480:":root {
+    --brand-orange: #CD853F;
+    --brand-dark: #06383B;
+
+    --accent-red: #902727;
+    --accent-red-2: #8F2B2B;
+
+    --page-bg: #ffffff;
+
+    /* Spaces cards */
+    --card-radius: 16px;
+    --card-border: rgba(15, 23, 42, 0.10);
+    --card-border-hover: rgba(165, 53, 53, 0.28);
+
+    --card-shadow: 0 10px 30px rgba(0,0,0,0.10);
+    --card-shadow-hover: 0 18px 50px rgba(0,0,0,0.16);
+
+    --card-body-bg-1: #f4f4f4;
+    --card-body-bg-2: #efefef;
+
+    --title: #121212;
+    --muted: rgba(18,18,18,0.68);
+
+    --gap: 20px;
+
+    /* Card sizing */
+    --img-h: 200px;
+    --body-h: 150px;
+    --card-h: calc(var(--img-h) + var(--body-h));
+
+    /* Menu (variables only; no menu styling below) */
+    --topbar-bg: #ffffff;
+    --topbar-border: rgba(15,23,42,.10);
+}
+
+
+/* ============================================
+   PROFILE HEADER
+============================================ */
+.panel-profile .panel-profile-header {
+    background: var(--brand-dark) !important;
+    color: #fff !important;
+}
+.panel-profile .panel-profile-header h1 a { color: #fff !important; }
+.panel-profile .panel-profile-header h2.space {
+    background: var(--brand-orange) !important;
+    color: #fff !important;
+}
+
+
+/* ============================================
+   BUTTON COLORS
+============================================ */
+.btn-primary {
+    background: var(--brand-dark) !important;
+    border-color: var(--brand-dark) !important;
+    color: #fff !important;
+}
+.btn-primary:hover {
+    background: #0b4a52 !important;
+    border-color: #0b4a52 !important;
+    color: #fff !important;
+}
+
+
+/* ============================================
+   MOBILE PROFILE FIX
+============================================ */
+@media (max-width: 768px) {
+    .panel-profile .panel-profile-header .img-profile-data {
+        width: 100% !important;
+        display: block !important;
+    }
+    .panel-profile .panel-profile-header .img-profile-data h1,
+    .panel-profile .panel-profile-header .img-profile-data h2 {
+        margin: 0 !important;
+        transform: translateY(-10px) !important;
+    }
+    .panel-profile .panel-profile-header .img-profile-data h1 a,
+    .panel-profile .panel-profile-header .img-profile-data .h1 a {
+        font-size: 18px !important;
+        padding: 2px 6px !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+    .panel-profile .panel-profile-header .img-profile-data h2.space {
+        font-size: 13px !important;
+        padding: 2px 6px !important;
+    }
+}
+
+
+/* ============================================
+   HIDE UNWANTED ELEMENTS
+============================================ */
+.layout-sidebar-container .panel:has(#activityStream) { display: none !important; }
+
+form.form-search[action="/people"] { display: none !important; }
+.panel-body:has(> form.form-search[action="/people"]) {
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+}
+
+.panel-profile-controls .followButton,
+.panel-profile-controls .unfollowButton { display: none !important; }
+
+.panel-profile .statistics > a:nth-child(1),
+.panel-profile .statistics > a:nth-child(2),
+.statistics a[data-action-url*="space-membership-list"] { display: none !important; }
+
+
+
+/* Remove space icons + buttons */
+.container-cards.container-spaces .card.card-space .card-icons,
+.container-cards.container-spaces .card.card-space i.fa-users,
+.container-cards.container-spaces .card.card-space .fa-users { display: none !important; }
+.container-cards.container-spaces .card.card-space .btn { display: none !important; }
+.container-cards.container-spaces .card.card-space .space-profile-acronym-1,
+.container-cards.container-spaces .card.card-space .space-acronym { display: none !important; }
+
+
+
+
+/* ============================================================
+   SPACES GRID — 4 columns
+============================================================ */
+.container-cards.container-spaces .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: var(--gap) !important;
+    align-items: stretch !important;
+}
+
+.container-cards.container-spaces .row > [class*="col-"] {
+    float: none !important;
+    width: auto !important;
+    max-width: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    flex: 0 0 calc((100% - (3 * var(--gap))) / 4) !important;
+    display: flex !important;
+    align-items: stretch !important;
+}
+
+@media (max-width: 1200px) {
+    .container-cards.container-spaces .row > [class*="col-"] {
+        flex: 0 0 calc((100% - var(--gap)) / 2) !important;
+    }
+}
+@media (max-width: 780px) {
+    .container-cards.container-spaces .row > [class*="col-"] {
+        flex: 0 0 100% !important;
+    }
+}
+
+
+/* ============================================================
+   SPACES CARDS — FIXED HEIGHT
+============================================================ */
+
+/* Outer wrapper */
+.container-cards.container-spaces .card.card-space {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    transform: none !important;
+    height: var(--card-h) !important;
+    min-height: var(--card-h) !important;
+    max-height: var(--card-h) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+    transition: none !important;
+}
+
+.container-cards.container-spaces .card.card-space:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+}
+
+.container-cards.container-spaces .card.card-space:focus-within {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+}
+
+/* Inner card panel */
+.container-cards.container-spaces .card.card-space .card-panel {
+    position: relative !important;
+    z-index: 1 !important;
+    height: var(--card-h) !important;
+    min-height: var(--card-h) !important;
+    max-height: var(--card-h) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+}
+
+/* Cover image */
+.container-cards.container-spaces .card.card-space .card-panel > .card-bg-image {
+    height: var(--img-h) !important;
+    min-height: var(--img-h) !important;
+    max-height: var(--img-h) !important;
+    width: 100% !important;
+    flex: 0 0 var(--img-h) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    filter: saturate(1.05) contrast(1.02) brightness(0.98) !important;
+    transition: transform .22s ease, filter .22s ease !important;
+}
+
+/* Hide empty header/footer */
+.container-cards.container-spaces .card.card-space .card-panel > .card-header,
+.container-cards.container-spaces .card.card-space .card-panel > .card-footer {
+    display: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+/* Body */
+.container-cards.container-spaces .card.card-space .card-panel > .card-body {
+    background: linear-gradient(180deg, var(--card-body-bg-1) 0%, var(--card-body-bg-2) 100%) !important;
+    padding: 14px 16px !important;
+    height: var(--body-h) !important;
+    min-height: var(--body-h) !important;
+    max-height: var(--body-h) !important;
+    width: 100% !important;
+    flex: 0 0 var(--body-h) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    overflow: hidden !important;
+    border-top: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-sizing: border-box !important;
+}
+
+/* Title */
+.container-cards.container-spaces .card.card-space h4,
+.container-cards.container-spaces .card.card-space .card-title {
+    color: var(--title) !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    margin: 0 0 8px 0 !important;
+    line-height: 1.22 !important;
+    letter-spacing: 0.2px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+}
+
+/* Description */
+.container-cards.container-spaces .card.card-space p {
+    color: var(--muted) !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 5 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+}
+
+/* Links */
+.container-cards.container-spaces .card.card-space a {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+
+
+
+/* ====================================================
+   REMOVE GAP BETWEEN #topbar-second AND PAGE CONTENT
+==================================================== */
+
+#layout-content {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+#layout-content > .container,
+#layout-content > .container-fluid {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+
+/* ============================================================
+   FILTERS
+============================================================ */
+
+.race-spaces-page #race-filters .panel.panel-default {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+}
+
+.race-spaces-page #race-filters .panel-heading {
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+}
+
+.race-spaces-page #race-filters .panel-body {
+    padding: 12px 14px 14px !important;
+}
+
+.race-spaces-page #race-filters .panel-body .row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 !important;
+}
+
+.race-spaces-page #race-filters .panel-body .row > [class*="col-"]:first-child {
+    display: none !important;
+}
+
+.race-spaces-page #race-filters .panel-body .row > [class*="col-"] {
+    float: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    flex: 1 1 calc((100% - 20px) / 3) !important;
+    min-width: 220px !important;
+}
+
+.race-spaces-page #race-filters input[type="text"],
+.race-spaces-page #race-filters input[type="search"],
+.race-spaces-page #race-filters .form-control,
+.race-spaces-page #race-filters select {
+    height: 40px !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(15,23,42,.12) !important;
+    background: rgba(255,255,255,.92) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.9) !important;
+    font-weight: 650 !important;
+}
+
+.race-spaces-page #race-filters .form-group {
+    margin: 0 !important;
+}
+
+.race-spaces-page #race-filters label {
+    font-size: 12px !important;
+    font-weight: 850 !important;
+    color: rgba(17,24,39,.70) !important;
+    margin: 0 0 6px 2px !important;
+}
+
+.race-spaces-page #race-filters a[href*="reset"],
+.race-spaces-page #race-filters a:has(.fa-times),
+.race-spaces-page #race-filters a:has(.fa-refresh) {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 36px !important;
+    padding: 0 12px !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(165,53,53,.18) !important;
+    background: rgba(165,53,53,.06) !important;
+    color: rgba(122,31,31,.92) !important;
+    font-weight: 850 !important;
+    text-decoration: none !important;
+    margin-top: 10px !important;
+}
+
+@media (max-width: 900px) {
+    .race-spaces-page #race-filters .panel-body .row > [class*="col-"] {
+        flex: 1 1 100% !important;
+        min-width: 0 !important;
+    }
+}
+
+
+
+
+/* ── Space card fade-in animation ── */
+.container-cards.container-spaces .card.card-space .tc-space-card.card-panel {
+    animation: cardFadeIn 0.6s cubic-bezier(0.4,0,0.2,1) backwards !important;
+}
+
+
+@keyframes cardFadeIn {
+  from { opacity:0; transform:translateY(20px) scale(0.98); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+
+
+
+
+
+
+.tc-spaces-panel {
+    display: none !important;
+}
+
+
+
+
+
+/* Make top menu icons red */
+#top-menu-nav i.fa,
+#top-menu-nav .fa,
+#top-menu-nav i {
+    color: #902727 !important;
+}
+
+
+
+
+#topbar-second .container {
+    display: flex !important;
+    justify-content: center !important;
+    position: relative;
+}
+
+#topbar-second .search {
+    position: absolute;
+    left: 0;
+}
+
+
+
+.container-people .panel.panel-default > .panel-heading {
+    display: none !important;
+}     
+
+
+/* Remove the "Guides d'utilisation" / Tour getting-started panel */
+#getting-started-panel {
+  display: none !important;
+}
+
+
+/* Panel titles styling */
+.panel-heading {
+    background-color: #902727 !important;
+    color: #ffffff !important;
+}
+
+/* Ensure text and icons inside the title stay white */
+.panel-heading * {
+    color: #ffffff !important;
+}
+
+
+
+
+#topbar-first  { border-bottom: none !important; }
+#topbar-second { border-bottom: 3px solid #902727 !important; }
+
+
+
+
+
+
+
+
+/* ============================================================
+   HumHub TOP MENU — Icon LEFT of text + raise ALL labels
+   Works even when labels are plain text (no span/#text)
+   ============================================================ */
+
+/* 0) If HumHub uses <br> to stack icon/text, disable it */
+#top-menu-nav br { display: none !important; }
+
+/* 1) Horizontal layout for ALL top menu links */
+#top-menu-nav > li.nav-item > a.nav-link,
+#top-menu-nav > li.nav-item.top-menu-item > a.nav-link {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  height: 50px !important;
+  padding: 0 14px !important;
+  white-space: nowrap !important;
+
+  line-height: 1 !important;
+  position: relative !important;
+  top: -5px !important;            /* <-- THIS raises icon + text for ALL items */
+}
+
+/* 2) Normalize children */
+#top-menu-nav > li.nav-item > a.nav-link > *,
+#top-menu-nav > li.nav-item.top-menu-item > a.nav-link > * {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+/* 3) Icon spacing */
+#top-menu-nav > li.nav-item > a.nav-link > i,
+#top-menu-nav > li.nav-item.top-menu-item > a.nav-link > i {
+  margin-right: 8px !important;
+}
+
+/* 4) If there IS a wrapped label (#text/span), keep it aligned too */
+#top-menu-nav > li.nav-item > a.nav-link #text,
+#top-menu-nav > li.nav-item > a.nav-link span {
+  line-height: 1 !important;
+}
+
+/* 5) Dropdown caret alignment */
+#top-menu-nav .dropdown-toggle::after,
+#top-menu-nav .caret {
+  margin-left: 6px !important;
+  position: relative !important;
+  top: 1px !important;
+}
+/* Fine-tune: move icons slightly DOWN */
+#top-menu-nav > li.nav-item > a.nav-link > i,
+#top-menu-nav > li.nav-item.top-menu-item > a.nav-link > i {
+    position: relative !important;
+    top: 4px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   HumHub TOP MENU — icon LEFT of text + perfect underline alignment
+   (No moving the <a> itself, so hover/active red line stays aligned)
+   ============================================================ */
+
+/* 0) If HumHub uses <br> to stack icon/text, disable it */
+#top-menu-nav br { display: none !important; }
+
+/* 1) Horizontal layout for ALL top menu links */
+#top-menu-nav > li.nav-item > a.nav-link,
+#top-menu-nav > li.nav-item.top-menu-item > a.nav-link {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  height: 50px !important;
+
+  /* This is the trick: more bottom padding pushes content UP
+     while the link box (and underline) stays at the same place. */
+  padding: 0 14px 8px 14px !important;
+
+  white-space: nowrap !important;
+  line-height: 1 !important;
+
+  position: relative !important;
+  top: 0 !important; /* IMPORTANT: keep underline aligned */
+}
+
+/* 2) Normalize children */
+#top-menu-nav > li.nav-item > a.nav-link > *,
+#top-menu-nav > li.nav-item.top-menu-item > a.nav-link > * {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+/* 3) Icon spacing + move icons DOWN (applies to all icons, including dropdown) */
+#top-menu-nav > li.nav-item > a.nav-link i,
+#top-menu-nav > li.nav-item.top-menu-item > a.nav-link i {
+  margin-right: 8px !important;
+  position: relative !important;
+  top: 3px !important;   /* <-- change this to push icons more down */
+}
+
+/* 4) Keep wrapped labels aligned if present */
+#top-menu-nav > li.nav-item > a.nav-link #text,
+#top-menu-nav > li.nav-item > a.nav-link span {
+  line-height: 1 !important;
+}
+
+/* 5) Dropdown caret alignment */
+#top-menu-nav .dropdown-toggle::after,
+#top-menu-nav .caret {
+  margin-left: 6px !important;
+  position: relative !important;
+  top: 1px !important;
+}
+
+/* Push MES ESPACES content slightly down without moving the link */
+#top-menu-nav > li:first-child > a.nav-link > * {
+    position: relative !important;
+    top: 4px !important;
+}
+
+
+
+.container-cards.container-spaces .tc-top .tc-avatar {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+
+
+
+#calendar-upcoming-events-snippet.panel.calendar-upcoming-snippet {
+    border-radius: 12px !important;
+    overflow: visible !important;
+}
+
+#calendar-upcoming-events-snippet .panel-heading {
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
+}
+
+#calendar-upcoming-events-snippet .panel-body {
+    overflow: visible !important;
+}
+
+
+/* Round all posts in Overview / Wall stream */
+
+.wall-entry .panel {
+    border-radius: 14px !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(0,0,0,0.06) !important;
+}
+
+.wall-entry .wall-entry-header {
+    background: rgba(165,53,53,0.035) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.06) !important;
+    padding: 10px 12px !important;
+
+    border-top-left-radius: 14px !important;
+    border-top-right-radius: 14px !important;
+}
+.wall-entry .wall-entry-header {
+    border-bottom: 1px solid #3c5f8c !important;
+}
+
+.container-people .tc-sub {
+  white-space: normal !important;
+  overflow: hidden !important;
+  text-overflow: unset !important;
+
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 5 !important;
+}
+
+
+.container-people .tc-people-card.card-panel {
+    animation: cardFadeIn 0.6s cubic-bezier(0.4,0,0.2,1) backwards !important;
+}
+
+
+
+.container-cards.container-spaces .card.card-space:has(a[href*="/s/actualite"]) {
+  display: none !important;
+}
+
+
+
+
+
+/* Hides profile pic from spaces */
+
+.space-layout-container .profile-user-photo-container {
+    display: none !important;
+}
+
+
+
+.tc-people-card[data-user-guid="021b5387-274c-47d6-9dc3-9981639492ae"] {
+    display: none !important;
+}
+
+
+
+.card.card-people:has(.card-panel.tc-people-card[data-user-guid="b11d832d-050c-4636-9c13-f1c8b8f3e235"]),
+.card.card-people:has(.card-panel.tc-people-card[data-user-guid="d8ca18e3-be86-40ca-922a-7c21b5c15064"]),
+.card.card-people:has(.card-panel.tc-people-card[data-user-guid="be37890a-f5f2-47e4-9ad0-5e3ddf0619ed"]),
+.card.card-people:has(.card-panel.tc-people-card[data-user-guid="021b5387-274c-47d6-9dc3-9981639492ae"]) {
+    display: none !important;
+}
+
+
+:root {
+    --hh-ct-top-menu-text-color: #902727 !important;
+}
+.container-cards.container-spaces .card.card-space p {
+    color: #902727 !important;
+}
+/*
+.tc-space-card .tc-title {
+    color: #902727 !important;
+}  */
+
+
+
+:root {
+    --hh-ct-top-menu-text-color: #902727!important;
+
+    --hh-ct-top-menu-active-color: #000000 !important;
+
+    --hh-ct-top-menu-active-border-color: #000000 !important;
+
+    --hh-ct-top-menu-active-bg: #000000 !important;
+}
+
+
+
+#topbar-first .nav > li > a,
+#topbar-first .nav > li > a:hover,
+#topbar-first .nav > li > a:focus,
+#topbar-first .nav > li > a:active,
+#topbar-first .nav > li.active > a,
+#topbar-first .nav > li > a.active {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+#topbar-first .nav > li > a,
+#topbar-first .nav > li > a.active {
+    color: #ffffff !important;
+}
+
+#topbar-first .nav > li > a i,
+#topbar-first .nav > li > a.active i {
+    color: #ffffff !important;
+}
+
+#top-menu-nav > li > a.nav-link.active,
+#top-menu-nav > li.active > a {
+    border-bottom: 3px solid #902727 !important;
+    color: #ffffff !important;
+}
+
+#top-menu-nav i.fa, 
+#top-menu-nav .fa, 
+#top-menu-nav i {
+    color: #ab8282 !important;
+}
+
+body.hh-ct-menu-style-background .list-group-item.active,
+body.hh-ct-menu-style-background .list-group-item.active:hover,
+body.hh-ct-menu-style-background .list-group-item.active:focus {
+    background-color: #dbdbdb !important;
+    color: #000000 !important;
+    border-left: none !important;
+}
+
+#contentForm,
+#contentFormBody,
+[data-action-component="content.form.CreateForm"] {
+    display: none !important;
+}
+#wall-stream-filter-nav .wall-stream-filter-body .filter-root.container > .row > div.filter-panel.col:first-of-type {
+    display: none !important;
+}";s:15:"maintenanceMode";s:1:"0";s:19:"maintenanceModeInfo";s:0:"";s:14:"mailerHostname";s:18:"smtp.office365.com";s:14:"mailerUsername";s:17:"emajlis@csefrs.ma";s:14:"mailerPassword";s:16:"L#314836683243ab";s:10:"mailerPort";s:3:"587";s:14:"mailerUseSmtps";s:1:"0";s:26:"mailerAllowSelfSignedCerts";s:1:"0";s:24:"mailerSystemEmailReplyTo";s:0:"";s:21:"showNameInsteadOfLogo";s:1:"0";s:22:"captcha.altcha.hmacKey";s:64:"2d7286ded7dabe28fbb0a0261621a0465a507f3ed8443c09766ae9a499194248";s:34:"theme.var.CSETheme v1.17.4.isFluid";s:5:"false";s:34:"theme.var.CSETheme v1.17.4.primary";s:7:"#435f6f";s:36:"theme.var.CSETheme v1.17.4.secondary";s:7:"#7a7a7a";s:31:"theme.var.CSETheme v1.17.4.info";s:7:"#0582FF";s:34:"theme.var.CSETheme v1.17.4.success";s:7:"#52a11c";s:34:"theme.var.CSETheme v1.17.4.warning";s:7:"#FFC107";s:33:"theme.var.CSETheme v1.17.4.danger";s:7:"#FC4A64";s:32:"theme.var.CSETheme v1.17.4.light";s:7:"#e7e7e7";s:31:"theme.var.CSETheme v1.17.4.dark";s:4:"#333";s:33:"theme.var.CSETheme v1.17.4.accent";s:7:"#21A1B3";s:47:"theme.var.CSETheme v1.17.4.accent-text-emphasis";s:25:"shade-color($accent, 60%)";s:43:"theme.var.CSETheme v1.17.4.accent-bg-subtle";s:24:"tint-color($accent, 80%)";s:47:"theme.var.CSETheme v1.17.4.accent-border-subtle";s:24:"tint-color($accent, 60%)";s:52:"theme.var.CSETheme v1.17.4.accent-text-emphasis-dark";s:24:"tint-color($accent, 60%)";s:48:"theme.var.CSETheme v1.17.4.accent-bg-subtle-dark";s:25:"shade-color($accent, 80%)";s:52:"theme.var.CSETheme v1.17.4.accent-border-subtle-dark";s:25:"shade-color($accent, 60%)";s:37:"theme.var.CSETheme v1.17.4.link-color";s:7:"#000000";s:43:"theme.var.CSETheme v1.17.4.link-hover-color";s:7:"#000000";s:37:"theme.var.CSETheme v1.17.4.code-color";s:24:"mix(black, $accent, 10%)";s:37:"theme.var.CSETheme v1.17.4.body-color";s:4:"#555";s:34:"theme.var.CSETheme v1.17.4.body-bg";s:7:"#ededed";s:45:"theme.var.CSETheme v1.17.4.input-border-color";s:7:"#e9ecef";s:35:"theme.var.CSETheme v1.17.4.input-bg";s:4:"#fff";s:42:"theme.var.CSETheme v1.17.4.text-color-main";s:4:"#555";s:45:"theme.var.CSETheme v1.17.4.text-color-default";s:7:"#4b4b4b";s:47:"theme.var.CSETheme v1.17.4.text-color-secondary";s:7:"#7a7a7a";s:47:"theme.var.CSETheme v1.17.4.text-color-highlight";s:4:"#000";s:42:"theme.var.CSETheme v1.17.4.text-color-soft";s:7:"#555555";s:43:"theme.var.CSETheme v1.17.4.text-color-soft2";s:7:"#aeaeae";s:43:"theme.var.CSETheme v1.17.4.text-color-soft3";s:7:"#bac2c7";s:46:"theme.var.CSETheme v1.17.4.text-color-contrast";s:4:"#fff";s:48:"theme.var.CSETheme v1.17.4.background-color-main";s:4:"#fff";s:53:"theme.var.CSETheme v1.17.4.background-color-secondary";s:7:"#f9f9f9";s:48:"theme.var.CSETheme v1.17.4.background-color-page";s:7:"#ededed";s:53:"theme.var.CSETheme v1.17.4.background-color-highlight";s:18:"rgba($accent, 0.2)";s:58:"theme.var.CSETheme v1.17.4.background-color-highlight-soft";s:51:"lighten(desaturate(adjust-hue($accent, 6), 16), 55)";s:38:"theme.var.CSETheme v1.17.4.background3";s:7:"#d7d7d7";s:38:"theme.var.CSETheme v1.17.4.background4";s:7:"#b2b2b2";s:51:"theme.var.CSETheme v1.17.4.background-color-success";s:7:"#f7fbf4";s:45:"theme.var.CSETheme v1.17.4.text-color-success";s:7:"#84be5e";s:47:"theme.var.CSETheme v1.17.4.border-color-success";s:7:"#97d271";s:51:"theme.var.CSETheme v1.17.4.background-color-warning";s:7:"#fffbf7";s:45:"theme.var.CSETheme v1.17.4.text-color-warning";s:7:"#e9b168";s:47:"theme.var.CSETheme v1.17.4.border-color-warning";s:7:"#fdd198";s:50:"theme.var.CSETheme v1.17.4.background-color-danger";s:7:"#fff6f6";s:44:"theme.var.CSETheme v1.17.4.text-color-danger";s:7:"#ff8989";s:46:"theme.var.CSETheme v1.17.4.border-color-danger";s:7:"#ff8989";s:43:"theme.var.CSETheme v1.17.4.font-family-base";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:49:"theme.var.CSETheme v1.17.4.font-family-sans-serif";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:41:"theme.var.CSETheme v1.17.4.font-size-root";s:4:"14px";s:43:"theme.var.CSETheme v1.17.4.font-weight-base";s:3:"400";s:43:"theme.var.CSETheme v1.17.4.mail-font-family";s:49:"'Open Sans', Arial, Tahoma, Helvetica, sans-serif";s:42:"theme.var.CSETheme v1.17.4.badge-font-size";s:4:"10px";s:44:"theme.var.CSETheme v1.17.4.badge-font-weight";s:6:"normal";s:42:"theme.var.CSETheme v1.17.4.badge-padding-y";s:3:"3px";s:42:"theme.var.CSETheme v1.17.4.badge-padding-x";s:3:"5px";s:46:"theme.var.CSETheme v1.17.4.badge-border-radius";s:3:"2px";s:45:"theme.var.CSETheme v1.17.4.min-contrast-ratio";s:1:"3";s:41:"theme.var.CSETheme v1.17.4.enable-shadows";s:4:"true";s:44:"theme.var.CSETheme v1.17.4.grid-gutter-width";s:4:"30px";s:43:"theme.var.CSETheme v1.17.4.line-height-base";s:3:"1.5";s:51:"theme.var.CSETheme v1.17.4.form-check-padding-start";s:3:"2em";s:48:"theme.var.CSETheme v1.17.4.focus-ring-box-shadow";s:4:"none";s:34:"theme.var.CSETheme v1.17.4.default";s:7:"#e7e7e7";s:31:"theme.var.CSETheme v1.17.4.link";s:7:"#435f6f";s:48:"theme.var.CSETheme v1.17.4.link-hover-color-dark";s:25:"mix(white, $primary, 10%)";s:42:"theme.var.CSETheme v1.17.4.code-color-dark";s:24:"mix(white, $accent, 10%)";s:42:"theme.var.CSETheme v1.17.4.body-color-dark";s:4:"#ddd";s:39:"theme.var.CSETheme v1.17.4.body-bg-dark";s:4:"#000";s:50:"theme.var.CSETheme v1.17.4.input-border-color-dark";s:7:"#1f2225";s:40:"theme.var.CSETheme v1.17.4.input-bg-dark";s:4:"#000";s:47:"theme.var.CSETheme v1.17.4.text-color-main-dark";s:4:"#ddd";s:50:"theme.var.CSETheme v1.17.4.text-color-default-dark";s:7:"#f0f0f0";s:52:"theme.var.CSETheme v1.17.4.text-color-secondary-dark";s:4:"#bbb";s:52:"theme.var.CSETheme v1.17.4.text-color-highlight-dark";s:4:"#fff";s:47:"theme.var.CSETheme v1.17.4.text-color-soft-dark";s:4:"#ddd";s:48:"theme.var.CSETheme v1.17.4.text-color-soft2-dark";s:4:"#ccc";s:48:"theme.var.CSETheme v1.17.4.text-color-soft3-dark";s:7:"#7b7773";s:51:"theme.var.CSETheme v1.17.4.text-color-contrast-dark";s:4:"#fff";s:53:"theme.var.CSETheme v1.17.4.background-color-main-dark";s:4:"#222";s:58:"theme.var.CSETheme v1.17.4.background-color-secondary-dark";s:4:"#333";s:53:"theme.var.CSETheme v1.17.4.background-color-page-dark";s:4:"#000";s:58:"theme.var.CSETheme v1.17.4.background-color-highlight-dark";s:18:"rgba($accent, 0.2)";s:63:"theme.var.CSETheme v1.17.4.background-color-highlight-soft-dark";s:50:"darken(desaturate(adjust-hue($accent, 6), 16), 55)";s:43:"theme.var.CSETheme v1.17.4.background3-dark";s:7:"#393939";s:43:"theme.var.CSETheme v1.17.4.background4-dark";s:7:"#5e5e5e";s:56:"theme.var.CSETheme v1.17.4.background-color-success-dark";s:7:"#3e423b";s:50:"theme.var.CSETheme v1.17.4.text-color-success-dark";s:7:"#84be5e";s:52:"theme.var.CSETheme v1.17.4.border-color-success-dark";s:7:"#97d271";s:56:"theme.var.CSETheme v1.17.4.background-color-warning-dark";s:7:"#4d443b";s:50:"theme.var.CSETheme v1.17.4.text-color-warning-dark";s:7:"#e9b168";s:52:"theme.var.CSETheme v1.17.4.border-color-warning-dark";s:7:"#fdd198";s:55:"theme.var.CSETheme v1.17.4.background-color-danger-dark";s:7:"#372a2a";s:49:"theme.var.CSETheme v1.17.4.text-color-danger-dark";s:7:"#ff8989";s:51:"theme.var.CSETheme v1.17.4.border-color-danger-dark";s:7:"#ff8989";s:27:"theme.var.CSETheme2.isFluid";s:5:"false";s:27:"theme.var.CSETheme2.primary";s:7:"#435f6f";s:29:"theme.var.CSETheme2.secondary";s:7:"#7a7a7a";s:24:"theme.var.CSETheme2.info";s:7:"#0582FF";s:27:"theme.var.CSETheme2.success";s:7:"#52a11c";s:27:"theme.var.CSETheme2.warning";s:7:"#FFC107";s:26:"theme.var.CSETheme2.danger";s:7:"#FC4A64";s:25:"theme.var.CSETheme2.light";s:7:"#e7e7e7";s:24:"theme.var.CSETheme2.dark";s:4:"#333";s:26:"theme.var.CSETheme2.accent";s:7:"#21A1B3";s:40:"theme.var.CSETheme2.accent-text-emphasis";s:25:"shade-color($accent, 60%)";s:36:"theme.var.CSETheme2.accent-bg-subtle";s:24:"tint-color($accent, 80%)";s:40:"theme.var.CSETheme2.accent-border-subtle";s:24:"tint-color($accent, 60%)";s:45:"theme.var.CSETheme2.accent-text-emphasis-dark";s:24:"tint-color($accent, 60%)";s:41:"theme.var.CSETheme2.accent-bg-subtle-dark";s:25:"shade-color($accent, 80%)";s:45:"theme.var.CSETheme2.accent-border-subtle-dark";s:25:"shade-color($accent, 60%)";s:30:"theme.var.CSETheme2.link-color";s:7:"#000000";s:36:"theme.var.CSETheme2.link-hover-color";s:7:"#000000";s:30:"theme.var.CSETheme2.code-color";s:24:"mix(black, $accent, 10%)";s:30:"theme.var.CSETheme2.body-color";s:4:"#555";s:27:"theme.var.CSETheme2.body-bg";s:7:"#ededed";s:38:"theme.var.CSETheme2.input-border-color";s:7:"#e9ecef";s:28:"theme.var.CSETheme2.input-bg";s:4:"#fff";s:35:"theme.var.CSETheme2.text-color-main";s:4:"#555";s:38:"theme.var.CSETheme2.text-color-default";s:7:"#4b4b4b";s:40:"theme.var.CSETheme2.text-color-secondary";s:7:"#7a7a7a";s:40:"theme.var.CSETheme2.text-color-highlight";s:4:"#000";s:35:"theme.var.CSETheme2.text-color-soft";s:7:"#555555";s:36:"theme.var.CSETheme2.text-color-soft2";s:7:"#aeaeae";s:36:"theme.var.CSETheme2.text-color-soft3";s:7:"#bac2c7";s:39:"theme.var.CSETheme2.text-color-contrast";s:4:"#fff";s:41:"theme.var.CSETheme2.background-color-main";s:4:"#fff";s:46:"theme.var.CSETheme2.background-color-secondary";s:7:"#f9f9f9";s:41:"theme.var.CSETheme2.background-color-page";s:7:"#ededed";s:46:"theme.var.CSETheme2.background-color-highlight";s:18:"rgba($accent, 0.2)";s:51:"theme.var.CSETheme2.background-color-highlight-soft";s:51:"lighten(desaturate(adjust-hue($accent, 6), 16), 55)";s:31:"theme.var.CSETheme2.background3";s:7:"#d7d7d7";s:31:"theme.var.CSETheme2.background4";s:7:"#b2b2b2";s:44:"theme.var.CSETheme2.background-color-success";s:7:"#f7fbf4";s:38:"theme.var.CSETheme2.text-color-success";s:7:"#84be5e";s:40:"theme.var.CSETheme2.border-color-success";s:7:"#97d271";s:44:"theme.var.CSETheme2.background-color-warning";s:7:"#fffbf7";s:38:"theme.var.CSETheme2.text-color-warning";s:7:"#e9b168";s:40:"theme.var.CSETheme2.border-color-warning";s:7:"#fdd198";s:43:"theme.var.CSETheme2.background-color-danger";s:7:"#fff6f6";s:37:"theme.var.CSETheme2.text-color-danger";s:7:"#ff8989";s:39:"theme.var.CSETheme2.border-color-danger";s:7:"#ff8989";s:36:"theme.var.CSETheme2.font-family-base";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:42:"theme.var.CSETheme2.font-family-sans-serif";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:34:"theme.var.CSETheme2.font-size-root";s:4:"14px";s:36:"theme.var.CSETheme2.font-weight-base";s:3:"400";s:36:"theme.var.CSETheme2.mail-font-family";s:49:"'Open Sans', Arial, Tahoma, Helvetica, sans-serif";s:35:"theme.var.CSETheme2.badge-font-size";s:4:"10px";s:37:"theme.var.CSETheme2.badge-font-weight";s:6:"normal";s:35:"theme.var.CSETheme2.badge-padding-y";s:3:"3px";s:35:"theme.var.CSETheme2.badge-padding-x";s:3:"5px";s:39:"theme.var.CSETheme2.badge-border-radius";s:3:"2px";s:38:"theme.var.CSETheme2.min-contrast-ratio";s:1:"3";s:34:"theme.var.CSETheme2.enable-shadows";s:4:"true";s:37:"theme.var.CSETheme2.grid-gutter-width";s:4:"30px";s:36:"theme.var.CSETheme2.line-height-base";s:3:"1.5";s:44:"theme.var.CSETheme2.form-check-padding-start";s:3:"2em";s:41:"theme.var.CSETheme2.focus-ring-box-shadow";s:4:"none";s:27:"theme.var.CSETheme2.default";s:7:"#e7e7e7";s:24:"theme.var.CSETheme2.link";s:7:"#435f6f";s:41:"theme.var.CSETheme2.link-hover-color-dark";s:25:"mix(white, $primary, 10%)";s:35:"theme.var.CSETheme2.code-color-dark";s:24:"mix(white, $accent, 10%)";s:35:"theme.var.CSETheme2.body-color-dark";s:4:"#ddd";s:32:"theme.var.CSETheme2.body-bg-dark";s:4:"#000";s:43:"theme.var.CSETheme2.input-border-color-dark";s:7:"#1f2225";s:33:"theme.var.CSETheme2.input-bg-dark";s:4:"#000";s:40:"theme.var.CSETheme2.text-color-main-dark";s:4:"#ddd";s:43:"theme.var.CSETheme2.text-color-default-dark";s:7:"#f0f0f0";s:45:"theme.var.CSETheme2.text-color-secondary-dark";s:4:"#bbb";s:45:"theme.var.CSETheme2.text-color-highlight-dark";s:4:"#fff";s:40:"theme.var.CSETheme2.text-color-soft-dark";s:4:"#ddd";s:41:"theme.var.CSETheme2.text-color-soft2-dark";s:4:"#ccc";s:41:"theme.var.CSETheme2.text-color-soft3-dark";s:7:"#7b7773";s:44:"theme.var.CSETheme2.text-color-contrast-dark";s:4:"#fff";s:46:"theme.var.CSETheme2.background-color-main-dark";s:4:"#222";s:51:"theme.var.CSETheme2.background-color-secondary-dark";s:4:"#333";s:46:"theme.var.CSETheme2.background-color-page-dark";s:4:"#000";s:51:"theme.var.CSETheme2.background-color-highlight-dark";s:18:"rgba($accent, 0.2)";s:56:"theme.var.CSETheme2.background-color-highlight-soft-dark";s:50:"darken(desaturate(adjust-hue($accent, 6), 16), 55)";s:36:"theme.var.CSETheme2.background3-dark";s:7:"#393939";s:36:"theme.var.CSETheme2.background4-dark";s:7:"#5e5e5e";s:49:"theme.var.CSETheme2.background-color-success-dark";s:7:"#3e423b";s:43:"theme.var.CSETheme2.text-color-success-dark";s:7:"#84be5e";s:45:"theme.var.CSETheme2.border-color-success-dark";s:7:"#97d271";s:49:"theme.var.CSETheme2.background-color-warning-dark";s:7:"#4d443b";s:43:"theme.var.CSETheme2.text-color-warning-dark";s:7:"#e9b168";s:45:"theme.var.CSETheme2.border-color-warning-dark";s:7:"#fdd198";s:48:"theme.var.CSETheme2.background-color-danger-dark";s:7:"#372a2a";s:42:"theme.var.CSETheme2.text-color-danger-dark";s:7:"#ff8989";s:44:"theme.var.CSETheme2.border-color-danger-dark";s:7:"#ff8989";s:29:"theme.var.CSE - light.isFluid";s:5:"false";s:29:"theme.var.CSE - light.primary";s:7:"#435f6f";s:31:"theme.var.CSE - light.secondary";s:7:"#7a7a7a";s:26:"theme.var.CSE - light.info";s:7:"#0582FF";s:29:"theme.var.CSE - light.success";s:7:"#52a11c";s:29:"theme.var.CSE - light.warning";s:7:"#FFC107";s:28:"theme.var.CSE - light.danger";s:7:"#FC4A64";s:27:"theme.var.CSE - light.light";s:7:"#e7e7e7";s:26:"theme.var.CSE - light.dark";s:4:"#333";s:28:"theme.var.CSE - light.accent";s:7:"#21A1B3";s:42:"theme.var.CSE - light.accent-text-emphasis";s:25:"shade-color($accent, 60%)";s:38:"theme.var.CSE - light.accent-bg-subtle";s:24:"tint-color($accent, 80%)";s:42:"theme.var.CSE - light.accent-border-subtle";s:24:"tint-color($accent, 60%)";s:47:"theme.var.CSE - light.accent-text-emphasis-dark";s:24:"tint-color($accent, 60%)";s:43:"theme.var.CSE - light.accent-bg-subtle-dark";s:25:"shade-color($accent, 80%)";s:47:"theme.var.CSE - light.accent-border-subtle-dark";s:25:"shade-color($accent, 60%)";s:32:"theme.var.CSE - light.link-color";s:7:"#000000";s:38:"theme.var.CSE - light.link-hover-color";s:7:"#000000";s:32:"theme.var.CSE - light.code-color";s:24:"mix(black, $accent, 10%)";s:32:"theme.var.CSE - light.body-color";s:4:"#555";s:29:"theme.var.CSE - light.body-bg";s:7:"#ededed";s:40:"theme.var.CSE - light.input-border-color";s:7:"#e9ecef";s:30:"theme.var.CSE - light.input-bg";s:4:"#fff";s:37:"theme.var.CSE - light.text-color-main";s:4:"#555";s:40:"theme.var.CSE - light.text-color-default";s:7:"#4b4b4b";s:42:"theme.var.CSE - light.text-color-secondary";s:7:"#7a7a7a";s:42:"theme.var.CSE - light.text-color-highlight";s:4:"#000";s:37:"theme.var.CSE - light.text-color-soft";s:7:"#555555";s:38:"theme.var.CSE - light.text-color-soft2";s:7:"#aeaeae";s:38:"theme.var.CSE - light.text-color-soft3";s:7:"#bac2c7";s:41:"theme.var.CSE - light.text-color-contrast";s:4:"#fff";s:43:"theme.var.CSE - light.background-color-main";s:4:"#fff";s:48:"theme.var.CSE - light.background-color-secondary";s:7:"#f9f9f9";s:43:"theme.var.CSE - light.background-color-page";s:7:"#ededed";s:48:"theme.var.CSE - light.background-color-highlight";s:18:"rgba($accent, 0.2)";s:53:"theme.var.CSE - light.background-color-highlight-soft";s:51:"lighten(desaturate(adjust-hue($accent, 6), 16), 55)";s:33:"theme.var.CSE - light.background3";s:7:"#d7d7d7";s:33:"theme.var.CSE - light.background4";s:7:"#b2b2b2";s:46:"theme.var.CSE - light.background-color-success";s:7:"#f7fbf4";s:40:"theme.var.CSE - light.text-color-success";s:7:"#84be5e";s:42:"theme.var.CSE - light.border-color-success";s:7:"#97d271";s:46:"theme.var.CSE - light.background-color-warning";s:7:"#fffbf7";s:40:"theme.var.CSE - light.text-color-warning";s:7:"#e9b168";s:42:"theme.var.CSE - light.border-color-warning";s:7:"#fdd198";s:45:"theme.var.CSE - light.background-color-danger";s:7:"#fff6f6";s:39:"theme.var.CSE - light.text-color-danger";s:7:"#ff8989";s:41:"theme.var.CSE - light.border-color-danger";s:7:"#ff8989";s:38:"theme.var.CSE - light.font-family-base";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:44:"theme.var.CSE - light.font-family-sans-serif";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:36:"theme.var.CSE - light.font-size-root";s:4:"14px";s:38:"theme.var.CSE - light.font-weight-base";s:3:"400";s:38:"theme.var.CSE - light.mail-font-family";s:49:"'Open Sans', Arial, Tahoma, Helvetica, sans-serif";s:37:"theme.var.CSE - light.badge-font-size";s:4:"10px";s:39:"theme.var.CSE - light.badge-font-weight";s:6:"normal";s:37:"theme.var.CSE - light.badge-padding-y";s:3:"3px";s:37:"theme.var.CSE - light.badge-padding-x";s:3:"5px";s:41:"theme.var.CSE - light.badge-border-radius";s:3:"2px";s:40:"theme.var.CSE - light.min-contrast-ratio";s:1:"3";s:36:"theme.var.CSE - light.enable-shadows";s:4:"true";s:39:"theme.var.CSE - light.grid-gutter-width";s:4:"30px";s:38:"theme.var.CSE - light.line-height-base";s:3:"1.5";s:46:"theme.var.CSE - light.form-check-padding-start";s:3:"2em";s:43:"theme.var.CSE - light.focus-ring-box-shadow";s:4:"none";s:29:"theme.var.CSE - light.default";s:7:"#e7e7e7";s:26:"theme.var.CSE - light.link";s:7:"#435f6f";s:43:"theme.var.CSE - light.link-hover-color-dark";s:25:"mix(white, $primary, 10%)";s:37:"theme.var.CSE - light.code-color-dark";s:24:"mix(white, $accent, 10%)";s:37:"theme.var.CSE - light.body-color-dark";s:4:"#ddd";s:34:"theme.var.CSE - light.body-bg-dark";s:4:"#000";s:45:"theme.var.CSE - light.input-border-color-dark";s:7:"#1f2225";s:35:"theme.var.CSE - light.input-bg-dark";s:4:"#000";s:42:"theme.var.CSE - light.text-color-main-dark";s:4:"#ddd";s:45:"theme.var.CSE - light.text-color-default-dark";s:7:"#f0f0f0";s:47:"theme.var.CSE - light.text-color-secondary-dark";s:4:"#bbb";s:47:"theme.var.CSE - light.text-color-highlight-dark";s:4:"#fff";s:42:"theme.var.CSE - light.text-color-soft-dark";s:4:"#ddd";s:43:"theme.var.CSE - light.text-color-soft2-dark";s:4:"#ccc";s:43:"theme.var.CSE - light.text-color-soft3-dark";s:7:"#7b7773";s:46:"theme.var.CSE - light.text-color-contrast-dark";s:4:"#fff";s:48:"theme.var.CSE - light.background-color-main-dark";s:4:"#222";s:53:"theme.var.CSE - light.background-color-secondary-dark";s:4:"#333";s:48:"theme.var.CSE - light.background-color-page-dark";s:4:"#000";s:53:"theme.var.CSE - light.background-color-highlight-dark";s:18:"rgba($accent, 0.2)";s:58:"theme.var.CSE - light.background-color-highlight-soft-dark";s:50:"darken(desaturate(adjust-hue($accent, 6), 16), 55)";s:38:"theme.var.CSE - light.background3-dark";s:7:"#393939";s:38:"theme.var.CSE - light.background4-dark";s:7:"#5e5e5e";s:51:"theme.var.CSE - light.background-color-success-dark";s:7:"#3e423b";s:45:"theme.var.CSE - light.text-color-success-dark";s:7:"#84be5e";s:47:"theme.var.CSE - light.border-color-success-dark";s:7:"#97d271";s:51:"theme.var.CSE - light.background-color-warning-dark";s:7:"#4d443b";s:45:"theme.var.CSE - light.text-color-warning-dark";s:7:"#e9b168";s:47:"theme.var.CSE - light.border-color-warning-dark";s:7:"#fdd198";s:50:"theme.var.CSE - light.background-color-danger-dark";s:7:"#372a2a";s:44:"theme.var.CSE - light.text-color-danger-dark";s:7:"#ff8989";s:46:"theme.var.CSE - light.border-color-danger-dark";s:7:"#ff8989";s:31:"theme.var.CSE - light.baseTheme";s:6:"HumHub";s:17:"mailerLinkService";s:1:"1";s:14:"fileAssetLinks";s:0:"";s:20:"fileAppleAssociation";s:0:"";s:18:"whiteListedDomains";s:29:"https://emajlis-dev.csefrs.ma";s:21:"theme.var.CSE.isFluid";s:5:"false";s:21:"theme.var.CSE.primary";s:7:"#435f6f";s:23:"theme.var.CSE.secondary";s:7:"#7a7a7a";s:18:"theme.var.CSE.info";s:7:"#0582FF";s:21:"theme.var.CSE.success";s:7:"#52a11c";s:21:"theme.var.CSE.warning";s:7:"#FFC107";s:20:"theme.var.CSE.danger";s:7:"#FC4A64";s:19:"theme.var.CSE.light";s:7:"#e7e7e7";s:18:"theme.var.CSE.dark";s:4:"#333";s:20:"theme.var.CSE.accent";s:7:"#21A1B3";s:34:"theme.var.CSE.accent-text-emphasis";s:25:"shade-color($accent, 60%)";s:30:"theme.var.CSE.accent-bg-subtle";s:24:"tint-color($accent, 80%)";s:34:"theme.var.CSE.accent-border-subtle";s:24:"tint-color($accent, 60%)";s:39:"theme.var.CSE.accent-text-emphasis-dark";s:24:"tint-color($accent, 60%)";s:35:"theme.var.CSE.accent-bg-subtle-dark";s:25:"shade-color($accent, 80%)";s:39:"theme.var.CSE.accent-border-subtle-dark";s:25:"shade-color($accent, 60%)";s:24:"theme.var.CSE.link-color";s:7:"#000000";s:30:"theme.var.CSE.link-hover-color";s:7:"#000000";s:24:"theme.var.CSE.code-color";s:24:"mix(black, $accent, 10%)";s:24:"theme.var.CSE.body-color";s:4:"#555";s:21:"theme.var.CSE.body-bg";s:7:"#ededed";s:32:"theme.var.CSE.input-border-color";s:7:"#e9ecef";s:22:"theme.var.CSE.input-bg";s:4:"#fff";s:29:"theme.var.CSE.text-color-main";s:4:"#555";s:32:"theme.var.CSE.text-color-default";s:7:"#4b4b4b";s:34:"theme.var.CSE.text-color-secondary";s:7:"#7a7a7a";s:34:"theme.var.CSE.text-color-highlight";s:4:"#000";s:29:"theme.var.CSE.text-color-soft";s:7:"#555555";s:30:"theme.var.CSE.text-color-soft2";s:7:"#aeaeae";s:30:"theme.var.CSE.text-color-soft3";s:7:"#bac2c7";s:33:"theme.var.CSE.text-color-contrast";s:4:"#fff";s:35:"theme.var.CSE.background-color-main";s:4:"#fff";s:40:"theme.var.CSE.background-color-secondary";s:7:"#f9f9f9";s:35:"theme.var.CSE.background-color-page";s:7:"#ededed";s:40:"theme.var.CSE.background-color-highlight";s:18:"rgba($accent, 0.2)";s:45:"theme.var.CSE.background-color-highlight-soft";s:51:"lighten(desaturate(adjust-hue($accent, 6), 16), 55)";s:25:"theme.var.CSE.background3";s:7:"#d7d7d7";s:25:"theme.var.CSE.background4";s:7:"#b2b2b2";s:38:"theme.var.CSE.background-color-success";s:7:"#f7fbf4";s:32:"theme.var.CSE.text-color-success";s:7:"#84be5e";s:34:"theme.var.CSE.border-color-success";s:7:"#97d271";s:38:"theme.var.CSE.background-color-warning";s:7:"#fffbf7";s:32:"theme.var.CSE.text-color-warning";s:7:"#e9b168";s:34:"theme.var.CSE.border-color-warning";s:7:"#fdd198";s:37:"theme.var.CSE.background-color-danger";s:7:"#fff6f6";s:31:"theme.var.CSE.text-color-danger";s:7:"#ff8989";s:33:"theme.var.CSE.border-color-danger";s:7:"#ff8989";s:30:"theme.var.CSE.font-family-base";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:36:"theme.var.CSE.font-family-sans-serif";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:28:"theme.var.CSE.font-size-root";s:4:"14px";s:30:"theme.var.CSE.font-weight-base";s:3:"400";s:30:"theme.var.CSE.mail-font-family";s:49:"'Open Sans', Arial, Tahoma, Helvetica, sans-serif";s:29:"theme.var.CSE.badge-font-size";s:4:"10px";s:31:"theme.var.CSE.badge-font-weight";s:6:"normal";s:29:"theme.var.CSE.badge-padding-y";s:3:"3px";s:29:"theme.var.CSE.badge-padding-x";s:3:"5px";s:33:"theme.var.CSE.badge-border-radius";s:3:"2px";s:32:"theme.var.CSE.min-contrast-ratio";s:1:"3";s:28:"theme.var.CSE.enable-shadows";s:4:"true";s:31:"theme.var.CSE.grid-gutter-width";s:4:"30px";s:30:"theme.var.CSE.line-height-base";s:3:"1.5";s:38:"theme.var.CSE.form-check-padding-start";s:3:"2em";s:35:"theme.var.CSE.focus-ring-box-shadow";s:4:"none";s:21:"theme.var.CSE.default";s:7:"#e7e7e7";s:18:"theme.var.CSE.link";s:7:"#435f6f";s:35:"theme.var.CSE.link-hover-color-dark";s:25:"mix(white, $primary, 10%)";s:29:"theme.var.CSE.code-color-dark";s:24:"mix(white, $accent, 10%)";s:29:"theme.var.CSE.body-color-dark";s:4:"#ddd";s:26:"theme.var.CSE.body-bg-dark";s:4:"#000";s:37:"theme.var.CSE.input-border-color-dark";s:7:"#1f2225";s:27:"theme.var.CSE.input-bg-dark";s:4:"#000";s:34:"theme.var.CSE.text-color-main-dark";s:4:"#ddd";s:37:"theme.var.CSE.text-color-default-dark";s:7:"#f0f0f0";s:39:"theme.var.CSE.text-color-secondary-dark";s:4:"#bbb";s:39:"theme.var.CSE.text-color-highlight-dark";s:4:"#fff";s:34:"theme.var.CSE.text-color-soft-dark";s:4:"#ddd";s:35:"theme.var.CSE.text-color-soft2-dark";s:4:"#ccc";s:35:"theme.var.CSE.text-color-soft3-dark";s:7:"#7b7773";s:38:"theme.var.CSE.text-color-contrast-dark";s:4:"#fff";s:40:"theme.var.CSE.background-color-main-dark";s:4:"#222";s:45:"theme.var.CSE.background-color-secondary-dark";s:4:"#333";s:40:"theme.var.CSE.background-color-page-dark";s:4:"#000";s:45:"theme.var.CSE.background-color-highlight-dark";s:18:"rgba($accent, 0.2)";s:50:"theme.var.CSE.background-color-highlight-soft-dark";s:50:"darken(desaturate(adjust-hue($accent, 6), 16), 55)";s:30:"theme.var.CSE.background3-dark";s:7:"#393939";s:30:"theme.var.CSE.background4-dark";s:7:"#5e5e5e";s:43:"theme.var.CSE.background-color-success-dark";s:7:"#3e423b";s:37:"theme.var.CSE.text-color-success-dark";s:7:"#84be5e";s:39:"theme.var.CSE.border-color-success-dark";s:7:"#97d271";s:43:"theme.var.CSE.background-color-warning-dark";s:7:"#4d443b";s:37:"theme.var.CSE.text-color-warning-dark";s:7:"#e9b168";s:39:"theme.var.CSE.border-color-warning-dark";s:7:"#fdd198";s:42:"theme.var.CSE.background-color-danger-dark";s:7:"#372a2a";s:36:"theme.var.CSE.text-color-danger-dark";s:7:"#ff8989";s:38:"theme.var.CSE.border-color-danger-dark";s:7:"#ff8989";s:23:"theme.var.CSE.baseTheme";s:6:"HumHub";s:14:"themeInfoColor";s:7:"#902727";s:17:"themePrimaryColor";s:7:"#902727";s:16:"themeAccentColor";s:7:"#e1cbc5";s:30:"theme.var.ThemeCitoyen.isFluid";s:5:"false";s:30:"theme.var.ThemeCitoyen.primary";s:7:"#435f6f";s:32:"theme.var.ThemeCitoyen.secondary";s:7:"#7a7a7a";s:27:"theme.var.ThemeCitoyen.info";s:7:"#0582FF";s:30:"theme.var.ThemeCitoyen.success";s:7:"#52a11c";s:30:"theme.var.ThemeCitoyen.warning";s:7:"#FFC107";s:29:"theme.var.ThemeCitoyen.danger";s:7:"#FC4A64";s:28:"theme.var.ThemeCitoyen.light";s:7:"#e7e7e7";s:27:"theme.var.ThemeCitoyen.dark";s:4:"#333";s:29:"theme.var.ThemeCitoyen.accent";s:7:"#21A1B3";s:43:"theme.var.ThemeCitoyen.accent-text-emphasis";s:25:"shade-color($accent, 60%)";s:39:"theme.var.ThemeCitoyen.accent-bg-subtle";s:24:"tint-color($accent, 80%)";s:43:"theme.var.ThemeCitoyen.accent-border-subtle";s:24:"tint-color($accent, 60%)";s:48:"theme.var.ThemeCitoyen.accent-text-emphasis-dark";s:24:"tint-color($accent, 60%)";s:44:"theme.var.ThemeCitoyen.accent-bg-subtle-dark";s:25:"shade-color($accent, 80%)";s:48:"theme.var.ThemeCitoyen.accent-border-subtle-dark";s:25:"shade-color($accent, 60%)";s:33:"theme.var.ThemeCitoyen.link-color";s:7:"#000000";s:39:"theme.var.ThemeCitoyen.link-hover-color";s:7:"#000000";s:33:"theme.var.ThemeCitoyen.code-color";s:24:"mix(black, $accent, 10%)";s:33:"theme.var.ThemeCitoyen.body-color";s:4:"#555";s:30:"theme.var.ThemeCitoyen.body-bg";s:7:"#ededed";s:41:"theme.var.ThemeCitoyen.input-border-color";s:7:"#e9ecef";s:31:"theme.var.ThemeCitoyen.input-bg";s:4:"#fff";s:38:"theme.var.ThemeCitoyen.text-color-main";s:4:"#555";s:41:"theme.var.ThemeCitoyen.text-color-default";s:7:"#4b4b4b";s:43:"theme.var.ThemeCitoyen.text-color-secondary";s:7:"#7a7a7a";s:43:"theme.var.ThemeCitoyen.text-color-highlight";s:4:"#000";s:38:"theme.var.ThemeCitoyen.text-color-soft";s:7:"#555555";s:39:"theme.var.ThemeCitoyen.text-color-soft2";s:7:"#aeaeae";s:39:"theme.var.ThemeCitoyen.text-color-soft3";s:7:"#bac2c7";s:42:"theme.var.ThemeCitoyen.text-color-contrast";s:4:"#fff";s:44:"theme.var.ThemeCitoyen.background-color-main";s:4:"#fff";s:49:"theme.var.ThemeCitoyen.background-color-secondary";s:7:"#f9f9f9";s:44:"theme.var.ThemeCitoyen.background-color-page";s:7:"#ededed";s:49:"theme.var.ThemeCitoyen.background-color-highlight";s:18:"rgba($accent, 0.2)";s:54:"theme.var.ThemeCitoyen.background-color-highlight-soft";s:51:"lighten(desaturate(adjust-hue($accent, 6), 16), 55)";s:34:"theme.var.ThemeCitoyen.background3";s:7:"#d7d7d7";s:34:"theme.var.ThemeCitoyen.background4";s:7:"#b2b2b2";s:47:"theme.var.ThemeCitoyen.background-color-success";s:7:"#f7fbf4";s:41:"theme.var.ThemeCitoyen.text-color-success";s:7:"#84be5e";s:43:"theme.var.ThemeCitoyen.border-color-success";s:7:"#97d271";s:47:"theme.var.ThemeCitoyen.background-color-warning";s:7:"#fffbf7";s:41:"theme.var.ThemeCitoyen.text-color-warning";s:7:"#e9b168";s:43:"theme.var.ThemeCitoyen.border-color-warning";s:7:"#fdd198";s:46:"theme.var.ThemeCitoyen.background-color-danger";s:7:"#fff6f6";s:40:"theme.var.ThemeCitoyen.text-color-danger";s:7:"#ff8989";s:42:"theme.var.ThemeCitoyen.border-color-danger";s:7:"#ff8989";s:39:"theme.var.ThemeCitoyen.font-family-base";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:45:"theme.var.ThemeCitoyen.font-family-sans-serif";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:37:"theme.var.ThemeCitoyen.font-size-root";s:4:"14px";s:39:"theme.var.ThemeCitoyen.font-weight-base";s:3:"400";s:39:"theme.var.ThemeCitoyen.mail-font-family";s:49:"'Open Sans', Arial, Tahoma, Helvetica, sans-serif";s:38:"theme.var.ThemeCitoyen.badge-font-size";s:4:"10px";s:40:"theme.var.ThemeCitoyen.badge-font-weight";s:6:"normal";s:38:"theme.var.ThemeCitoyen.badge-padding-y";s:3:"3px";s:38:"theme.var.ThemeCitoyen.badge-padding-x";s:3:"5px";s:42:"theme.var.ThemeCitoyen.badge-border-radius";s:3:"2px";s:41:"theme.var.ThemeCitoyen.min-contrast-ratio";s:1:"3";s:37:"theme.var.ThemeCitoyen.enable-shadows";s:4:"true";s:40:"theme.var.ThemeCitoyen.grid-gutter-width";s:4:"30px";s:39:"theme.var.ThemeCitoyen.line-height-base";s:3:"1.5";s:47:"theme.var.ThemeCitoyen.form-check-padding-start";s:3:"2em";s:44:"theme.var.ThemeCitoyen.focus-ring-box-shadow";s:4:"none";s:30:"theme.var.ThemeCitoyen.default";s:7:"#e7e7e7";s:27:"theme.var.ThemeCitoyen.link";s:7:"#435f6f";s:44:"theme.var.ThemeCitoyen.link-hover-color-dark";s:25:"mix(white, $primary, 10%)";s:38:"theme.var.ThemeCitoyen.code-color-dark";s:24:"mix(white, $accent, 10%)";s:38:"theme.var.ThemeCitoyen.body-color-dark";s:4:"#ddd";s:35:"theme.var.ThemeCitoyen.body-bg-dark";s:4:"#000";s:46:"theme.var.ThemeCitoyen.input-border-color-dark";s:7:"#1f2225";s:36:"theme.var.ThemeCitoyen.input-bg-dark";s:4:"#000";s:43:"theme.var.ThemeCitoyen.text-color-main-dark";s:4:"#ddd";s:46:"theme.var.ThemeCitoyen.text-color-default-dark";s:7:"#f0f0f0";s:48:"theme.var.ThemeCitoyen.text-color-secondary-dark";s:4:"#bbb";s:48:"theme.var.ThemeCitoyen.text-color-highlight-dark";s:4:"#fff";s:43:"theme.var.ThemeCitoyen.text-color-soft-dark";s:4:"#ddd";s:44:"theme.var.ThemeCitoyen.text-color-soft2-dark";s:4:"#ccc";s:44:"theme.var.ThemeCitoyen.text-color-soft3-dark";s:7:"#7b7773";s:47:"theme.var.ThemeCitoyen.text-color-contrast-dark";s:4:"#fff";s:49:"theme.var.ThemeCitoyen.background-color-main-dark";s:4:"#222";s:54:"theme.var.ThemeCitoyen.background-color-secondary-dark";s:4:"#333";s:49:"theme.var.ThemeCitoyen.background-color-page-dark";s:4:"#000";s:54:"theme.var.ThemeCitoyen.background-color-highlight-dark";s:18:"rgba($accent, 0.2)";s:59:"theme.var.ThemeCitoyen.background-color-highlight-soft-dark";s:50:"darken(desaturate(adjust-hue($accent, 6), 16), 55)";s:39:"theme.var.ThemeCitoyen.background3-dark";s:7:"#393939";s:39:"theme.var.ThemeCitoyen.background4-dark";s:7:"#5e5e5e";s:52:"theme.var.ThemeCitoyen.background-color-success-dark";s:7:"#3e423b";s:46:"theme.var.ThemeCitoyen.text-color-success-dark";s:7:"#84be5e";s:48:"theme.var.ThemeCitoyen.border-color-success-dark";s:7:"#97d271";s:52:"theme.var.ThemeCitoyen.background-color-warning-dark";s:7:"#4d443b";s:46:"theme.var.ThemeCitoyen.text-color-warning-dark";s:7:"#e9b168";s:48:"theme.var.ThemeCitoyen.border-color-warning-dark";s:7:"#fdd198";s:51:"theme.var.ThemeCitoyen.background-color-danger-dark";s:7:"#372a2a";s:45:"theme.var.ThemeCitoyen.text-color-danger-dark";s:7:"#ff8989";s:47:"theme.var.ThemeCitoyen.border-color-danger-dark";s:7:"#ff8989";s:32:"theme.var.ThemeCitoyen.baseTheme";s:6:"HumHub";s:26:"theme.var.emajlis1.isFluid";s:5:"false";s:26:"theme.var.emajlis1.primary";s:7:"#435f6f";s:28:"theme.var.emajlis1.secondary";s:7:"#7a7a7a";s:23:"theme.var.emajlis1.info";s:7:"#0582FF";s:26:"theme.var.emajlis1.success";s:7:"#52a11c";s:26:"theme.var.emajlis1.warning";s:7:"#FFC107";s:25:"theme.var.emajlis1.danger";s:7:"#FC4A64";s:24:"theme.var.emajlis1.light";s:7:"#e7e7e7";s:23:"theme.var.emajlis1.dark";s:4:"#333";s:25:"theme.var.emajlis1.accent";s:7:"#21A1B3";s:39:"theme.var.emajlis1.accent-text-emphasis";s:25:"shade-color($accent, 60%)";s:35:"theme.var.emajlis1.accent-bg-subtle";s:24:"tint-color($accent, 80%)";s:39:"theme.var.emajlis1.accent-border-subtle";s:24:"tint-color($accent, 60%)";s:44:"theme.var.emajlis1.accent-text-emphasis-dark";s:24:"tint-color($accent, 60%)";s:40:"theme.var.emajlis1.accent-bg-subtle-dark";s:25:"shade-color($accent, 80%)";s:44:"theme.var.emajlis1.accent-border-subtle-dark";s:25:"shade-color($accent, 60%)";s:29:"theme.var.emajlis1.link-color";s:7:"#000000";s:35:"theme.var.emajlis1.link-hover-color";s:7:"#000000";s:29:"theme.var.emajlis1.code-color";s:24:"mix(black, $accent, 10%)";s:29:"theme.var.emajlis1.body-color";s:4:"#555";s:26:"theme.var.emajlis1.body-bg";s:7:"#ededed";s:37:"theme.var.emajlis1.input-border-color";s:7:"#e9ecef";s:27:"theme.var.emajlis1.input-bg";s:4:"#fff";s:34:"theme.var.emajlis1.text-color-main";s:4:"#555";s:37:"theme.var.emajlis1.text-color-default";s:7:"#4b4b4b";s:39:"theme.var.emajlis1.text-color-secondary";s:7:"#7a7a7a";s:39:"theme.var.emajlis1.text-color-highlight";s:4:"#000";s:34:"theme.var.emajlis1.text-color-soft";s:7:"#555555";s:35:"theme.var.emajlis1.text-color-soft2";s:7:"#aeaeae";s:35:"theme.var.emajlis1.text-color-soft3";s:7:"#bac2c7";s:38:"theme.var.emajlis1.text-color-contrast";s:4:"#fff";s:40:"theme.var.emajlis1.background-color-main";s:4:"#fff";s:45:"theme.var.emajlis1.background-color-secondary";s:7:"#f9f9f9";s:40:"theme.var.emajlis1.background-color-page";s:7:"#ededed";s:45:"theme.var.emajlis1.background-color-highlight";s:18:"rgba($accent, 0.2)";s:50:"theme.var.emajlis1.background-color-highlight-soft";s:51:"lighten(desaturate(adjust-hue($accent, 6), 16), 55)";s:30:"theme.var.emajlis1.background3";s:7:"#d7d7d7";s:30:"theme.var.emajlis1.background4";s:7:"#b2b2b2";s:43:"theme.var.emajlis1.background-color-success";s:7:"#f7fbf4";s:37:"theme.var.emajlis1.text-color-success";s:7:"#84be5e";s:39:"theme.var.emajlis1.border-color-success";s:7:"#97d271";s:43:"theme.var.emajlis1.background-color-warning";s:7:"#fffbf7";s:37:"theme.var.emajlis1.text-color-warning";s:7:"#e9b168";s:39:"theme.var.emajlis1.border-color-warning";s:7:"#fdd198";s:42:"theme.var.emajlis1.background-color-danger";s:7:"#fff6f6";s:36:"theme.var.emajlis1.text-color-danger";s:7:"#ff8989";s:38:"theme.var.emajlis1.border-color-danger";s:7:"#ff8989";s:35:"theme.var.emajlis1.font-family-base";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:41:"theme.var.emajlis1.font-family-sans-serif";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:33:"theme.var.emajlis1.font-size-root";s:4:"14px";s:35:"theme.var.emajlis1.font-weight-base";s:3:"400";s:35:"theme.var.emajlis1.mail-font-family";s:49:"'Open Sans', Arial, Tahoma, Helvetica, sans-serif";s:34:"theme.var.emajlis1.badge-font-size";s:4:"10px";s:36:"theme.var.emajlis1.badge-font-weight";s:6:"normal";s:34:"theme.var.emajlis1.badge-padding-y";s:3:"3px";s:34:"theme.var.emajlis1.badge-padding-x";s:3:"5px";s:38:"theme.var.emajlis1.badge-border-radius";s:3:"2px";s:37:"theme.var.emajlis1.min-contrast-ratio";s:1:"3";s:33:"theme.var.emajlis1.enable-shadows";s:4:"true";s:36:"theme.var.emajlis1.grid-gutter-width";s:4:"30px";s:35:"theme.var.emajlis1.line-height-base";s:3:"1.5";s:43:"theme.var.emajlis1.form-check-padding-start";s:3:"2em";s:40:"theme.var.emajlis1.focus-ring-box-shadow";s:4:"none";s:26:"theme.var.emajlis1.default";s:7:"#e7e7e7";s:23:"theme.var.emajlis1.link";s:7:"#435f6f";s:40:"theme.var.emajlis1.link-hover-color-dark";s:25:"mix(white, $primary, 10%)";s:34:"theme.var.emajlis1.code-color-dark";s:24:"mix(white, $accent, 10%)";s:34:"theme.var.emajlis1.body-color-dark";s:4:"#ddd";s:31:"theme.var.emajlis1.body-bg-dark";s:4:"#000";s:42:"theme.var.emajlis1.input-border-color-dark";s:7:"#1f2225";s:32:"theme.var.emajlis1.input-bg-dark";s:4:"#000";s:39:"theme.var.emajlis1.text-color-main-dark";s:4:"#ddd";s:42:"theme.var.emajlis1.text-color-default-dark";s:7:"#f0f0f0";s:44:"theme.var.emajlis1.text-color-secondary-dark";s:4:"#bbb";s:44:"theme.var.emajlis1.text-color-highlight-dark";s:4:"#fff";s:39:"theme.var.emajlis1.text-color-soft-dark";s:4:"#ddd";s:40:"theme.var.emajlis1.text-color-soft2-dark";s:4:"#ccc";s:40:"theme.var.emajlis1.text-color-soft3-dark";s:7:"#7b7773";s:43:"theme.var.emajlis1.text-color-contrast-dark";s:4:"#fff";s:45:"theme.var.emajlis1.background-color-main-dark";s:4:"#222";s:50:"theme.var.emajlis1.background-color-secondary-dark";s:4:"#333";s:45:"theme.var.emajlis1.background-color-page-dark";s:4:"#000";s:50:"theme.var.emajlis1.background-color-highlight-dark";s:18:"rgba($accent, 0.2)";s:55:"theme.var.emajlis1.background-color-highlight-soft-dark";s:50:"darken(desaturate(adjust-hue($accent, 6), 16), 55)";s:35:"theme.var.emajlis1.background3-dark";s:7:"#393939";s:35:"theme.var.emajlis1.background4-dark";s:7:"#5e5e5e";s:48:"theme.var.emajlis1.background-color-success-dark";s:7:"#3e423b";s:42:"theme.var.emajlis1.text-color-success-dark";s:7:"#84be5e";s:44:"theme.var.emajlis1.border-color-success-dark";s:7:"#97d271";s:48:"theme.var.emajlis1.background-color-warning-dark";s:7:"#4d443b";s:42:"theme.var.emajlis1.text-color-warning-dark";s:7:"#e9b168";s:44:"theme.var.emajlis1.border-color-warning-dark";s:7:"#fdd198";s:47:"theme.var.emajlis1.background-color-danger-dark";s:7:"#372a2a";s:41:"theme.var.emajlis1.text-color-danger-dark";s:7:"#ff8989";s:43:"theme.var.emajlis1.border-color-danger-dark";s:7:"#ff8989";s:28:"theme.var.emajlis1.baseTheme";s:6:"HumHub";s:26:"theme.var.emajlis2.isFluid";s:5:"false";s:26:"theme.var.emajlis2.primary";s:7:"#435f6f";s:28:"theme.var.emajlis2.secondary";s:7:"#7a7a7a";s:23:"theme.var.emajlis2.info";s:7:"#0582FF";s:26:"theme.var.emajlis2.success";s:7:"#52a11c";s:26:"theme.var.emajlis2.warning";s:7:"#FFC107";s:25:"theme.var.emajlis2.danger";s:7:"#FC4A64";s:24:"theme.var.emajlis2.light";s:7:"#e7e7e7";s:23:"theme.var.emajlis2.dark";s:4:"#333";s:25:"theme.var.emajlis2.accent";s:7:"#21A1B3";s:39:"theme.var.emajlis2.accent-text-emphasis";s:25:"shade-color($accent, 60%)";s:35:"theme.var.emajlis2.accent-bg-subtle";s:24:"tint-color($accent, 80%)";s:39:"theme.var.emajlis2.accent-border-subtle";s:24:"tint-color($accent, 60%)";s:44:"theme.var.emajlis2.accent-text-emphasis-dark";s:24:"tint-color($accent, 60%)";s:40:"theme.var.emajlis2.accent-bg-subtle-dark";s:25:"shade-color($accent, 80%)";s:44:"theme.var.emajlis2.accent-border-subtle-dark";s:25:"shade-color($accent, 60%)";s:29:"theme.var.emajlis2.link-color";s:7:"#000000";s:35:"theme.var.emajlis2.link-hover-color";s:7:"#000000";s:29:"theme.var.emajlis2.code-color";s:24:"mix(black, $accent, 10%)";s:29:"theme.var.emajlis2.body-color";s:4:"#555";s:26:"theme.var.emajlis2.body-bg";s:7:"#ededed";s:37:"theme.var.emajlis2.input-border-color";s:7:"#e9ecef";s:27:"theme.var.emajlis2.input-bg";s:4:"#fff";s:34:"theme.var.emajlis2.text-color-main";s:4:"#555";s:37:"theme.var.emajlis2.text-color-default";s:7:"#4b4b4b";s:39:"theme.var.emajlis2.text-color-secondary";s:7:"#7a7a7a";s:39:"theme.var.emajlis2.text-color-highlight";s:4:"#000";s:34:"theme.var.emajlis2.text-color-soft";s:7:"#555555";s:35:"theme.var.emajlis2.text-color-soft2";s:7:"#aeaeae";s:35:"theme.var.emajlis2.text-color-soft3";s:7:"#bac2c7";s:38:"theme.var.emajlis2.text-color-contrast";s:4:"#fff";s:40:"theme.var.emajlis2.background-color-main";s:4:"#fff";s:45:"theme.var.emajlis2.background-color-secondary";s:7:"#f9f9f9";s:40:"theme.var.emajlis2.background-color-page";s:7:"#ededed";s:45:"theme.var.emajlis2.background-color-highlight";s:18:"rgba($accent, 0.2)";s:50:"theme.var.emajlis2.background-color-highlight-soft";s:51:"lighten(desaturate(adjust-hue($accent, 6), 16), 55)";s:30:"theme.var.emajlis2.background3";s:7:"#d7d7d7";s:30:"theme.var.emajlis2.background4";s:7:"#b2b2b2";s:43:"theme.var.emajlis2.background-color-success";s:7:"#f7fbf4";s:37:"theme.var.emajlis2.text-color-success";s:7:"#84be5e";s:39:"theme.var.emajlis2.border-color-success";s:7:"#97d271";s:43:"theme.var.emajlis2.background-color-warning";s:7:"#fffbf7";s:37:"theme.var.emajlis2.text-color-warning";s:7:"#e9b168";s:39:"theme.var.emajlis2.border-color-warning";s:7:"#fdd198";s:42:"theme.var.emajlis2.background-color-danger";s:7:"#fff6f6";s:36:"theme.var.emajlis2.text-color-danger";s:7:"#ff8989";s:38:"theme.var.emajlis2.border-color-danger";s:7:"#ff8989";s:35:"theme.var.emajlis2.font-family-base";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:41:"theme.var.emajlis2.font-family-sans-serif";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:33:"theme.var.emajlis2.font-size-root";s:4:"14px";s:35:"theme.var.emajlis2.font-weight-base";s:3:"400";s:35:"theme.var.emajlis2.mail-font-family";s:49:"'Open Sans', Arial, Tahoma, Helvetica, sans-serif";s:34:"theme.var.emajlis2.badge-font-size";s:4:"10px";s:36:"theme.var.emajlis2.badge-font-weight";s:6:"normal";s:34:"theme.var.emajlis2.badge-padding-y";s:3:"3px";s:34:"theme.var.emajlis2.badge-padding-x";s:3:"5px";s:38:"theme.var.emajlis2.badge-border-radius";s:3:"2px";s:37:"theme.var.emajlis2.min-contrast-ratio";s:1:"3";s:33:"theme.var.emajlis2.enable-shadows";s:4:"true";s:36:"theme.var.emajlis2.grid-gutter-width";s:4:"30px";s:35:"theme.var.emajlis2.line-height-base";s:3:"1.5";s:43:"theme.var.emajlis2.form-check-padding-start";s:3:"2em";s:40:"theme.var.emajlis2.focus-ring-box-shadow";s:4:"none";s:26:"theme.var.emajlis2.default";s:7:"#e7e7e7";s:23:"theme.var.emajlis2.link";s:7:"#435f6f";s:40:"theme.var.emajlis2.link-hover-color-dark";s:25:"mix(white, $primary, 10%)";s:34:"theme.var.emajlis2.code-color-dark";s:24:"mix(white, $accent, 10%)";s:34:"theme.var.emajlis2.body-color-dark";s:4:"#ddd";s:31:"theme.var.emajlis2.body-bg-dark";s:4:"#000";s:42:"theme.var.emajlis2.input-border-color-dark";s:7:"#1f2225";s:32:"theme.var.emajlis2.input-bg-dark";s:4:"#000";s:39:"theme.var.emajlis2.text-color-main-dark";s:4:"#ddd";s:42:"theme.var.emajlis2.text-color-default-dark";s:7:"#f0f0f0";s:44:"theme.var.emajlis2.text-color-secondary-dark";s:4:"#bbb";s:44:"theme.var.emajlis2.text-color-highlight-dark";s:4:"#fff";s:39:"theme.var.emajlis2.text-color-soft-dark";s:4:"#ddd";s:40:"theme.var.emajlis2.text-color-soft2-dark";s:4:"#ccc";s:40:"theme.var.emajlis2.text-color-soft3-dark";s:7:"#7b7773";s:43:"theme.var.emajlis2.text-color-contrast-dark";s:4:"#fff";s:45:"theme.var.emajlis2.background-color-main-dark";s:4:"#222";s:50:"theme.var.emajlis2.background-color-secondary-dark";s:4:"#333";s:45:"theme.var.emajlis2.background-color-page-dark";s:4:"#000";s:50:"theme.var.emajlis2.background-color-highlight-dark";s:18:"rgba($accent, 0.2)";s:55:"theme.var.emajlis2.background-color-highlight-soft-dark";s:50:"darken(desaturate(adjust-hue($accent, 6), 16), 55)";s:35:"theme.var.emajlis2.background3-dark";s:7:"#393939";s:35:"theme.var.emajlis2.background4-dark";s:7:"#5e5e5e";s:48:"theme.var.emajlis2.background-color-success-dark";s:7:"#3e423b";s:42:"theme.var.emajlis2.text-color-success-dark";s:7:"#84be5e";s:44:"theme.var.emajlis2.border-color-success-dark";s:7:"#97d271";s:48:"theme.var.emajlis2.background-color-warning-dark";s:7:"#4d443b";s:42:"theme.var.emajlis2.text-color-warning-dark";s:7:"#e9b168";s:44:"theme.var.emajlis2.border-color-warning-dark";s:7:"#fdd198";s:47:"theme.var.emajlis2.background-color-danger-dark";s:7:"#372a2a";s:41:"theme.var.emajlis2.text-color-danger-dark";s:7:"#ff8989";s:43:"theme.var.emajlis2.border-color-danger-dark";s:7:"#ff8989";s:28:"theme.var.emajlis2.baseTheme";s:6:"HumHub";s:22:"theme.var.CSE2.isFluid";s:5:"false";s:22:"theme.var.CSE2.primary";s:7:"#435f6f";s:24:"theme.var.CSE2.secondary";s:7:"#7a7a7a";s:19:"theme.var.CSE2.info";s:7:"#0582FF";s:22:"theme.var.CSE2.success";s:7:"#52a11c";s:22:"theme.var.CSE2.warning";s:7:"#FFC107";s:21:"theme.var.CSE2.danger";s:7:"#FC4A64";s:20:"theme.var.CSE2.light";s:7:"#e7e7e7";s:19:"theme.var.CSE2.dark";s:4:"#333";s:21:"theme.var.CSE2.accent";s:7:"#21A1B3";s:35:"theme.var.CSE2.accent-text-emphasis";s:25:"shade-color($accent, 60%)";s:31:"theme.var.CSE2.accent-bg-subtle";s:24:"tint-color($accent, 80%)";s:35:"theme.var.CSE2.accent-border-subtle";s:24:"tint-color($accent, 60%)";s:40:"theme.var.CSE2.accent-text-emphasis-dark";s:24:"tint-color($accent, 60%)";s:36:"theme.var.CSE2.accent-bg-subtle-dark";s:25:"shade-color($accent, 80%)";s:40:"theme.var.CSE2.accent-border-subtle-dark";s:25:"shade-color($accent, 60%)";s:25:"theme.var.CSE2.link-color";s:7:"#000000";s:31:"theme.var.CSE2.link-hover-color";s:7:"#000000";s:25:"theme.var.CSE2.code-color";s:24:"mix(black, $accent, 10%)";s:25:"theme.var.CSE2.body-color";s:4:"#555";s:22:"theme.var.CSE2.body-bg";s:7:"#ededed";s:33:"theme.var.CSE2.input-border-color";s:7:"#e9ecef";s:23:"theme.var.CSE2.input-bg";s:4:"#fff";s:30:"theme.var.CSE2.text-color-main";s:4:"#555";s:33:"theme.var.CSE2.text-color-default";s:7:"#4b4b4b";s:35:"theme.var.CSE2.text-color-secondary";s:7:"#7a7a7a";s:35:"theme.var.CSE2.text-color-highlight";s:4:"#000";s:30:"theme.var.CSE2.text-color-soft";s:7:"#555555";s:31:"theme.var.CSE2.text-color-soft2";s:7:"#aeaeae";s:31:"theme.var.CSE2.text-color-soft3";s:7:"#bac2c7";s:34:"theme.var.CSE2.text-color-contrast";s:4:"#fff";s:36:"theme.var.CSE2.background-color-main";s:4:"#fff";s:41:"theme.var.CSE2.background-color-secondary";s:7:"#f9f9f9";s:36:"theme.var.CSE2.background-color-page";s:7:"#ededed";s:41:"theme.var.CSE2.background-color-highlight";s:18:"rgba($accent, 0.2)";s:46:"theme.var.CSE2.background-color-highlight-soft";s:51:"lighten(desaturate(adjust-hue($accent, 6), 16), 55)";s:26:"theme.var.CSE2.background3";s:7:"#d7d7d7";s:26:"theme.var.CSE2.background4";s:7:"#b2b2b2";s:39:"theme.var.CSE2.background-color-success";s:7:"#f7fbf4";s:33:"theme.var.CSE2.text-color-success";s:7:"#84be5e";s:35:"theme.var.CSE2.border-color-success";s:7:"#97d271";s:39:"theme.var.CSE2.background-color-warning";s:7:"#fffbf7";s:33:"theme.var.CSE2.text-color-warning";s:7:"#e9b168";s:35:"theme.var.CSE2.border-color-warning";s:7:"#fdd198";s:38:"theme.var.CSE2.background-color-danger";s:7:"#fff6f6";s:32:"theme.var.CSE2.text-color-danger";s:7:"#ff8989";s:34:"theme.var.CSE2.border-color-danger";s:7:"#ff8989";s:31:"theme.var.CSE2.font-family-base";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:37:"theme.var.CSE2.font-family-sans-serif";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:29:"theme.var.CSE2.font-size-root";s:4:"14px";s:31:"theme.var.CSE2.font-weight-base";s:3:"400";s:31:"theme.var.CSE2.mail-font-family";s:49:"'Open Sans', Arial, Tahoma, Helvetica, sans-serif";s:30:"theme.var.CSE2.badge-font-size";s:4:"10px";s:32:"theme.var.CSE2.badge-font-weight";s:6:"normal";s:30:"theme.var.CSE2.badge-padding-y";s:3:"3px";s:30:"theme.var.CSE2.badge-padding-x";s:3:"5px";s:34:"theme.var.CSE2.badge-border-radius";s:3:"2px";s:33:"theme.var.CSE2.min-contrast-ratio";s:1:"3";s:29:"theme.var.CSE2.enable-shadows";s:4:"true";s:32:"theme.var.CSE2.grid-gutter-width";s:4:"30px";s:31:"theme.var.CSE2.line-height-base";s:3:"1.5";s:39:"theme.var.CSE2.form-check-padding-start";s:3:"2em";s:36:"theme.var.CSE2.focus-ring-box-shadow";s:4:"none";s:22:"theme.var.CSE2.default";s:7:"#e7e7e7";s:19:"theme.var.CSE2.link";s:7:"#435f6f";s:36:"theme.var.CSE2.link-hover-color-dark";s:25:"mix(white, $primary, 10%)";s:30:"theme.var.CSE2.code-color-dark";s:24:"mix(white, $accent, 10%)";s:30:"theme.var.CSE2.body-color-dark";s:4:"#ddd";s:27:"theme.var.CSE2.body-bg-dark";s:4:"#000";s:38:"theme.var.CSE2.input-border-color-dark";s:7:"#1f2225";s:28:"theme.var.CSE2.input-bg-dark";s:4:"#000";s:35:"theme.var.CSE2.text-color-main-dark";s:4:"#ddd";s:38:"theme.var.CSE2.text-color-default-dark";s:7:"#f0f0f0";s:40:"theme.var.CSE2.text-color-secondary-dark";s:4:"#bbb";s:40:"theme.var.CSE2.text-color-highlight-dark";s:4:"#fff";s:35:"theme.var.CSE2.text-color-soft-dark";s:4:"#ddd";s:36:"theme.var.CSE2.text-color-soft2-dark";s:4:"#ccc";s:36:"theme.var.CSE2.text-color-soft3-dark";s:7:"#7b7773";s:39:"theme.var.CSE2.text-color-contrast-dark";s:4:"#fff";s:41:"theme.var.CSE2.background-color-main-dark";s:4:"#222";s:46:"theme.var.CSE2.background-color-secondary-dark";s:4:"#333";s:41:"theme.var.CSE2.background-color-page-dark";s:4:"#000";s:46:"theme.var.CSE2.background-color-highlight-dark";s:18:"rgba($accent, 0.2)";s:51:"theme.var.CSE2.background-color-highlight-soft-dark";s:50:"darken(desaturate(adjust-hue($accent, 6), 16), 55)";s:31:"theme.var.CSE2.background3-dark";s:7:"#393939";s:31:"theme.var.CSE2.background4-dark";s:7:"#5e5e5e";s:44:"theme.var.CSE2.background-color-success-dark";s:7:"#3e423b";s:38:"theme.var.CSE2.text-color-success-dark";s:7:"#84be5e";s:40:"theme.var.CSE2.border-color-success-dark";s:7:"#97d271";s:44:"theme.var.CSE2.background-color-warning-dark";s:7:"#4d443b";s:38:"theme.var.CSE2.text-color-warning-dark";s:7:"#e9b168";s:40:"theme.var.CSE2.border-color-warning-dark";s:7:"#fdd198";s:43:"theme.var.CSE2.background-color-danger-dark";s:7:"#372a2a";s:37:"theme.var.CSE2.text-color-danger-dark";s:7:"#ff8989";s:39:"theme.var.CSE2.border-color-danger-dark";s:7:"#ff8989";s:24:"theme.var.CSE2.baseTheme";s:6:"HumHub";s:31:"theme.var.ThemeCitoyen2.isFluid";s:5:"false";s:31:"theme.var.ThemeCitoyen2.primary";s:7:"#435f6f";s:33:"theme.var.ThemeCitoyen2.secondary";s:7:"#7a7a7a";s:28:"theme.var.ThemeCitoyen2.info";s:7:"#0582FF";s:31:"theme.var.ThemeCitoyen2.success";s:7:"#52a11c";s:31:"theme.var.ThemeCitoyen2.warning";s:7:"#FFC107";s:30:"theme.var.ThemeCitoyen2.danger";s:7:"#FC4A64";s:29:"theme.var.ThemeCitoyen2.light";s:7:"#e7e7e7";s:28:"theme.var.ThemeCitoyen2.dark";s:4:"#333";s:30:"theme.var.ThemeCitoyen2.accent";s:7:"#21A1B3";s:44:"theme.var.ThemeCitoyen2.accent-text-emphasis";s:25:"shade-color($accent, 60%)";s:40:"theme.var.ThemeCitoyen2.accent-bg-subtle";s:24:"tint-color($accent, 80%)";s:44:"theme.var.ThemeCitoyen2.accent-border-subtle";s:24:"tint-color($accent, 60%)";s:49:"theme.var.ThemeCitoyen2.accent-text-emphasis-dark";s:24:"tint-color($accent, 60%)";s:45:"theme.var.ThemeCitoyen2.accent-bg-subtle-dark";s:25:"shade-color($accent, 80%)";s:49:"theme.var.ThemeCitoyen2.accent-border-subtle-dark";s:25:"shade-color($accent, 60%)";s:34:"theme.var.ThemeCitoyen2.link-color";s:7:"#000000";s:40:"theme.var.ThemeCitoyen2.link-hover-color";s:7:"#000000";s:34:"theme.var.ThemeCitoyen2.code-color";s:24:"mix(black, $accent, 10%)";s:34:"theme.var.ThemeCitoyen2.body-color";s:4:"#555";s:31:"theme.var.ThemeCitoyen2.body-bg";s:7:"#ededed";s:42:"theme.var.ThemeCitoyen2.input-border-color";s:7:"#e9ecef";s:32:"theme.var.ThemeCitoyen2.input-bg";s:4:"#fff";s:39:"theme.var.ThemeCitoyen2.text-color-main";s:4:"#555";s:42:"theme.var.ThemeCitoyen2.text-color-default";s:7:"#4b4b4b";s:44:"theme.var.ThemeCitoyen2.text-color-secondary";s:7:"#7a7a7a";s:44:"theme.var.ThemeCitoyen2.text-color-highlight";s:4:"#000";s:39:"theme.var.ThemeCitoyen2.text-color-soft";s:7:"#555555";s:40:"theme.var.ThemeCitoyen2.text-color-soft2";s:7:"#aeaeae";s:40:"theme.var.ThemeCitoyen2.text-color-soft3";s:7:"#bac2c7";s:43:"theme.var.ThemeCitoyen2.text-color-contrast";s:4:"#fff";s:45:"theme.var.ThemeCitoyen2.background-color-main";s:4:"#fff";s:50:"theme.var.ThemeCitoyen2.background-color-secondary";s:7:"#f9f9f9";s:45:"theme.var.ThemeCitoyen2.background-color-page";s:7:"#ededed";s:50:"theme.var.ThemeCitoyen2.background-color-highlight";s:18:"rgba($accent, 0.2)";s:55:"theme.var.ThemeCitoyen2.background-color-highlight-soft";s:51:"lighten(desaturate(adjust-hue($accent, 6), 16), 55)";s:35:"theme.var.ThemeCitoyen2.background3";s:7:"#d7d7d7";s:35:"theme.var.ThemeCitoyen2.background4";s:7:"#b2b2b2";s:48:"theme.var.ThemeCitoyen2.background-color-success";s:7:"#f7fbf4";s:42:"theme.var.ThemeCitoyen2.text-color-success";s:7:"#84be5e";s:44:"theme.var.ThemeCitoyen2.border-color-success";s:7:"#97d271";s:48:"theme.var.ThemeCitoyen2.background-color-warning";s:7:"#fffbf7";s:42:"theme.var.ThemeCitoyen2.text-color-warning";s:7:"#e9b168";s:44:"theme.var.ThemeCitoyen2.border-color-warning";s:7:"#fdd198";s:47:"theme.var.ThemeCitoyen2.background-color-danger";s:7:"#fff6f6";s:41:"theme.var.ThemeCitoyen2.text-color-danger";s:7:"#ff8989";s:43:"theme.var.ThemeCitoyen2.border-color-danger";s:7:"#ff8989";s:40:"theme.var.ThemeCitoyen2.font-family-base";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:46:"theme.var.ThemeCitoyen2.font-family-sans-serif";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:38:"theme.var.ThemeCitoyen2.font-size-root";s:4:"14px";s:40:"theme.var.ThemeCitoyen2.font-weight-base";s:3:"400";s:40:"theme.var.ThemeCitoyen2.mail-font-family";s:49:"'Open Sans', Arial, Tahoma, Helvetica, sans-serif";s:39:"theme.var.ThemeCitoyen2.badge-font-size";s:4:"10px";s:41:"theme.var.ThemeCitoyen2.badge-font-weight";s:6:"normal";s:39:"theme.var.ThemeCitoyen2.badge-padding-y";s:3:"3px";s:39:"theme.var.ThemeCitoyen2.badge-padding-x";s:3:"5px";s:43:"theme.var.ThemeCitoyen2.badge-border-radius";s:3:"2px";s:42:"theme.var.ThemeCitoyen2.min-contrast-ratio";s:1:"3";s:38:"theme.var.ThemeCitoyen2.enable-shadows";s:4:"true";s:41:"theme.var.ThemeCitoyen2.grid-gutter-width";s:4:"30px";s:40:"theme.var.ThemeCitoyen2.line-height-base";s:3:"1.5";s:48:"theme.var.ThemeCitoyen2.form-check-padding-start";s:3:"2em";s:45:"theme.var.ThemeCitoyen2.focus-ring-box-shadow";s:4:"none";s:31:"theme.var.ThemeCitoyen2.default";s:7:"#e7e7e7";s:28:"theme.var.ThemeCitoyen2.link";s:7:"#435f6f";s:45:"theme.var.ThemeCitoyen2.link-hover-color-dark";s:25:"mix(white, $primary, 10%)";s:39:"theme.var.ThemeCitoyen2.code-color-dark";s:24:"mix(white, $accent, 10%)";s:39:"theme.var.ThemeCitoyen2.body-color-dark";s:4:"#ddd";s:36:"theme.var.ThemeCitoyen2.body-bg-dark";s:4:"#000";s:47:"theme.var.ThemeCitoyen2.input-border-color-dark";s:7:"#1f2225";s:37:"theme.var.ThemeCitoyen2.input-bg-dark";s:4:"#000";s:44:"theme.var.ThemeCitoyen2.text-color-main-dark";s:4:"#ddd";s:47:"theme.var.ThemeCitoyen2.text-color-default-dark";s:7:"#f0f0f0";s:49:"theme.var.ThemeCitoyen2.text-color-secondary-dark";s:4:"#bbb";s:49:"theme.var.ThemeCitoyen2.text-color-highlight-dark";s:4:"#fff";s:44:"theme.var.ThemeCitoyen2.text-color-soft-dark";s:4:"#ddd";s:45:"theme.var.ThemeCitoyen2.text-color-soft2-dark";s:4:"#ccc";s:45:"theme.var.ThemeCitoyen2.text-color-soft3-dark";s:7:"#7b7773";s:48:"theme.var.ThemeCitoyen2.text-color-contrast-dark";s:4:"#fff";s:50:"theme.var.ThemeCitoyen2.background-color-main-dark";s:4:"#222";s:55:"theme.var.ThemeCitoyen2.background-color-secondary-dark";s:4:"#333";s:50:"theme.var.ThemeCitoyen2.background-color-page-dark";s:4:"#000";s:55:"theme.var.ThemeCitoyen2.background-color-highlight-dark";s:18:"rgba($accent, 0.2)";s:60:"theme.var.ThemeCitoyen2.background-color-highlight-soft-dark";s:50:"darken(desaturate(adjust-hue($accent, 6), 16), 55)";s:40:"theme.var.ThemeCitoyen2.background3-dark";s:7:"#393939";s:40:"theme.var.ThemeCitoyen2.background4-dark";s:7:"#5e5e5e";s:53:"theme.var.ThemeCitoyen2.background-color-success-dark";s:7:"#3e423b";s:47:"theme.var.ThemeCitoyen2.text-color-success-dark";s:7:"#84be5e";s:49:"theme.var.ThemeCitoyen2.border-color-success-dark";s:7:"#97d271";s:53:"theme.var.ThemeCitoyen2.background-color-warning-dark";s:7:"#4d443b";s:47:"theme.var.ThemeCitoyen2.text-color-warning-dark";s:7:"#e9b168";s:49:"theme.var.ThemeCitoyen2.border-color-warning-dark";s:7:"#fdd198";s:52:"theme.var.ThemeCitoyen2.background-color-danger-dark";s:7:"#372a2a";s:46:"theme.var.ThemeCitoyen2.text-color-danger-dark";s:7:"#ff8989";s:48:"theme.var.ThemeCitoyen2.border-color-danger-dark";s:7:"#ff8989";s:33:"theme.var.ThemeCitoyen2.baseTheme";s:6:"HumHub";s:30:"theme.var.emajlisclean.isFluid";s:5:"false";s:30:"theme.var.emajlisclean.primary";s:7:"#435f6f";s:32:"theme.var.emajlisclean.secondary";s:7:"#7a7a7a";s:27:"theme.var.emajlisclean.info";s:7:"#0582FF";s:30:"theme.var.emajlisclean.success";s:7:"#52a11c";s:30:"theme.var.emajlisclean.warning";s:7:"#FFC107";s:29:"theme.var.emajlisclean.danger";s:7:"#FC4A64";s:28:"theme.var.emajlisclean.light";s:7:"#e7e7e7";s:27:"theme.var.emajlisclean.dark";s:4:"#333";s:29:"theme.var.emajlisclean.accent";s:7:"#21A1B3";s:43:"theme.var.emajlisclean.accent-text-emphasis";s:25:"shade-color($accent, 60%)";s:39:"theme.var.emajlisclean.accent-bg-subtle";s:24:"tint-color($accent, 80%)";s:43:"theme.var.emajlisclean.accent-border-subtle";s:24:"tint-color($accent, 60%)";s:48:"theme.var.emajlisclean.accent-text-emphasis-dark";s:24:"tint-color($accent, 60%)";s:44:"theme.var.emajlisclean.accent-bg-subtle-dark";s:25:"shade-color($accent, 80%)";s:48:"theme.var.emajlisclean.accent-border-subtle-dark";s:25:"shade-color($accent, 60%)";s:33:"theme.var.emajlisclean.link-color";s:7:"#000000";s:39:"theme.var.emajlisclean.link-hover-color";s:7:"#000000";s:33:"theme.var.emajlisclean.code-color";s:24:"mix(black, $accent, 10%)";s:33:"theme.var.emajlisclean.body-color";s:4:"#555";s:30:"theme.var.emajlisclean.body-bg";s:7:"#ededed";s:41:"theme.var.emajlisclean.input-border-color";s:7:"#e9ecef";s:31:"theme.var.emajlisclean.input-bg";s:4:"#fff";s:38:"theme.var.emajlisclean.text-color-main";s:4:"#555";s:41:"theme.var.emajlisclean.text-color-default";s:7:"#4b4b4b";s:43:"theme.var.emajlisclean.text-color-secondary";s:7:"#7a7a7a";s:43:"theme.var.emajlisclean.text-color-highlight";s:4:"#000";s:38:"theme.var.emajlisclean.text-color-soft";s:7:"#555555";s:39:"theme.var.emajlisclean.text-color-soft2";s:7:"#aeaeae";s:39:"theme.var.emajlisclean.text-color-soft3";s:7:"#bac2c7";s:42:"theme.var.emajlisclean.text-color-contrast";s:4:"#fff";s:44:"theme.var.emajlisclean.background-color-main";s:4:"#fff";s:49:"theme.var.emajlisclean.background-color-secondary";s:7:"#f9f9f9";s:44:"theme.var.emajlisclean.background-color-page";s:7:"#ededed";s:49:"theme.var.emajlisclean.background-color-highlight";s:18:"rgba($accent, 0.2)";s:54:"theme.var.emajlisclean.background-color-highlight-soft";s:51:"lighten(desaturate(adjust-hue($accent, 6), 16), 55)";s:34:"theme.var.emajlisclean.background3";s:7:"#d7d7d7";s:34:"theme.var.emajlisclean.background4";s:7:"#b2b2b2";s:47:"theme.var.emajlisclean.background-color-success";s:7:"#f7fbf4";s:41:"theme.var.emajlisclean.text-color-success";s:7:"#84be5e";s:43:"theme.var.emajlisclean.border-color-success";s:7:"#97d271";s:47:"theme.var.emajlisclean.background-color-warning";s:7:"#fffbf7";s:41:"theme.var.emajlisclean.text-color-warning";s:7:"#e9b168";s:43:"theme.var.emajlisclean.border-color-warning";s:7:"#fdd198";s:46:"theme.var.emajlisclean.background-color-danger";s:7:"#fff6f6";s:40:"theme.var.emajlisclean.text-color-danger";s:7:"#ff8989";s:42:"theme.var.emajlisclean.border-color-danger";s:7:"#ff8989";s:39:"theme.var.emajlisclean.font-family-base";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:45:"theme.var.emajlisclean.font-family-sans-serif";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:37:"theme.var.emajlisclean.font-size-root";s:4:"14px";s:39:"theme.var.emajlisclean.font-weight-base";s:3:"400";s:39:"theme.var.emajlisclean.mail-font-family";s:49:"'Open Sans', Arial, Tahoma, Helvetica, sans-serif";s:38:"theme.var.emajlisclean.badge-font-size";s:4:"10px";s:40:"theme.var.emajlisclean.badge-font-weight";s:6:"normal";s:38:"theme.var.emajlisclean.badge-padding-y";s:3:"3px";s:38:"theme.var.emajlisclean.badge-padding-x";s:3:"5px";s:42:"theme.var.emajlisclean.badge-border-radius";s:3:"2px";s:41:"theme.var.emajlisclean.min-contrast-ratio";s:1:"3";s:37:"theme.var.emajlisclean.enable-shadows";s:4:"true";s:40:"theme.var.emajlisclean.grid-gutter-width";s:4:"30px";s:39:"theme.var.emajlisclean.line-height-base";s:3:"1.5";s:47:"theme.var.emajlisclean.form-check-padding-start";s:3:"2em";s:44:"theme.var.emajlisclean.focus-ring-box-shadow";s:4:"none";s:30:"theme.var.emajlisclean.default";s:7:"#e7e7e7";s:27:"theme.var.emajlisclean.link";s:7:"#435f6f";s:44:"theme.var.emajlisclean.link-hover-color-dark";s:25:"mix(white, $primary, 10%)";s:38:"theme.var.emajlisclean.code-color-dark";s:24:"mix(white, $accent, 10%)";s:38:"theme.var.emajlisclean.body-color-dark";s:4:"#ddd";s:35:"theme.var.emajlisclean.body-bg-dark";s:4:"#000";s:46:"theme.var.emajlisclean.input-border-color-dark";s:7:"#1f2225";s:36:"theme.var.emajlisclean.input-bg-dark";s:4:"#000";s:43:"theme.var.emajlisclean.text-color-main-dark";s:4:"#ddd";s:46:"theme.var.emajlisclean.text-color-default-dark";s:7:"#f0f0f0";s:48:"theme.var.emajlisclean.text-color-secondary-dark";s:4:"#bbb";s:48:"theme.var.emajlisclean.text-color-highlight-dark";s:4:"#fff";s:43:"theme.var.emajlisclean.text-color-soft-dark";s:4:"#ddd";s:44:"theme.var.emajlisclean.text-color-soft2-dark";s:4:"#ccc";s:44:"theme.var.emajlisclean.text-color-soft3-dark";s:7:"#7b7773";s:47:"theme.var.emajlisclean.text-color-contrast-dark";s:4:"#fff";s:49:"theme.var.emajlisclean.background-color-main-dark";s:4:"#222";s:54:"theme.var.emajlisclean.background-color-secondary-dark";s:4:"#333";s:49:"theme.var.emajlisclean.background-color-page-dark";s:4:"#000";s:54:"theme.var.emajlisclean.background-color-highlight-dark";s:18:"rgba($accent, 0.2)";s:59:"theme.var.emajlisclean.background-color-highlight-soft-dark";s:50:"darken(desaturate(adjust-hue($accent, 6), 16), 55)";s:39:"theme.var.emajlisclean.background3-dark";s:7:"#393939";s:39:"theme.var.emajlisclean.background4-dark";s:7:"#5e5e5e";s:52:"theme.var.emajlisclean.background-color-success-dark";s:7:"#3e423b";s:46:"theme.var.emajlisclean.text-color-success-dark";s:7:"#84be5e";s:48:"theme.var.emajlisclean.border-color-success-dark";s:7:"#97d271";s:52:"theme.var.emajlisclean.background-color-warning-dark";s:7:"#4d443b";s:46:"theme.var.emajlisclean.text-color-warning-dark";s:7:"#e9b168";s:48:"theme.var.emajlisclean.border-color-warning-dark";s:7:"#fdd198";s:51:"theme.var.emajlisclean.background-color-danger-dark";s:7:"#372a2a";s:45:"theme.var.emajlisclean.text-color-danger-dark";s:7:"#ff8989";s:47:"theme.var.emajlisclean.border-color-danger-dark";s:7:"#ff8989";s:32:"theme.var.emajlisclean.baseTheme";s:6:"HumHub";s:26:"theme.var.CSETheme.isFluid";s:5:"false";s:26:"theme.var.CSETheme.primary";s:7:"#435f6f";s:28:"theme.var.CSETheme.secondary";s:7:"#7a7a7a";s:23:"theme.var.CSETheme.info";s:7:"#0582FF";s:26:"theme.var.CSETheme.success";s:7:"#52a11c";s:26:"theme.var.CSETheme.warning";s:7:"#FFC107";s:25:"theme.var.CSETheme.danger";s:7:"#FC4A64";s:24:"theme.var.CSETheme.light";s:7:"#e7e7e7";s:23:"theme.var.CSETheme.dark";s:4:"#333";s:25:"theme.var.CSETheme.accent";s:7:"#21A1B3";s:39:"theme.var.CSETheme.accent-text-emphasis";s:25:"shade-color($accent, 60%)";s:35:"theme.var.CSETheme.accent-bg-subtle";s:24:"tint-color($accent, 80%)";s:39:"theme.var.CSETheme.accent-border-subtle";s:24:"tint-color($accent, 60%)";s:44:"theme.var.CSETheme.accent-text-emphasis-dark";s:24:"tint-color($accent, 60%)";s:40:"theme.var.CSETheme.accent-bg-subtle-dark";s:25:"shade-color($accent, 80%)";s:44:"theme.var.CSETheme.accent-border-subtle-dark";s:25:"shade-color($accent, 60%)";s:29:"theme.var.CSETheme.link-color";s:7:"#000000";s:35:"theme.var.CSETheme.link-hover-color";s:7:"#000000";s:29:"theme.var.CSETheme.code-color";s:24:"mix(black, $accent, 10%)";s:29:"theme.var.CSETheme.body-color";s:4:"#555";s:26:"theme.var.CSETheme.body-bg";s:7:"#ededed";s:37:"theme.var.CSETheme.input-border-color";s:7:"#e9ecef";s:27:"theme.var.CSETheme.input-bg";s:4:"#fff";s:34:"theme.var.CSETheme.text-color-main";s:4:"#555";s:37:"theme.var.CSETheme.text-color-default";s:7:"#4b4b4b";s:39:"theme.var.CSETheme.text-color-secondary";s:7:"#7a7a7a";s:39:"theme.var.CSETheme.text-color-highlight";s:4:"#000";s:34:"theme.var.CSETheme.text-color-soft";s:7:"#555555";s:35:"theme.var.CSETheme.text-color-soft2";s:7:"#aeaeae";s:35:"theme.var.CSETheme.text-color-soft3";s:7:"#bac2c7";s:38:"theme.var.CSETheme.text-color-contrast";s:4:"#fff";s:40:"theme.var.CSETheme.background-color-main";s:4:"#fff";s:45:"theme.var.CSETheme.background-color-secondary";s:7:"#f9f9f9";s:40:"theme.var.CSETheme.background-color-page";s:7:"#ededed";s:45:"theme.var.CSETheme.background-color-highlight";s:18:"rgba($accent, 0.2)";s:50:"theme.var.CSETheme.background-color-highlight-soft";s:51:"lighten(desaturate(adjust-hue($accent, 6), 16), 55)";s:30:"theme.var.CSETheme.background3";s:7:"#d7d7d7";s:30:"theme.var.CSETheme.background4";s:7:"#b2b2b2";s:43:"theme.var.CSETheme.background-color-success";s:7:"#f7fbf4";s:37:"theme.var.CSETheme.text-color-success";s:7:"#84be5e";s:39:"theme.var.CSETheme.border-color-success";s:7:"#97d271";s:43:"theme.var.CSETheme.background-color-warning";s:7:"#fffbf7";s:37:"theme.var.CSETheme.text-color-warning";s:7:"#e9b168";s:39:"theme.var.CSETheme.border-color-warning";s:7:"#fdd198";s:42:"theme.var.CSETheme.background-color-danger";s:7:"#fff6f6";s:36:"theme.var.CSETheme.text-color-danger";s:7:"#ff8989";s:38:"theme.var.CSETheme.border-color-danger";s:7:"#ff8989";s:35:"theme.var.CSETheme.font-family-base";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:41:"theme.var.CSETheme.font-family-sans-serif";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:33:"theme.var.CSETheme.font-size-root";s:4:"14px";s:35:"theme.var.CSETheme.font-weight-base";s:3:"400";s:35:"theme.var.CSETheme.mail-font-family";s:49:"'Open Sans', Arial, Tahoma, Helvetica, sans-serif";s:34:"theme.var.CSETheme.badge-font-size";s:4:"10px";s:36:"theme.var.CSETheme.badge-font-weight";s:6:"normal";s:34:"theme.var.CSETheme.badge-padding-y";s:3:"3px";s:34:"theme.var.CSETheme.badge-padding-x";s:3:"5px";s:38:"theme.var.CSETheme.badge-border-radius";s:3:"2px";s:37:"theme.var.CSETheme.min-contrast-ratio";s:1:"3";s:33:"theme.var.CSETheme.enable-shadows";s:4:"true";s:36:"theme.var.CSETheme.grid-gutter-width";s:4:"30px";s:35:"theme.var.CSETheme.line-height-base";s:3:"1.5";s:43:"theme.var.CSETheme.form-check-padding-start";s:3:"2em";s:40:"theme.var.CSETheme.focus-ring-box-shadow";s:4:"none";s:26:"theme.var.CSETheme.default";s:7:"#e7e7e7";s:23:"theme.var.CSETheme.link";s:7:"#435f6f";s:40:"theme.var.CSETheme.link-hover-color-dark";s:25:"mix(white, $primary, 10%)";s:34:"theme.var.CSETheme.code-color-dark";s:24:"mix(white, $accent, 10%)";s:34:"theme.var.CSETheme.body-color-dark";s:4:"#ddd";s:31:"theme.var.CSETheme.body-bg-dark";s:4:"#000";s:42:"theme.var.CSETheme.input-border-color-dark";s:7:"#1f2225";s:32:"theme.var.CSETheme.input-bg-dark";s:4:"#000";s:39:"theme.var.CSETheme.text-color-main-dark";s:4:"#ddd";s:42:"theme.var.CSETheme.text-color-default-dark";s:7:"#f0f0f0";s:44:"theme.var.CSETheme.text-color-secondary-dark";s:4:"#bbb";s:44:"theme.var.CSETheme.text-color-highlight-dark";s:4:"#fff";s:39:"theme.var.CSETheme.text-color-soft-dark";s:4:"#ddd";s:40:"theme.var.CSETheme.text-color-soft2-dark";s:4:"#ccc";s:40:"theme.var.CSETheme.text-color-soft3-dark";s:7:"#7b7773";s:43:"theme.var.CSETheme.text-color-contrast-dark";s:4:"#fff";s:45:"theme.var.CSETheme.background-color-main-dark";s:4:"#222";s:50:"theme.var.CSETheme.background-color-secondary-dark";s:4:"#333";s:45:"theme.var.CSETheme.background-color-page-dark";s:4:"#000";s:50:"theme.var.CSETheme.background-color-highlight-dark";s:18:"rgba($accent, 0.2)";s:55:"theme.var.CSETheme.background-color-highlight-soft-dark";s:50:"darken(desaturate(adjust-hue($accent, 6), 16), 55)";s:35:"theme.var.CSETheme.background3-dark";s:7:"#393939";s:35:"theme.var.CSETheme.background4-dark";s:7:"#5e5e5e";s:48:"theme.var.CSETheme.background-color-success-dark";s:7:"#3e423b";s:42:"theme.var.CSETheme.text-color-success-dark";s:7:"#84be5e";s:44:"theme.var.CSETheme.border-color-success-dark";s:7:"#97d271";s:48:"theme.var.CSETheme.background-color-warning-dark";s:7:"#4d443b";s:42:"theme.var.CSETheme.text-color-warning-dark";s:7:"#e9b168";s:44:"theme.var.CSETheme.border-color-warning-dark";s:7:"#fdd198";s:47:"theme.var.CSETheme.background-color-danger-dark";s:7:"#372a2a";s:41:"theme.var.CSETheme.text-color-danger-dark";s:7:"#ff8989";s:43:"theme.var.CSETheme.border-color-danger-dark";s:7:"#ff8989";s:28:"theme.var.CSETheme.baseTheme";s:6:"HumHub";s:24:"theme.var.theme2.isFluid";s:5:"false";s:24:"theme.var.theme2.primary";s:7:"#435f6f";s:26:"theme.var.theme2.secondary";s:7:"#7a7a7a";s:21:"theme.var.theme2.info";s:7:"#0582FF";s:24:"theme.var.theme2.success";s:7:"#52a11c";s:24:"theme.var.theme2.warning";s:7:"#FFC107";s:23:"theme.var.theme2.danger";s:7:"#FC4A64";s:22:"theme.var.theme2.light";s:7:"#e7e7e7";s:21:"theme.var.theme2.dark";s:4:"#333";s:23:"theme.var.theme2.accent";s:7:"#21A1B3";s:37:"theme.var.theme2.accent-text-emphasis";s:25:"shade-color($accent, 60%)";s:33:"theme.var.theme2.accent-bg-subtle";s:24:"tint-color($accent, 80%)";s:37:"theme.var.theme2.accent-border-subtle";s:24:"tint-color($accent, 60%)";s:42:"theme.var.theme2.accent-text-emphasis-dark";s:24:"tint-color($accent, 60%)";s:38:"theme.var.theme2.accent-bg-subtle-dark";s:25:"shade-color($accent, 80%)";s:42:"theme.var.theme2.accent-border-subtle-dark";s:25:"shade-color($accent, 60%)";s:27:"theme.var.theme2.link-color";s:7:"#000000";s:33:"theme.var.theme2.link-hover-color";s:7:"#000000";s:27:"theme.var.theme2.code-color";s:24:"mix(black, $accent, 10%)";s:27:"theme.var.theme2.body-color";s:4:"#555";s:24:"theme.var.theme2.body-bg";s:7:"#ededed";s:35:"theme.var.theme2.input-border-color";s:7:"#e9ecef";s:25:"theme.var.theme2.input-bg";s:4:"#fff";s:32:"theme.var.theme2.text-color-main";s:4:"#555";s:35:"theme.var.theme2.text-color-default";s:7:"#4b4b4b";s:37:"theme.var.theme2.text-color-secondary";s:7:"#7a7a7a";s:37:"theme.var.theme2.text-color-highlight";s:4:"#000";s:32:"theme.var.theme2.text-color-soft";s:7:"#555555";s:33:"theme.var.theme2.text-color-soft2";s:7:"#aeaeae";s:33:"theme.var.theme2.text-color-soft3";s:7:"#bac2c7";s:38:"theme.var.theme2.background-color-main";s:4:"#fff";s:43:"theme.var.theme2.background-color-secondary";s:7:"#f9f9f9";s:38:"theme.var.theme2.background-color-page";s:7:"#ededed";s:43:"theme.var.theme2.background-color-highlight";s:18:"rgba($accent, 0.2)";s:48:"theme.var.theme2.background-color-highlight-soft";s:53:"lighten(desaturate(adjust-hue($accent, 6), 16%), 55%)";s:28:"theme.var.theme2.background3";s:7:"#d7d7d7";s:28:"theme.var.theme2.background4";s:7:"#b2b2b2";s:35:"theme.var.theme2.min-contrast-ratio";s:1:"3";s:22:"theme.var.theme2.white";s:4:"#fff";s:22:"theme.var.theme2.black";s:4:"#000";s:36:"theme.var.theme2.color-contrast-dark";s:4:"#000";s:37:"theme.var.theme2.color-contrast-light";s:4:"#fff";s:43:"theme.var.theme2.text-color-accent-contrast";s:23:"color-contrast($accent)";s:44:"theme.var.theme2.text-color-primary-contrast";s:24:"color-contrast($primary)";s:46:"theme.var.theme2.text-color-secondary-contrast";s:26:"color-contrast($secondary)";s:41:"theme.var.theme2.text-color-info-contrast";s:21:"color-contrast($info)";s:44:"theme.var.theme2.text-color-success-contrast";s:24:"color-contrast($success)";s:44:"theme.var.theme2.text-color-warning-contrast";s:24:"color-contrast($warning)";s:43:"theme.var.theme2.text-color-danger-contrast";s:23:"color-contrast($danger)";s:42:"theme.var.theme2.text-color-light-contrast";s:22:"color-contrast($light)";s:41:"theme.var.theme2.text-color-dark-contrast";s:21:"color-contrast($dark)";s:41:"theme.var.theme2.background-color-success";s:7:"#f7fbf4";s:35:"theme.var.theme2.text-color-success";s:7:"#84be5e";s:37:"theme.var.theme2.border-color-success";s:7:"#97d271";s:41:"theme.var.theme2.background-color-warning";s:7:"#fffbf7";s:35:"theme.var.theme2.text-color-warning";s:7:"#e9b168";s:37:"theme.var.theme2.border-color-warning";s:7:"#fdd198";s:40:"theme.var.theme2.background-color-danger";s:7:"#fff6f6";s:34:"theme.var.theme2.text-color-danger";s:7:"#ff8989";s:36:"theme.var.theme2.border-color-danger";s:7:"#ff8989";s:33:"theme.var.theme2.font-family-base";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:39:"theme.var.theme2.font-family-sans-serif";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:31:"theme.var.theme2.font-size-root";s:4:"14px";s:33:"theme.var.theme2.font-weight-base";s:3:"400";s:33:"theme.var.theme2.mail-font-family";s:97:"-apple-system, BlinkMacSystemFont, 'Segoe UI', ’Helvetica Neue’, Helvetica, Arial, sans-serif";s:32:"theme.var.theme2.badge-font-size";s:4:"10px";s:34:"theme.var.theme2.badge-font-weight";s:6:"normal";s:32:"theme.var.theme2.badge-padding-y";s:3:"3px";s:32:"theme.var.theme2.badge-padding-x";s:3:"5px";s:36:"theme.var.theme2.badge-border-radius";s:3:"2px";s:31:"theme.var.theme2.enable-shadows";s:4:"true";s:34:"theme.var.theme2.grid-gutter-width";s:4:"30px";s:33:"theme.var.theme2.line-height-base";s:3:"1.5";s:41:"theme.var.theme2.form-check-padding-start";s:3:"2em";s:38:"theme.var.theme2.focus-ring-box-shadow";s:4:"none";s:39:"theme.var.theme2.component-active-color";s:24:"color-contrast($primary)";s:24:"theme.var.theme2.default";s:7:"#e7e7e7";s:21:"theme.var.theme2.link";s:7:"#435f6f";s:36:"theme.var.theme2.text-color-contrast";s:4:"#fff";s:41:"theme.var.theme2.text-color-contrast-dark";s:4:"#fff";s:38:"theme.var.theme2.link-hover-color-dark";s:25:"mix(white, $primary, 10%)";s:32:"theme.var.theme2.code-color-dark";s:24:"mix(white, $accent, 10%)";s:32:"theme.var.theme2.body-color-dark";s:4:"#ddd";s:29:"theme.var.theme2.body-bg-dark";s:4:"#000";s:40:"theme.var.theme2.input-border-color-dark";s:7:"#1f2225";s:30:"theme.var.theme2.input-bg-dark";s:4:"#000";s:37:"theme.var.theme2.text-color-main-dark";s:4:"#ddd";s:40:"theme.var.theme2.text-color-default-dark";s:7:"#f0f0f0";s:42:"theme.var.theme2.text-color-secondary-dark";s:4:"#bbb";s:42:"theme.var.theme2.text-color-highlight-dark";s:4:"#fff";s:37:"theme.var.theme2.text-color-soft-dark";s:4:"#ddd";s:38:"theme.var.theme2.text-color-soft2-dark";s:4:"#ccc";s:38:"theme.var.theme2.text-color-soft3-dark";s:7:"#7b7773";s:43:"theme.var.theme2.background-color-main-dark";s:4:"#222";s:48:"theme.var.theme2.background-color-secondary-dark";s:4:"#333";s:43:"theme.var.theme2.background-color-page-dark";s:4:"#000";s:48:"theme.var.theme2.background-color-highlight-dark";s:18:"rgba($accent, 0.2)";s:53:"theme.var.theme2.background-color-highlight-soft-dark";s:52:"darken(desaturate(adjust-hue($accent, 6), 16%), 55%)";s:33:"theme.var.theme2.background3-dark";s:7:"#393939";s:33:"theme.var.theme2.background4-dark";s:7:"#5e5e5e";s:46:"theme.var.theme2.background-color-success-dark";s:7:"#3e423b";s:40:"theme.var.theme2.text-color-success-dark";s:7:"#84be5e";s:42:"theme.var.theme2.border-color-success-dark";s:7:"#97d271";s:46:"theme.var.theme2.background-color-warning-dark";s:7:"#4d443b";s:40:"theme.var.theme2.text-color-warning-dark";s:7:"#e9b168";s:42:"theme.var.theme2.border-color-warning-dark";s:7:"#fdd198";s:45:"theme.var.theme2.background-color-danger-dark";s:7:"#372a2a";s:39:"theme.var.theme2.text-color-danger-dark";s:7:"#ff8989";s:41:"theme.var.theme2.border-color-danger-dark";s:7:"#ff8989";s:26:"theme.var.theme2.baseTheme";s:6:"HumHub";s:14:"people.detail1";s:8:"lastname";s:14:"people.detail2";s:5:"title";s:14:"people.detail3";s:10:"commission";s:21:"people.defaultSorting";s:9:"lastlogin";s:26:"people.defaultSortingGroup";s:0:"";s:19:"themeSecondaryColor";s:7:"#7a7a7a";s:14:"themeDarkColor";s:7:"#333333";s:12:"themeParents";s:34:"["/var/www/emajlis/themes/HumHub"]";s:23:"theme.var.Clean.isFluid";s:5:"false";s:23:"theme.var.Clean.primary";s:7:"#31414a";s:25:"theme.var.Clean.secondary";s:7:"#7a7a7a";s:20:"theme.var.Clean.info";s:7:"#1A808E";s:23:"theme.var.Clean.success";s:7:"#518132";s:23:"theme.var.Clean.warning";s:7:"#AF640E";s:22:"theme.var.Clean.danger";s:7:"#EC0426";s:21:"theme.var.Clean.light";s:7:"#f3f3f3";s:20:"theme.var.Clean.dark";s:4:"#333";s:22:"theme.var.Clean.accent";s:7:"#21A1B3";s:36:"theme.var.Clean.accent-text-emphasis";s:25:"shade-color($accent, 60%)";s:32:"theme.var.Clean.accent-bg-subtle";s:24:"tint-color($accent, 80%)";s:36:"theme.var.Clean.accent-border-subtle";s:24:"tint-color($accent, 60%)";s:41:"theme.var.Clean.accent-text-emphasis-dark";s:24:"tint-color($accent, 60%)";s:37:"theme.var.Clean.accent-bg-subtle-dark";s:25:"shade-color($accent, 80%)";s:41:"theme.var.Clean.accent-border-subtle-dark";s:25:"shade-color($accent, 60%)";s:26:"theme.var.Clean.link-color";s:7:"#000000";s:32:"theme.var.Clean.link-hover-color";s:7:"#000000";s:26:"theme.var.Clean.code-color";s:24:"mix(black, $accent, 10%)";s:26:"theme.var.Clean.body-color";s:4:"#555";s:23:"theme.var.Clean.body-bg";s:7:"#ededed";s:34:"theme.var.Clean.input-border-color";s:7:"#e9ecef";s:24:"theme.var.Clean.input-bg";s:4:"#fff";s:31:"theme.var.Clean.text-color-main";s:4:"#555";s:34:"theme.var.Clean.text-color-default";s:7:"#4b4b4b";s:36:"theme.var.Clean.text-color-secondary";s:7:"#7a7a7a";s:36:"theme.var.Clean.text-color-highlight";s:4:"#000";s:31:"theme.var.Clean.text-color-soft";s:7:"#555555";s:32:"theme.var.Clean.text-color-soft2";s:7:"#aeaeae";s:32:"theme.var.Clean.text-color-soft3";s:7:"#bac2c7";s:37:"theme.var.Clean.background-color-main";s:4:"#fff";s:42:"theme.var.Clean.background-color-secondary";s:7:"#f9f9f9";s:37:"theme.var.Clean.background-color-page";s:7:"#ededed";s:42:"theme.var.Clean.background-color-highlight";s:18:"rgba($accent, 0.2)";s:47:"theme.var.Clean.background-color-highlight-soft";s:53:"lighten(desaturate(adjust-hue($accent, 6), 16%), 55%)";s:27:"theme.var.Clean.background3";s:7:"#d7d7d7";s:27:"theme.var.Clean.background4";s:7:"#b2b2b2";s:34:"theme.var.Clean.min-contrast-ratio";s:1:"3";s:21:"theme.var.Clean.white";s:4:"#fff";s:21:"theme.var.Clean.black";s:4:"#000";s:35:"theme.var.Clean.color-contrast-dark";s:4:"#000";s:36:"theme.var.Clean.color-contrast-light";s:4:"#fff";s:42:"theme.var.Clean.text-color-accent-contrast";s:23:"color-contrast($accent)";s:43:"theme.var.Clean.text-color-primary-contrast";s:24:"color-contrast($primary)";s:45:"theme.var.Clean.text-color-secondary-contrast";s:26:"color-contrast($secondary)";s:40:"theme.var.Clean.text-color-info-contrast";s:21:"color-contrast($info)";s:43:"theme.var.Clean.text-color-success-contrast";s:24:"color-contrast($success)";s:43:"theme.var.Clean.text-color-warning-contrast";s:24:"color-contrast($warning)";s:42:"theme.var.Clean.text-color-danger-contrast";s:23:"color-contrast($danger)";s:41:"theme.var.Clean.text-color-light-contrast";s:22:"color-contrast($light)";s:40:"theme.var.Clean.text-color-dark-contrast";s:21:"color-contrast($dark)";s:40:"theme.var.Clean.background-color-success";s:7:"#f7fbf4";s:34:"theme.var.Clean.text-color-success";s:7:"#84be5e";s:36:"theme.var.Clean.border-color-success";s:7:"#97d271";s:40:"theme.var.Clean.background-color-warning";s:7:"#fffbf7";s:34:"theme.var.Clean.text-color-warning";s:7:"#e9b168";s:36:"theme.var.Clean.border-color-warning";s:7:"#fdd198";s:39:"theme.var.Clean.background-color-danger";s:7:"#fff6f6";s:33:"theme.var.Clean.text-color-danger";s:7:"#ff8989";s:35:"theme.var.Clean.border-color-danger";s:7:"#ff8989";s:32:"theme.var.Clean.font-family-base";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:38:"theme.var.Clean.font-family-sans-serif";s:204:"'Open Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"";s:30:"theme.var.Clean.font-size-root";s:4:"14px";s:32:"theme.var.Clean.font-weight-base";s:3:"400";s:32:"theme.var.Clean.mail-font-family";s:97:"-apple-system, BlinkMacSystemFont, 'Segoe UI', ’Helvetica Neue’, Helvetica, Arial, sans-serif";s:31:"theme.var.Clean.badge-font-size";s:4:"10px";s:33:"theme.var.Clean.badge-font-weight";s:6:"normal";s:31:"theme.var.Clean.badge-padding-y";s:3:"3px";s:31:"theme.var.Clean.badge-padding-x";s:3:"5px";s:35:"theme.var.Clean.badge-border-radius";s:3:"2px";s:30:"theme.var.Clean.enable-shadows";s:4:"true";s:33:"theme.var.Clean.grid-gutter-width";s:4:"30px";s:32:"theme.var.Clean.line-height-base";s:3:"1.5";s:40:"theme.var.Clean.form-check-padding-start";s:3:"2em";s:37:"theme.var.Clean.focus-ring-box-shadow";s:4:"none";s:38:"theme.var.Clean.component-active-color";s:24:"color-contrast($primary)";s:23:"theme.var.Clean.default";s:7:"#e7e7e7";s:20:"theme.var.Clean.link";s:7:"#435f6f";s:35:"theme.var.Clean.text-color-contrast";s:4:"#fff";s:40:"theme.var.Clean.text-color-contrast-dark";s:4:"#fff";s:37:"theme.var.Clean.link-hover-color-dark";s:25:"mix(white, $primary, 10%)";s:31:"theme.var.Clean.code-color-dark";s:24:"mix(white, $accent, 10%)";s:31:"theme.var.Clean.body-color-dark";s:4:"#ddd";s:28:"theme.var.Clean.body-bg-dark";s:4:"#000";s:39:"theme.var.Clean.input-border-color-dark";s:7:"#1f2225";s:29:"theme.var.Clean.input-bg-dark";s:4:"#000";s:36:"theme.var.Clean.text-color-main-dark";s:4:"#ddd";s:39:"theme.var.Clean.text-color-default-dark";s:7:"#f0f0f0";s:41:"theme.var.Clean.text-color-secondary-dark";s:4:"#bbb";s:41:"theme.var.Clean.text-color-highlight-dark";s:4:"#fff";s:36:"theme.var.Clean.text-color-soft-dark";s:4:"#ddd";s:37:"theme.var.Clean.text-color-soft2-dark";s:4:"#ccc";s:37:"theme.var.Clean.text-color-soft3-dark";s:7:"#7b7773";s:42:"theme.var.Clean.background-color-main-dark";s:4:"#222";s:47:"theme.var.Clean.background-color-secondary-dark";s:4:"#333";s:42:"theme.var.Clean.background-color-page-dark";s:4:"#000";s:47:"theme.var.Clean.background-color-highlight-dark";s:18:"rgba($accent, 0.2)";s:52:"theme.var.Clean.background-color-highlight-soft-dark";s:52:"darken(desaturate(adjust-hue($accent, 6), 16%), 55%)";s:32:"theme.var.Clean.background3-dark";s:7:"#393939";s:32:"theme.var.Clean.background4-dark";s:7:"#5e5e5e";s:45:"theme.var.Clean.background-color-success-dark";s:7:"#3e423b";s:39:"theme.var.Clean.text-color-success-dark";s:7:"#84be5e";s:41:"theme.var.Clean.border-color-success-dark";s:7:"#97d271";s:45:"theme.var.Clean.background-color-warning-dark";s:7:"#4d443b";s:39:"theme.var.Clean.text-color-warning-dark";s:7:"#e9b168";s:41:"theme.var.Clean.border-color-warning-dark";s:7:"#fdd198";s:44:"theme.var.Clean.background-color-danger-dark";s:7:"#372a2a";s:38:"theme.var.Clean.text-color-danger-dark";s:7:"#ff8989";s:40:"theme.var.Clean.border-color-danger-dark";s:7:"#ff8989";s:25:"theme.var.Clean.baseTheme";s:6:"HumHub";s:27:"theme.var.Clean.prev-topbar";s:4:"true";}i:1;N;}

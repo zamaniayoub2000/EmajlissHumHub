@@ -1,0 +1,288 @@
+openapi: 3.0.0
+info:
+  description: |
+    Welcome to the HumHub notification module API reference.
+  version: 1.0.0
+  title: HumHub - Notification API
+  contact:
+    email: info@humhub.com
+  license:
+    name: AGPLv2
+    url: https://www.humhub.org/en/licences
+tags:
+  - name: Notification
+    description: API to access notification information.
+    externalDocs:
+      description: Find out more
+      url: http://docs.humhub.org
+paths:
+  /notification:
+    get:
+      tags:
+        - Notification
+      summary: Find all user notifications
+      description: ""
+      parameters:
+        - $ref: common.yaml#/components/parameters/pageParam
+        - $ref: common.yaml#/components/parameters/limitParam
+        - in: query
+          name: excludeFilters
+          required: false
+          description: Filters to exclude notifications from result.
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - admin
+                - calendar
+                - task
+                - task_reminder
+                - comments
+                - content_created
+                - like
+                - space_member
+                - followed
+                - mentioned
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    $ref: common.yaml#/components/schemas/totalProperty
+                  page:
+                    $ref: common.yaml#/components/schemas/pageProperty
+                  pages:
+                    $ref: common.yaml#/components/schemas/pagesProperty
+                  links:
+                    $ref: common.yaml#/components/schemas/linksProperty
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Notification"
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  total:
+                    $ref: common.yaml#/components/schemas/totalProperty
+                  page:
+                    $ref: common.yaml#/components/schemas/pageProperty
+                  pages:
+                    $ref: common.yaml#/components/schemas/pagesProperty
+                  links:
+                    $ref: common.yaml#/components/schemas/linksProperty
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Notification"
+  /notification/send-custom:
+    post:
+      tags:
+        - Notification
+      summary: Send a custom notification to a user
+      description: Send a free text notification with target URL to a specific user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - userId
+                - text
+                - url
+              properties:
+                userId:
+                  type: integer
+                  description: Target user ID.
+                  example: 2
+                text:
+                  type: string
+                  description: Notification text shown to the user.
+                  example: Your report is ready.
+                url:
+                  type: string
+                  description: Target URL Absolute or Relative to HumHub base URL.
+                  example: https://example.com/reports/42
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Notification successfully sent
+        "422":
+          description: Invalid payload
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 422
+                  message:
+                    type: string
+                    example: Text cannot be blank.
+  "/notification/{id}":
+    get:
+      tags:
+        - Notification
+      summary: Get notification by id
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          description: The id of notification
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Notification"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Notification"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Notification not found
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Notification not found
+  /notification/unseen:
+    get:
+      tags:
+        - Notification
+      summary: Find unseen user notifications
+      description: ""
+      parameters:
+        - $ref: common.yaml#/components/parameters/pageParam
+        - $ref: common.yaml#/components/parameters/limitParam
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    $ref: common.yaml#/components/schemas/totalProperty
+                  page:
+                    $ref: common.yaml#/components/schemas/pageProperty
+                  pages:
+                    $ref: common.yaml#/components/schemas/pagesProperty
+                  links:
+                    $ref: common.yaml#/components/schemas/linksProperty
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Notification"
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  total:
+                    $ref: common.yaml#/components/schemas/totalProperty
+                  page:
+                    $ref: common.yaml#/components/schemas/pageProperty
+                  pages:
+                    $ref: common.yaml#/components/schemas/pagesProperty
+                  links:
+                    $ref: common.yaml#/components/schemas/linksProperty
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Notification"
+  /notification/mark-as-seen:
+    patch:
+      tags:
+        - Notification
+      summary: Mark all notifications as seen
+      description: ""
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: All notifications successfully marked as seen
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: All notifications successfully marked as seen
+servers:
+  - url: /api/v1
+components:
+  securitySchemes:
+    _ref: common.yaml#/securityDefinitions
+  schemas:
+    Notification:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 32
+        class:
+          type: string
+          example: humhub\modules\content\notifications\ContentCreated
+        output:
+          type: string
+          example: <strong>John Smith</strong> created post "Calvin Klein – Between love
+            and madness lies obsession."
+        originator:
+          $ref: user.yaml#/components/schemas/UserShort
+        source:
+          $ref: post.yaml#/components/schemas/Post
+        createdAt:
+          type: string
+          example: 2019-03-05 15:35:02

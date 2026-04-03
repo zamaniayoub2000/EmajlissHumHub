@@ -1,0 +1,60 @@
+<?php
+
+use humhub\components\View;
+use humhub\helpers\Html;
+use humhub\modules\mail\models\forms\InboxFilterForm;
+use humhub\modules\mail\widgets\ConversationTagPicker;
+use humhub\modules\mail\widgets\ManageTagsLink;
+use humhub\modules\ui\filter\widgets\PickerFilterInput;
+use humhub\modules\ui\filter\widgets\TextFilterInput;
+use humhub\modules\user\widgets\UserPickerField;
+use humhub\widgets\bootstrap\Link;
+use humhub\widgets\form\ActiveForm;
+
+/* @var $this View */
+/* @var $options array */
+/* @var $model InboxFilterForm */
+?>
+
+<?= Html::beginTag('div', $options) ?>
+<?= Link::none(Yii::t('MailModule.base', 'Filter'))
+    ->id('conversation-filter-link')
+    ->href('#mail-filter-menu')
+    ->icon('filter')
+    ->cssClass('filter-toggle-link ')
+    ->options(['data-bs-toggle' => 'collapse'])
+    ->sm() ?>
+
+<div id="mail-filter-menu" class="collapse clearfix<?= $model->isFiltered() ? ' in' : '' ?>">
+    <hr>
+    <?php $filterForm = ActiveForm::begin() ?>
+
+    <?= TextFilterInput::widget([
+        'id' => 'term',
+        'category' => 'term',
+        'view' => '@mail/widgets/views/inboxFilterTextInput',
+        'options' => [
+            'placeholder' => Yii::t('MailModule.base', 'Search'),
+            'value' => $model->term,
+        ],
+    ]) ?>
+
+    <div class="mb-3">
+        <?= PickerFilterInput::widget([
+            'id' => 'participants', 'category' => 'participants',
+            'picker' => UserPickerField::class,
+            'pickerOptions' => ['name' => 'participants', 'placeholder' => Yii::t('MailModule.base', 'Participants')]]) ?>
+    </div>
+    <div class="message-tag-filter-group">
+        <?= PickerFilterInput::widget([
+            'id' => 'tags', 'category' => 'tags',
+            'picker' => ConversationTagPicker::class,
+            'pickerOptions' => ['id' => 'inbox-tag-picker', 'name' => 'tags', 'placeholder' => Yii::t('MailModule.base', 'Tags'), 'placeholderMore' => Yii::t('MailModule.base', 'Tags')]]) ?>
+
+        <small>
+            <?= ManageTagsLink::widget() ?>
+        </small>
+    </div>
+    <?php ActiveForm::end() ?>
+</div>
+<?= Html::endTag('div') ?>

@@ -1,0 +1,64 @@
+Changelog
+=========
+
+1.1.1 (Februrary 26, 2026)
+--------------------------
+- Fix #61: Update module resources path
+- Fix #79: Improved Module Test GitHub Actions
+- Fix #81: Implemented `module-coding-standards`
+- Fix #90: Labels encoding (see [migration guide](https://github.com/humhub/humhub/blob/master/MIGRATE-DEV.md#version-1181))
+
+1.1.0 (August 18, 2025)
+-----------------------
+- Enh #78: Migration to Bootstrap 5 for HumHub 1.18
+
+1.0.11 (May 28, 2025)
+---------------------
+- Fix #75: Fix activity description
+
+1.0.10 (February 5, 2025)
+-------------------------
+- Enh #71: Show the list of available spaces to share to without having to enter the 2 first letters
+
+1.0.9 (December 12, 2024)
+-------------------------
+- Enh #69: Fix activity and notification wording from User and Dashboard
+
+1.0.8 (December 12, 2024)
+-------------------------
+- Enh #67: Update text for activity and notification of shared contents
+
+1.0.7 (November 14, 2024)
+-------------------------
+- Enh #65: Use PHP CS Fixer
+
+1.0.6 (May 17, 2024)
+--------------------
+- Fix #60: Fix sharing a global content from the dashboard
+
+1.0.5 (February 8, 2024)
+------------------------
+- Fix #55: Fix space searching with updated default permission
+
+1.0.4 (January 12, 2024)
+------------------------
+- Fix #51: Initialize module content class
+- Enh #52: Tests for `next` version
+- Fix #53: Fix space searching with updated default permission
+
+1.0.3 (June 2, 2023)
+--------------------
+- Fix #39: Deny to share a not published content
+- Fix #45: Disable possibility to share on the profile stream when "profileDisableStream" is true
+- Fix #37: Display a share button after create a content
+- Fix #50: Fix missing translations
+
+1.0.2 (May 1, 2023)
+-------------------
+- Fix #35: Hard delete records on disable module
+
+1.0.1 (April 27, 2023)
+----------------------
+- Fix #24: Add acceptance tests
+- Fix #27: Deny sharing a content to space where it was created in
+- Enh #28: Improve style of a shared content stream entry

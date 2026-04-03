@@ -1,0 +1,134 @@
+<?php
+
+namespace custom_pages\acceptance;
+
+use custom_pages\AcceptanceTester;
+
+class CreateGlobalPageCest
+{
+    public function testCreateMarkdownPageOnTopMenu(AcceptanceTester $I)
+    {
+        $I->amAdmin();
+        $I->wantToTest('the creation of a markdown page on Top Navigation');
+        $I->amGoingTo('add a new page');
+        $I->amOnRoute(['/custom_pages/page']);
+        $I->expectTo('see the add new page site');
+        $I->see('Overview');
+        $I->see('Top Navigation');
+        $I->seeElement('.target-page-list.TopMenuWidget');
+
+        $I->click('.btn-success', '.target-page-list.TopMenuWidget');
+
+        $I->waitForText('Add new page');
+        $I->click('#add-content-type-4');
+
+        $I->waitForText('Configuration');
+
+        $I->fillField('CustomPage[title]', 'Test title');
+        $I->fillField('#custompage-page_content .humhub-ui-richtext', 'Test Content');
+        $I->jsClick('.form-collapsible-fields-label.collapsed label');
+        $I->scrollToBottom();
+        $I->waitForElementVisible('#custompage-sort_order');
+        $I->fillField('CustomPage[sort_order]', '400');
+        $I->selectOption('CustomPage[icon]', ['value' => 'fa-adn']);
+
+        $I->scrollToBottom();
+        $I->wait(1);
+        $I->click('Create');
+        $I->waitForElementVisible('#topbar-second .fa-adn');
+        $I->expectTo('see my new page in the top navigation');
+
+        $I->click('#topbar-second .fa-adn');
+        $I->expectTo('see no my new page content');
+
+        $I->waitForText('Test Content');
+        $I->see('Test title');
+    }
+
+    public function testCreateLinkPageOnAccountMenu(AcceptanceTester $I)
+    {
+        $I->amAdmin();
+        $I->wantToTest('the creation of a link page on User Account Menu (Settings)');
+        $I->amGoingTo('add a new page');
+        $I->amOnRoute(['/custom_pages/page']);
+        $I->expectTo('see the add new page site');
+        $I->see('Overview');
+        $I->see('User Account Menu');
+        $I->seeElement('.target-page-list.AccountMenuWidget');
+
+        $I->click('.btn-success', '.target-page-list.AccountMenuWidget');
+
+        $I->waitForText('Add new page');
+        $I->click('#add-content-type-1');
+
+        $I->waitForText('Configuration');
+
+        $I->fillField('CustomPage[title]', 'Test link');
+        $I->fillField('CustomPage[page_content]', '/dashboard/dashboard');
+        $I->jsClick('.form-collapsible-fields-label.collapsed label');
+        $I->scrollToBottom();
+        $I->waitForElementVisible('#custompage-sort_order');
+        $I->fillField('CustomPage[sort_order]', '400');
+        $I->selectOption('CustomPage[icon]', ['value' => 'fa-adn']);
+
+        $I->scrollToBottom();
+        $I->wait(1);
+        $I->click('Create');
+        $I->wait(1);
+        $I->amOnRoute(['/user/account/edit']);
+        $I->expectTo('see my new page in the user account setting menu');
+
+        $I->waitForElementVisible('.left-navigation .fa-adn');
+        $I->see('Test link');
+
+        $I->click('.left-navigation .fa-adn');
+        $I->expectTo('see the dashboard');
+        $I->wait(2);
+        $I->seeInCurrentUrl('dashboard/dashboard');
+    }
+
+    public function testCreateMarkdownPageOnPeopleHeadingButtons(AcceptanceTester $I)
+    {
+        $I->amAdmin();
+        $I->wantToTest('the creation of a markdown page on People Heading Buttons');
+        $I->amGoingTo('add a new page');
+        $I->amOnRoute(['/custom_pages/page']);
+        $I->expectTo('see the add new page site');
+        $I->see('Overview');
+        $I->see('People Buttons');
+        $I->seeElement('.target-page-list.PeopleButtonsWidget');
+
+        $I->scrollTo('.target-page-list.PeopleButtonsWidget');
+        $I->wait(1);
+        $I->click('.btn-success', '.target-page-list.PeopleButtonsWidget');
+
+        $I->waitForText('Add new page');
+        $I->click('#add-content-type-4');
+
+        $I->waitForText('Configuration');
+
+        $I->fillField('CustomPage[title]', 'Custom people page');
+        $I->fillField('#custompage-page_content .humhub-ui-richtext', 'Custom people page content');
+        $I->jsClick('.form-collapsible-fields-label.collapsed label');
+        $I->scrollToBottom();
+        $I->waitForElementVisible('#custompage-sort_order');
+        $I->fillField('CustomPage[sort_order]', '200');
+        $I->selectOption('CustomPage[icon]', ['value' => 'fa-anchor']);
+
+        $I->scrollToBottom();
+        $I->wait(1);
+        $I->click('Create');
+        $I->scrollToBottom();
+        $I->wait(1);
+        $I->waitForText('People Buttons');
+        $I->see('Custom people page');
+        $I->amOnRoute(['/people']);
+        $I->waitForElementVisible('.container-people .panel-heading .fa-anchor');
+        $I->expectTo('see my new page in the people heading buttons');
+
+        $I->jsClick('.container-people .panel-heading .fa-anchor');
+        $I->expectTo('see no my new page content');
+
+        $I->waitForText('Custom people page content');
+    }
+}

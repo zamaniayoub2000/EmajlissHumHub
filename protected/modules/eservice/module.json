@@ -1,0 +1,11 @@
+{
+    "id": "eservice",
+    "version": "1.0.0",
+    "name": "Emajlis E-Services",
+    "description": "Module de gestion des demandes de services électroniques (hébergement, billets d'avion, documents, support)",
+    "humhub": {
+        "minVersion": "1.14.0"
+    },
+    "keywords": ["eservice", "requests", "workflow"],
+    "screenshots": []
+}

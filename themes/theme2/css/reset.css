@@ -1,0 +1,301 @@
+
+/* ============================================================
+   RESET PASSWORD PAGE — ALIGN WITH LOGIN CARD
+   Works with original #password-recovery-form markup
+============================================================ */
+
+/* Same background treatment as login page */
+body.login-container {
+    min-height: 100vh !important;
+    height: 100% !important;
+    background-image: url('../img/bg.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: cover !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+}
+
+/* Turn the panel into a centered card similar to .auth-card */
+#password-recovery-form.panel {
+    width: min(80vw, 900px) !important;
+    height: min(75vh, 600px) !important;
+
+    position: relative !important;
+    margin: 0 auto !important;               /* center horizontally */
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    background: var(--background-color-main) !important;
+    box-shadow: 0 18px 50px rgba(0,0,0,.22) !important;
+    border: none !important;
+    padding: 0 !important;
+
+    animation: authCardPop 0.55s cubic-bezier(.21,1.02,.35,1) !important;
+}
+
+/* LEFT HALF — Africa panel (like .auth-card__left) */
+#password-recovery-form.panel::before,
+#password-recovery-form.panel::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* base background */
+#password-recovery-form.panel::before {
+    background:
+        linear-gradient(180deg, rgba(0,0,0,0.20), rgba(0,0,0,0.20)),
+        url('../img/africa-map.png') center/85% no-repeat,
+        var(--primary);
+    z-index: 2;
+}
+
+/* floating africa */
+#password-recovery-form.panel::after {
+    background-image: url('../img/africa-map.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 85%;
+    opacity: 0.95;
+    filter: drop-shadow(0 6px 20px rgba(0,0,0,0.45));
+    transform-origin: center;
+    animation: africaFloat 18s ease-in-out infinite;
+    z-index: 3;
+}
+
+/* RIGHT SIDE: heading + form occupy the right 50% */
+#password-recovery-form .panel-heading,
+#password-recovery-form .panel-body {
+    position: relative;
+    margin-left: 50%;              /* push into right half */
+    width: auto;
+}
+
+/* Heading style (similar to login panel heading) */
+#password-recovery-form .panel-heading {
+    padding: 25px 40px 10px 40px !important;
+    background: transparent !important;
+    border: none !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+}
+
+/* Body with background graphic like .auth-card__right::before */
+#password-recovery-form .panel-body {
+    padding: 15px 40px 40px 40px !important;
+    background-image: url('../img/graphic2.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30%;
+    background-color: rgba(255, 255, 255, 0.5);
+    background-blend-mode: lighten;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Limit form width like .auth-content */
+#password-recovery-form .panel-body form {
+    max-width: 360px;
+    width: 100%;
+}
+
+/* Small spacing under intro text */
+#password-recovery-form .panel-body > p {
+    margin-bottom: 15px;
+}
+
+/* Captcha row alignment */
+#password-recovery-form .form-group .captcha-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Buttons row */
+#password-recovery-form .panel-body .btn {
+    min-width: 130px;
+    border-radius: 6px;
+}
+
+/* Put buttons on one line with small gap */
+#password-recovery-form .panel-body hr + button,
+#password-recovery-form .panel-body hr + .btn-primary {
+    margin-right: 10px;
+}
+#password-recovery-panel,
+#password-recovery-panel * {
+    text-align: left !important;
+}
+/* Make the Retour button look exactly like the Envoyer button */
+/* Make the Retour button EXACTLY like the Envoyer button */
+#password-recovery-panel .auth-links a {
+    display: inline-block !important;
+    background-color: var(--primary) !important;   
+    color: #fff !important;
+    padding: 8px 16px !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;      /* <-- THIS MAKES IT BOLD */
+    text-decoration: none !important;
+    min-width: 130px !important;
+    text-align: center !important;
+    line-height: 1.4 !important;      /* match button height */
+}
+/* Make the Envoyer button identical to the Retour button */
+#password-recovery-panel .btn-primary {
+    background-color: var(--primary) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;      /* make text bold */
+    min-width: 130px !important;
+    text-align: center !important;
+    box-shadow: none !important;
+}
+#password-recovery-panel .row {
+    display: flex !important;
+    gap: 15px !important;  /* space between buttons */
+}
+
+
+/* ================= MOBILE ================= */
+@media (max-width: 992px) {
+    #password-recovery-form.panel {
+        width: 100% !important;
+        max-width: 500px !important;
+        height: auto !important;
+    }
+
+    #password-recovery-form.panel::before,
+    #password-recovery-form.panel::after {
+        display: none !important; /* hide africa block; like login mobile */
+    }
+
+    #password-recovery-form .panel-heading,
+    #password-recovery-form .panel-body {
+        margin-left: 0;
+        width: 100%;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+}
+
+/* MOVE Envoyer + Retour fully to the LEFT (flush left) */
+#password-recovery-panel .row {
+    display: flex !important;
+    justify-content: flex-start !important;   /* align left */
+    align-items: center !important;
+    gap: 15px !important;
+    padding-left: 0 !important;
+}
+
+/* Force column widths to shrink instead of reserving space */
+#password-recovery-panel .row .col-md-4,
+#password-recovery-panel .row .col-md-8,
+#password-recovery-panel .row .col-xs-12 {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Remove the auto-right pushing of .auth-links */
+#password-recovery-panel .auth-links {
+    margin-left: 0 !important;
+    text-align: left !important;
+}
+
+
+.auth-card {
+    height: min(73vh, 600px);
+    
+}
+
+/* ============================================================
+   MOBILE: Small Africa icon inside the RIGHT login card
+   Shown ABOVE the login form when screen is small
+============================================================ */
+@media (max-width: 992px) {
+
+    .auth-card__left {
+        display: none !important;
+    }
+
+    .auth-content::before {
+        content: "";
+        display: block;
+        width: 90px;
+        height: 90px;
+        margin: 0 auto 20px auto;
+
+        background-image: url('../img/africa-map.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        opacity: 0.95;
+
+        /* ⭐ Add a soft drop shadow */
+        filter: drop-shadow(0px 6px 12px rgba(0, 0, 0, 0.85));
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

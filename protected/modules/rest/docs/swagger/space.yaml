@@ -1,0 +1,1066 @@
+openapi: 3.0.0
+info:
+  description: |
+    Welcome to the HumHub space module API reference.
+  version: 1.0.0
+  title: HumHub - Space API
+  contact:
+    email: info@humhub.com
+  license:
+    name: AGPLv2
+    url: https://www.humhub.org/en/licences
+tags:
+  - name: Space
+    description: API to access and manage space information.
+    externalDocs:
+      description: Find out more
+      url: http://docs.humhub.org
+  - name: Archive space
+    description: API to archive or unarchive the space.
+paths:
+  /space:
+    get:
+      tags:
+        - Space
+      summary: Find all spaces
+      description: ""
+      parameters:
+        - $ref: common.yaml#/components/parameters/pageParam
+        - $ref: common.yaml#/components/parameters/limitParam
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    $ref: common.yaml#/components/schemas/totalProperty
+                  page:
+                    $ref: common.yaml#/components/schemas/pageProperty
+                  pages:
+                    $ref: common.yaml#/components/schemas/pagesProperty
+                  links:
+                    $ref: common.yaml#/components/schemas/linksProperty
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Space"
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  total:
+                    $ref: common.yaml#/components/schemas/totalProperty
+                  page:
+                    $ref: common.yaml#/components/schemas/pageProperty
+                  pages:
+                    $ref: common.yaml#/components/schemas/pagesProperty
+                  links:
+                    $ref: common.yaml#/components/schemas/linksProperty
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Space"
+    post:
+      tags:
+        - Space
+      summary: Create new space
+      description: ""
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - visibility
+                - join_policy
+              properties:
+                name:
+                  type: string
+                  example: Welcome space
+                description:
+                  type: string
+                  example: Your first sample space to discover the platform.
+                visibility:
+                  type: integer
+                  format: int64
+                  example: 1
+                join_policy:
+                  type: integer
+                  format: int64
+                  example: 1
+        description: Space base info and visibility settings
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Space"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Space"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: You are not allowed to create spaces!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: You are not allowed to create spaces!
+        "422":
+          description: Validation failed
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: Internal error while save space!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: Internal error while save space!
+  "/space/{id}":
+    get:
+      tags:
+        - Space
+      summary: Get space by id
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          description: The id of space
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Space"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Space"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                  message:
+                    type: string
+                    example: Invalid space id supplied!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                  message:
+                    type: string
+                    example: Invalid space id supplied!
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Space not found
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Space not found
+    put:
+      tags:
+        - Space
+      summary: Update existing space
+      description: ""
+      parameters:
+        - in: path
+          name: id
+          description: The id of space
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Welcome space
+                description:
+                  type: string
+                  example: Your first sample space to discover the platform.
+                tagsField:
+                  type: array
+                  items:
+                    type: string
+                  example:
+                    - First tag
+                    - Second tag
+                color:
+                  type: string
+                  example: "#eeeeee"
+                url:
+                  type: string
+                  example: welcome-space
+                visibility:
+                  type: integer
+                  format: int64
+                  example: 1
+                join_policy:
+                  type: integer
+                  format: int64
+                  example: 1
+                default_content_visibility:
+                  type: integer
+                  format: int64
+                  example: 1
+                hideMembers:
+                  type: boolean
+                  example: true
+                hideAbout:
+                  type: boolean
+                  example: false
+                hideActivities:
+                  type: boolean
+                  example: true
+                hideFollowers:
+                  type: boolean
+                  example: false
+                indexUrl:
+                  type: string
+                  example: /s/welcome-space/space/space/home
+                indexGuestUrl:
+                  type: string
+                  example: /s/welcome-space/space/space/home
+        description: Space base info and settings
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Space"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Space"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: You are not allowed to manage this space!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: You are not allowed to manage this space!
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Space not found
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Space not found
+        "422":
+          description: Validation failed
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: Internal error while update space!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: Internal error while update space!
+    delete:
+      tags:
+        - Space
+      summary: Delete space by id
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          description: The id of space
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Space successfully deleted!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Space successfully deleted!
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: You are not allowed to delete this space!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: You are not allowed to delete this space!
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Space not found
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Space not found
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: Internal error while delete space!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 500
+                  message:
+                    type: string
+                    example: Internal error while delete space!
+  "/space/{id}/archive":
+    patch:
+      tags:
+        - Archive space
+      summary: Archive the space by id
+      parameters:
+        - name: id
+          in: path
+          description: The id of space
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Space successfully archived!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Space successfully archived!
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                  message:
+                    type: string
+                    example: Space is already archived!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                  message:
+                    type: string
+                    example: Space is already archived!
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: You are not allowed to archive this space!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: You are not allowed to archive this space!
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Space not found
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Space not found
+  "/space/{id}/unarchive":
+    patch:
+      tags:
+        - Archive space
+      summary: Unarchive the space by id
+      parameters:
+        - name: id
+          in: path
+          description: The id of space
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Space successfully unarchived!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Space successfully unarchived!
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                  message:
+                    type: string
+                    example: Space is not archived!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                  message:
+                    type: string
+                    example: Space is not archived!
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: You are not allowed to unarchive this space!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 401
+                  message:
+                    type: string
+                    example: You are not allowed to unarchive this space!
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Space not found
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Space not found
+  "/space/{id}/membership":
+    get:
+      tags:
+        - Membership
+      summary: List all memberships by given space id
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          description: The id of space
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    $ref: common.yaml#/components/schemas/totalProperty
+                  page:
+                    $ref: common.yaml#/components/schemas/pageProperty
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/SpaceMembership"
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  total:
+                    $ref: common.yaml#/components/schemas/totalProperty
+                  page:
+                    $ref: common.yaml#/components/schemas/pageProperty
+                  results:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/SpaceMembership"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                  message:
+                    type: string
+                    example: Invalid space id supplied!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                  message:
+                    type: string
+                    example: Invalid space id supplied!
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Space not found
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Space not found
+  "/space/{id}/membership/{userId}":
+    post:
+      tags:
+        - Membership
+      summary: Add a new user to the space
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          description: The id of space
+          required: true
+          schema:
+            type: integer
+        - name: userId
+          in: path
+          description: The id of user
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: silent
+          description: Send added notification to the user
+          schema:
+            type: boolean
+            default: false
+        - in: query
+          name: canLeave
+          description: "0: user cannot cancel membership | 1: can cancel membership | 2:
+            depending on space flag members_can_leave"
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: showAtDashboard
+          description: Show at dashboard
+          schema:
+            type: boolean
+            default: true
+      responses:
+        default:
+          description: Successful operation
+    delete:
+      tags:
+        - Membership
+      summary: Delete a space membership of a user
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          description: The id of space
+          required: true
+          schema:
+            type: integer
+        - name: userId
+          in: path
+          description: The id of user
+          required: true
+          schema:
+            type: integer
+      responses:
+        default:
+          description: Successful operation
+  "/space/{id}/membership/{userId}/role":
+    patch:
+      tags:
+        - Membership
+      summary: Set the user membership role
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          description: The id of space
+          required: true
+          schema:
+            type: integer
+        - name: userId
+          in: path
+          description: The id of user
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  type: string
+                  description: admin, member or moderator
+                  example: admin
+        description: Space membership role
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Member updated!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: Member updated!
+        "400":
+          description: Invalid role
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                  message:
+                    type: string
+                    example: Invalid role given!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 400
+                  message:
+                    type: string
+                    example: Invalid role given!
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Space not found!
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: Space not found!
+servers:
+  - url: /api/v1
+components:
+  securitySchemes:
+    _ref: common.yaml#/securityDefinitions
+  schemas:
+    SpaceShort:
+      description: A short representation of the space
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          example: 1
+        guid:
+          type: string
+          readOnly: true
+          example: cd081891-d2e2-40d5-84a4-b47309e71c80
+        name:
+          type: string
+          example: Welcome Space
+        description:
+          type: string
+          example: Your first sample space to discover the platform.
+        url:
+          type: string
+          example: http://humhub.localhost/s/welcome-space/
+    Space:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          example: 1
+        guid:
+          type: string
+          readOnly: true
+          example: cd081891-d2e2-40d5-84a4-b47309e71c80
+        name:
+          type: string
+          example: Welcome Space
+        description:
+          type: string
+          example: Your first sample space to discover the platform.
+        url:
+          type: string
+          example: http://humhub.localhost/s/welcome-space/
+        contentcontainer_id:
+          type: integer
+          example: 1
+        visibility:
+          type: integer
+          example: 1
+        join_policy:
+          type: integer
+          example: 1
+        status:
+          type: integer
+          example: 1
+        tags:
+          type: array
+          items:
+            type: string
+          example:
+            - First tag
+            - Second tag
+        owner:
+          $ref: user.yaml#/components/schemas/UserShort
+        hideMembers:
+          type: integer
+          example: 1
+        hideAbout:
+          type: integer
+          example: 0
+        hideActivities:
+          type: integer
+          example: 1
+        hideFollowers:
+          type: integer
+          example: 0
+        indexUrl:
+          type: string
+          example: /s/welcome-space/space/space/home
+        indexGuestUrl:
+          type: string
+          example: /s/welcome-space/space/space/home
+    SpaceMembership:
+      type: object
+      properties:
+        role:
+          type: string
+          example: member
+          description: Available roles=admin, moderator or member
+        status:
+          type: integer
+          example: 3
+          description: 1=Invited, 2=Applicant, 3=Member
+        can_cancel_membership:
+          type: boolean
+          example: false
+        send_notifications:
+          type: boolean
+          example: false
+        show_at_dashboard:
+          type: boolean
+          example: false
+        originator_user:
+          $ref: user.yaml#/components/schemas/UserShort
+        member_since:
+          type: string
+          readOnly: true
+          example: 2019-12-01 11:43:16
+        request_message:
+          type: string
+          readOnly: true
+          example: Please add me to this space!
+        updated_at:
+          type: string
+          readOnly: true
+          example: 2019-12-30 11:00:59
+        last_visit:
+          type: string
+          readOnly: true
+          example: 2020-01-15 14:00:59
+        user:
+          $ref: user.yaml#/components/schemas/UserShort

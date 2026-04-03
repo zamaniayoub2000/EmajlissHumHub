@@ -1,0 +1,31 @@
+{
+    "id": "gallery",
+    "name": "Gallery",
+    "description": "Adds galleries to Spaces and profiles.",
+    "keywords": ["gallery", "photo", "organisation"],
+    "version": "1.7.0",
+    "humhub": {
+        "minVersion": "1.18"
+    },
+    "homepage": "https://github.com/humhub-contrib/gallery",
+    "authors": [
+        {
+            "name": "Sebastian Stumpf"
+        },
+        {
+            "name": "Lucas Bartholemy"
+        },
+        {
+            "name": "Julian Harrer"
+        }
+
+    ],
+    "screenshots": [
+        "resources/screen1.PNG",
+        "resources/screen2.PNG",
+        "resources/screen3.PNG",
+        "resources/screen4.PNG",
+        "resources/screen5.PNG",
+        "resources/screen6.PNG"
+    ]
+}
