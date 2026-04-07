@@ -12,9 +12,9 @@ use humhub\modules\eservice\models\EServiceRequest;
 \humhub\modules\eservice\assets\EServiceAsset::register($this);
 
 $typeLabels = [
-    'hebergement' => 'Demande d\'H&eacute;bergement',
+    'hebergement' => 'Demande d\'Hébergement',
     'billet_avion' => 'Demande de Billet d\'Avion',
-    'indemnite' => 'Suivi des Indemnit&eacute;s',
+    'indemnite' => 'Dépôt de documents et justificatifs',
     'support' => 'Demande de Support',
 ];
 
@@ -54,15 +54,21 @@ $events = EServiceRequest::getEventsList();
                 <!-- Event Selection -->
                 <?= $form->field($model, 'event_name')->dropDownList(
                     $events,
-                    ['prompt' => '-- S&eacute;lectionnez une manifestation --', 'class' => 'form-control']
-                )->label('Manifestation') ?>
+                    ['prompt' => '-- Sélectionnez un type de réunion --', 'class' => 'form-control', 'id' => 'event-name-select']
+                )->label('Type de réunion') ?>
+
+                <!-- Champ Préciser (affiché quand "Autre" est sélectionné) -->
+                <div class="form-group" id="preciser-container" style="display:none;">
+                    <label class="control-label">Préciser</label>
+                    <input type="text" name="EServiceRequest[extra_data]" class="form-control" placeholder="Veuillez préciser le type de réunion..." />
+                </div>
             <?php endif; ?>
 
             <?php if ($type === 'billet_avion'): ?>
                 <!-- Billet d'avion specific fields -->
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'date_start')->input('date', ['class' => 'form-control'])->label('Date de d&eacute;part') ?>
+                        <?= $form->field($model, 'date_start')->input('date', ['class' => 'form-control'])->label('Date de départ') ?>
                     </div>
                     <div class="col-md-6">
                         <?= $form->field($model, 'date_end')->input('date', ['class' => 'form-control'])->label('Date de retour') ?>
@@ -72,7 +78,7 @@ $events = EServiceRequest::getEventsList();
                 <?= $form->field($model, 'flight_plan')->textarea([
                     'rows' => 4,
                     'class' => 'form-control',
-                    'placeholder' => 'D&eacute;crivez votre plan de vol (villes, escales, etc.)',
+                    'placeholder' => 'Décrivez votre plan de vol (villes, escales, etc.)',
                 ])->label('Plan de vol') ?>
 
                 <!-- Shuttle toggles -->
@@ -87,7 +93,7 @@ $events = EServiceRequest::getEventsList();
                             ]) ?>
                             <span class="es-toggle-slider"></span>
                         </label>
-                        <span class="es-toggle-label">Navette &agrave; l'arriv&eacute;e</span>
+                        <span class="es-toggle-label">Navette &agrave; l'arrivée</span>
                     </div>
                 </div>
 
@@ -102,7 +108,7 @@ $events = EServiceRequest::getEventsList();
                             ]) ?>
                             <span class="es-toggle-slider"></span>
                         </label>
-                        <span class="es-toggle-label">Navette au d&eacute;part</span>
+                        <span class="es-toggle-label">Navette au départ</span>
                     </div>
                 </div>
 
@@ -110,10 +116,10 @@ $events = EServiceRequest::getEventsList();
                 <!-- Hebergement specific fields -->
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'date_start')->input('date', ['class' => 'form-control'])->label('Date d\'arriv&eacute;e') ?>
+                        <?= $form->field($model, 'date_start')->input('date', ['class' => 'form-control'])->label('Date d\'arrivée') ?>
                     </div>
                     <div class="col-md-6">
-                        <?= $form->field($model, 'date_end')->input('date', ['class' => 'form-control'])->label('Date de d&eacute;part') ?>
+                        <?= $form->field($model, 'date_end')->input('date', ['class' => 'form-control'])->label('Date de départ') ?>
                     </div>
                 </div>
 
@@ -129,14 +135,14 @@ $events = EServiceRequest::getEventsList();
                 'rows' => 4,
                 'class' => 'form-control',
                 'placeholder' => $type === 'support'
-                    ? 'D&eacute;crivez votre probl&egrave;me ou votre demande en d&eacute;tail...'
-                    : 'Ajoutez des observations ou pr&eacute;cisions compl&eacute;mentaires...',
+                    ? 'Décrivez votre problème ou votre demande en détail...'
+                    : 'Ajoutez des observations ou précisions complémentaires...',
             ])->label($type === 'support' ? 'Description de la demande' : 'Observations') ?>
 
             <!-- File Upload (for support and indemnite, also available for others) -->
             <?php if ($type === 'support' || $type === 'indemnite'): ?>
                 <div class="form-group">
-                    <label class="control-label">Pi&egrave;ces jointes</label>
+                    <label class="control-label">Pièces jointes</label>
                     <div class="es-file-upload">
                         <div class="es-file-upload-icon">
                             <i class="fa fa-cloud-upload-alt"></i>

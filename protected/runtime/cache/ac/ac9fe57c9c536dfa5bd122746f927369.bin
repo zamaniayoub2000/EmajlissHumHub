@@ -1,0 +1,26 @@
+a:2:{i:0;s:1431:"
+
+<a href="/activity/link?id=1299">
+    
+    <div class="d-flex">
+        <div class="flex-shrink-0 me-3 pt-1 img-profile-space">
+                            <!-- Show user image -->
+                <span><img class="rounded" src="/static/img/default_user.jpg" width="32" alt="Photo de profil de tarik sbai" style="width: 32px; height: 32px" data-contentcontainer-id="49"></span>            
+            <!-- Show space image, if you are outside from a space -->
+                            
+
+<div class="img-space space-profile-acronym-22 space-acronym d-inline-flex justify-content-center align-items-center" style=" background-color: #006b62; width: 20px; height: 20px; border-radius: 2px;" data-contentcontainer-id="44">    <span>AD</span>
+</div><img class="img-space space-profile-image-22 rounded profile-user-photo d-none-space-image" src="/static/img/default_space.jpg" alt="Actualités du conseil" style=" width: 20px; height: 20px;" data-contentcontainer-id="44">
+                    </div>
+
+        <div class="flex-grow-1 text-break">
+
+            <!-- Show content -->
+            <strong>tarik sbai</strong> a publié Journal du Conseil "« Préscolaire : politiques, pratiques et stratégies de dével...".            <br>
+
+            <!-- show time -->
+            <time class="tt time timeago" datetime="2026-04-01T14:00:58+01:00" title="1 avr. 2026 - 14:00">1 avr. 2026</time>        </div>
+    </div>
+
+    </a>
+";i:1;N;}

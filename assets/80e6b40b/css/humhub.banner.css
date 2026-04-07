@@ -1,0 +1,96 @@
+:root {
+    --hh-banner-height: 40px;
+    --hh-banner-font-color: var(--hh-info-contrast);
+    --hh-banner-bg-color: var(--bs-info);
+}
+
+#banner {
+    height: var(--hh-banner-height);
+    line-height: var(--hh-banner-height);
+    top: 0;
+    z-index: 1030;
+    position: fixed;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 15px;
+    text-align: center;
+    background-color: var(--hh-banner-bg-color);
+    color: var(--hh-banner-font-color);
+}
+
+#banner-container {
+    margin: 0 auto;
+    max-width: fit-content;
+}
+
+#banner-close {
+    color: var(--hh-banner-font-color);
+    opacity: 0.7;
+    background: none;
+    padding: 0 0 0 15px;
+    border: 0;
+    height: var(--hh-banner-height);
+    display: block;
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    text-shadow: 0 1px 0 var(--hh-banner-font-color);
+}
+
+#banner-content {
+    width: max-content;
+}
+
+#banner.scrolling #banner-content {
+    animation: scroll-text 10s linear infinite;
+}
+
+#banner.scrolling #banner-content::after {
+    content: attr(data-text);
+    margin-left: 20px;
+}
+
+#banner.scrolling:hover #banner-content {
+    animation-play-state: paused;
+}
+
+#banner.scrolling #banner-close {
+    display: none;
+}
+
+@keyframes scroll-text {
+    0% { transform: translateX(15%); }
+    100% { transform: translateX(-50%); }
+}
+
+@media screen and (max-width: 430px) {
+    #banner,
+    #banner button {
+        font-size: 14px !important;
+    }
+}
+
+body {
+    padding-top: calc(var(--hh-banner-height) + var(--hh-fixed-header-height, 0px));
+    &.clean-theme {
+        padding-top: calc(var(--hh-banner-height) + var(--hh-ct-top-bar-height) + var(--hh-ct-top-bar-bottom-spacing));
+    }
+    &.enterprise-theme .space-nav {
+        margin-top: calc(var(--hh-banner-height) + var(--hh-et-topbar-height));
+    }
+}
+
+#topbar, #topbar-first {
+    top: var(--hh-banner-height);
+}
+#topbar-second {
+    top: calc(var(--hh-banner-height) + 50px);
+}
+
+@media (max-width: 570px) {
+    #topbar > .container .notifications .dropdown-menu {
+        top: calc(var(--hh-ct-top-bar-height, 0px) + var(--hh-banner-height)) !important;
+    }
+}

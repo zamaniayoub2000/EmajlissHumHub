@@ -19,11 +19,11 @@
     --hh-background-color-highlight-soft: #f2f9fb;
     --hh-ct-font-family: "Cairo", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --hh-ct-font-size: 14px;
-    --hh-ct-font-weight: 400;
-    --hh-ct-font-bold-weight: 700;
-    --hh-ct-heading-font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --hh-ct-ph-font-size: 16px;
-    --hh-ct-h1-font-size: 1.7em;
+    --hh-ct-font-weight: 300;
+    --hh-ct-font-bold-weight: 600;
+    --hh-ct-heading-font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --hh-ct-ph-font-size: 15px;
+    --hh-ct-h1-font-size: 1.5em;
     --hh-ct-h1-stream-font-size: 1.45em;
     --hh-ct-h2-font-size: 1.5em;
     --hh-ct-h2-stream-font-size: 1.3em;
@@ -31,27 +31,27 @@
     --hh-ct-h4-font-size: 1.1em;
     --hh-ct-h5-font-size: 1.0em;
     --hh-ct-h6-font-size: 0.85em;
-    --hh-ct-ph-font-weight: 700;
+    --hh-ct-ph-font-weight: 500;
     --hh-ct-panel-border-width: 1px;
     --hh-ct-panel-border-style: solid;
-    --hh-ct-panel-border-color: #d2d3e4;
+    --hh-ct-panel-border-color: #cfcfcf;
     --hh-ct-panel-border-radius: 4px;
     --hh-ct-panel-box-shadow: 0 1px 10px #00000019;
-    --hh-ct-menu-font-size: 12px;
-    --hh-ct-menu-text-color: #31414a;
+    --hh-ct-menu-font-size: 16px;
+    --hh-ct-menu-text-color: #000000;
     --hh-ct-menu-border-color: #e4eaec;
-    --hh-ct-top-bar-height: 50px;
-    --hh-ct-top-bar-font-size: 10px;
-    --hh-ct-top-menu-nav-justify-content: center;
+    --hh-ct-top-bar-height: 70px;
+    --hh-ct-top-bar-font-size: 12px;
+    --hh-ct-top-menu-nav-justify-content: flex-start;
     --hh-ct-top-menu-background-color: #ffffff;
-    --hh-ct-top-menu-text-color: #31414a;
+    --hh-ct-top-menu-text-color: #5c5c5c;
     --hh-ct-top-menu-button-hover-background-color: #f7f7f7;
     --hh-ct-top-menu-button-hover-text-color: #242424;
-    --hh-ct-bottom-menu-background-color: #f7f7f7;
-    --hh-ct-bottom-menu-text-color: #31414a;
+    --hh-ct-bottom-menu-background-color: #ffffff;
+    --hh-ct-bottom-menu-text-color: #000000;
 
     --hh-ct-top-bar-bottom-spacing: 30px;
-    --hh-fixed-header-height: 80px;
+    --hh-fixed-header-height: 100px;
     --hh-fixed-footer-height: 0px;
 }
 
@@ -76,7 +76,7 @@
         --hh-ct-menu-text-color: #dddddd;
         --hh-ct-menu-border-color: #333333;
         --hh-ct-top-menu-background-color: #222222;
-        --hh-ct-top-menu-text-color: #dddddd;
+        --hh-ct-top-menu-text-color: #ffffff;
         --hh-ct-top-menu-button-hover-background-color: #333333;
         --hh-ct-top-menu-button-hover-text-color: #ffffff;
         --hh-ct-bottom-menu-background-color: #222222;

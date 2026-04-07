@@ -200,7 +200,7 @@ class EServiceRequest extends ActiveRecord
             self::TYPE_HEBERGEMENT => 'Hebergement',
             self::TYPE_BILLET_AVION => 'Billet d\'avion',
             self::TYPE_DOCUMENT => 'Document',
-            self::TYPE_INDEMNITE => 'Indemnite',
+            self::TYPE_INDEMNITE => 'Dépôt de documents',
             self::TYPE_SUPPORT => 'Support',
         ];
     }

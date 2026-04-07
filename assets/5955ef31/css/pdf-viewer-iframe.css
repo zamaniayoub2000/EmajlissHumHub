@@ -1,0 +1,12 @@
+#editorModeButtons,
+#editorModeSeparator,
+#secondaryOpenFile,
+#secondaryDownload + .horizontalToolbarSeparator {
+  display: none;
+}
+
+@media (max-width: 750px) {
+  #secondaryDownload + .horizontalToolbarSeparator {
+    display: inherit;
+  }
+}

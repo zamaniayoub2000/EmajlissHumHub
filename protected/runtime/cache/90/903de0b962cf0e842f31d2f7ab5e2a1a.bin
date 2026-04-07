@@ -1,0 +1,26 @@
+a:2:{i:0;s:1538:"
+
+<a href="/activity/link?id=2776">
+    
+    <div class="d-flex">
+        <div class="flex-shrink-0 me-3 pt-1 img-profile-space">
+                            <!-- Show user image -->
+                <span><img class="rounded" src="/uploads/profile_image/9376420e-4d1b-426c-b754-2c973f65841e.jpg?m=1775126353" width="32" alt="Photo de profil de E-MAJLIS COMMUNICATION" style="width: 32px; height: 32px" data-contentcontainer-id="52"></span>            
+            <!-- Show space image, if you are outside from a space -->
+                            
+
+<div class="img-space space-profile-acronym-22 space-acronym d-inline-flex justify-content-center align-items-center" style=" background-color: #006b62; width: 20px; height: 20px; border-radius: 2px;" data-contentcontainer-id="44">    <span>AD</span>
+</div><img class="img-space space-profile-image-22 rounded profile-user-photo d-none-space-image" src="/static/img/default_space.jpg" alt="Actualités du conseil" style=" width: 20px; height: 20px;" data-contentcontainer-id="44">
+                    </div>
+
+        <div class="flex-grow-1 text-break">
+
+            <!-- Show content -->
+            <strong>E-MAJLIS COMMUNICATION</strong> a publié Journal du Conseil "Vient de paraître –Bulletin électronique de veille documenta...".            <br>
+
+            <!-- show time -->
+            <time class="tt time timeago" data-ui-addition="timeago" datetime="2026-04-07T15:26:14+01:00" title="7 avr. 2026 - 15:26">7 avr. 2026 - 15:26</time>        </div>
+    </div>
+
+    </a>
+";i:1;N;}

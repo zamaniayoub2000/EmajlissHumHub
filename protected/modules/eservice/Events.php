@@ -16,7 +16,7 @@ class Events
     {
         $event->sender->addItem([
             'label' => Yii::t('EserviceModule.base', 'E-Services'),
-            'icon' => '<i class="fa fa-concierge-bell"></i>',
+            'icon' => '<i class="fa fa-cogs"></i>',
             'url' => Url::to(['/eservice/index/index']),
             'sortOrder' => 400,
             'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id === 'eservice'),

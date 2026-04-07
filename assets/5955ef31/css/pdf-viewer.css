@@ -1,0 +1,13 @@
+#pdf-viewer-modal .modal-dialog {
+  height: 92%;
+}
+#pdf-viewer-modal .modal-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#pdf-viewer-modal .modal-body,
+#pdf-viewer-modal iframe {
+  width: 100%;
+  height: 100%;
+}

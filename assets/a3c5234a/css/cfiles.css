@@ -1,0 +1,189 @@
+#cfiles-folderView a:not(:hover) {
+    color: var(--hh-text-color-highlight);
+}
+
+.overflow-ellipsis {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cfiles-content .breadcrumb {
+  border-radius: 0;
+  margin: 0;
+}
+
+.cfiles-content .file-controls {
+  font-size: 11px;
+  color: var(--hh-text-color-soft2);
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.cfiles-content .file-controls a {
+  font-size: 11px;
+  color: var(--hh-text-color-soft2);
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px;
+  direction: ltr;
+  cursor: pointer;
+}
+
+.panel .panel-body .files-action-menu .btn {
+  font-size: 1em !important;
+  font-weight: normal !important;
+}
+.panel .panel-body .files-action-menu .btn-group .split-toggle {
+  width: auto !important;
+  float: right !important;
+  border-radius: 0px 3px 3px 0px;
+}
+.panel .panel-body .files-action-menu .btn-group .split-toggle:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0px 3px 3px 0px;
+}
+.panel .panel-body .files-action-menu .btn-group > .split-button {
+  width: auto !important;
+  overflow: hidden;
+  display: block;
+  float: none !important;
+  border-radius: 3px 0px 0px 3px;
+}
+
+.filedelete-button {
+  cursor: pointer;
+}
+.filemove-button {
+  cursor: pointer;
+}
+.downloadzipped-button {
+  cursor: pointer;
+}
+.table-responsive td .title,
+.table-responsive td .timestamp,
+.table-responsive td .creator,
+.table-responsive td .size {
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  display: block;
+  white-space: nowrap;
+}
+.table-responsive > table > tbody > tr > td {
+  vertical-align: middle;
+}
+.table-responsive .table .file-controls {
+  font-size: 11px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.table-responsive .table .file-controls a {
+  font-size: 11px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.table-responsive .table .file-controls hr {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+#fileList .table-responsive {
+  overflow: initial;
+  border: none;
+}
+
+#bs-table.table .file-actions {
+  padding-left: 0;
+  padding-right: 2px;
+  width: 0;
+}
+
+@media (min-width: 418px) {
+  #bs-table.table tr .context-icon {
+    display: none;
+  }
+  #bs-table.table tr:hover .context-icon {
+    display: inline-block;
+  }
+}
+
+#bs-table.table>thead>tr>th,
+#bs-table.table>tbody>tr>th,
+#bs-table.table>tfoot>tr>th,
+#bs-table.table>thead>tr>td,
+#bs-table.table>tbody>tr>td,
+#bs-table.table>tfoot>tr>td {
+  padding: 10px 5px 5px 5px;
+  height: 45px;
+}
+
+#bs-table.table>thead>tr>th label,
+#bs-table.table>tbody>tr>th label,
+#bs-table.table>tfoot>tr>th label,
+#bs-table.table>thead>tr>td label,
+#bs-table.table>tbody>tr>td label,
+#bs-table.table>tfoot>tr>td label {
+  margin-bottom: 0px;
+}
+
+#bs-table.table ul.contextMenu li a {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+#bs-table.table tr.ui-draggable-dragging {
+  z-index: 10000;
+}
+
+#fileList [data-ui-sort] {
+  font-weight:bold;
+  cursor: pointer;
+}
+
+#fileList [data-ui-order="ASC"]:after {
+  content: "\25bc";
+}
+
+#fileList [data-ui-order="DESC"]:after {
+  content: "\25b2";
+}
+
+
+.table-responsive td .title {
+  position: absolute;
+  width: 100%;
+  top: -10px;
+}
+@media (min-width: 420px) {
+  .table-responsive td:nth-child(2) {
+    width: 25%;
+    max-width: 25%;
+  }
+}
+@media (min-width: 768px) {
+  .table-responsive td:nth-child(2) {
+    width: 30%;
+    max-width: 30%;
+  }
+}
+@media (min-width: 992px) {
+  .table-responsive td:nth-child(2) {
+    width: 35%;
+    max-width: 35%;
+  }
+}
+@media (min-width: 1200px) {
+  .table-responsive td:nth-child(2) {
+    width: 40%;
+    max-width: 40%;
+  }
+}
